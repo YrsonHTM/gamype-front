@@ -1,0 +1,44 @@
+<p-card class="login-card">
+    <div class="head-section">
+        <h1>GAMYPE</h1>
+        <p class="mb-16">
+            Crea una cuenta en GAMYPE para empezar a gestionar tu empresa.
+        </p>
+    </div>
+    <form [formGroup]="form">
+        <main class="form-content1">
+            <p-floatLabel class="w-100">
+                <input id="username" type="text" pInputText formControlName="username" />
+                <label for="username">Nombre de usuario</label>
+            </p-floatLabel>
+            <p-floatLabel class="w-100">
+                <input id="correo" type="text" pInputText formControlName="correo" />
+                <label for="correo">Correo Electronico</label>
+            </p-floatLabel>
+            <p-floatLabel class="w-100">
+                <input id="pais" type="text" pInputText formControlName="pais" />
+                <label for="pais">Pais</label>
+            </p-floatLabel>
+            <p-floatLabel class="w-100">
+                <input id="telefono" type="text" pInputText formControlName="correo" />
+                <label for="telefono">Telefono</label>
+            </p-floatLabel>
+            <app-select class="w-100"></app-select>
+            <p-floatLabel class="w-100">
+                <p-password class="w-100 d-b"  formControlName="password" [feedback]="false" />
+                <label for="password">Contraseña</label>
+            </p-floatLabel>
+            <p-button class="w-100" type="submit">
+                Registrarse
+            </p-button>
+            <div class="other-actions">
+                <p class="link mt-16 mb-16" (click)="navigateToLogin()">
+                    ¿Ya tienes una cuenta?
+                </p>
+                <p class="link" (click)="navigateToHome()">
+                    Volver al inicio
+                </p>
+            </div>
+        </main>
+    </form>
+</p-card>

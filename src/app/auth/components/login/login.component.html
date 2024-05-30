@@ -1,0 +1,31 @@
+<p-card class="login-card">
+    <div class="head-section">
+        <h1>Bienvenido a Gamype</h1>
+        <p class="mb-16">
+            Software de gestión empresarial para recursos humanos e inventarios.
+        </p>
+    </div>
+    <form [formGroup]="form">
+        <main class="form-content1">
+            <p-floatLabel class="w-100">
+                <input id="username" type="text" pInputText formControlName="username" />
+                <label for="username">Nombre de usuario</label>
+            </p-floatLabel>
+            <p-floatLabel class="w-100">
+                <p-password class="w-100 d-b"  formControlName="password" [feedback]="false" />
+                <label for="password">Contraseña</label>
+            </p-floatLabel>
+            <p-button class="w-100" type="submit">
+                Iniciar sesión
+            </p-button>
+            <div class="other-actions">
+                <p class="link mt-16 mb-16">
+                    ¿Olvidaste tu contraseña?
+                </p>
+                <p class="link" (click)="navigateToRegister()">
+                    Registrarse
+                </p>
+            </div>
+        </main>
+    </form>
+</p-card>

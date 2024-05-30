@@ -1,0 +1,69 @@
+$section-height: 300px;
+$header-height: 64px;
+main{
+    background-color: var(--primary-color);
+    height: calc($section-height + $header-height);
+}
+
+header{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    height: $header-height;
+    
+    .gamype-title{
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin-left: 32px;
+        .icon{
+            font-size: 2rem;
+            font-weight: bold;
+            transform: translate(0, -2px);
+        }
+        span{
+            display: flex;
+            font-size: 2rem;
+            font-weight: bold;
+            justify-content: center;
+        }
+    }
+    .gamype-nav{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        margin-right: 32px;
+        align-self: self-end;
+    }
+}
+
+.p-section{
+    height: $section-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: $section-height;
+    .welcome-section{
+        max-width: 800px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        
+        p{
+            font-size: 1rem;
+            margin:0px 0px 32px 0px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .b-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+        }
+    }
+}

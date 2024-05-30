@@ -1,0 +1,13 @@
+<p-floatLabel>
+    <p-autoComplete 
+        [(ngModel)]="selectedItem" 
+        [suggestions]="suggestions" 
+        (completeMethod)="search($event)" 
+        size="100"
+        [field]="searchByParam"
+        inputId="float-label-select" />
+    <label for="float-label-select">Ejemplo</label>
+</p-floatLabel>
+<pre>
+    {{selectedItem}}
+</pre>

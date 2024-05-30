@@ -1,0 +1,27 @@
+<main>
+    <header>
+        <div class="gamype-title">
+            <i class="pi pi-briefcase gl icon"></i>
+            <span class="gl">GAMYPE</span>
+        </div>
+        <div class="gamype-nav">
+            <p-button class="g-b-label-b" label="Ingresar" [text]="true" (onClick)="navigateToLogin()" />
+            <p-button class="g-b-label-b" label="Registrarse" [text]="true" (onClick)="navigateToRegister()"/>
+
+        </div>
+    </header>
+    <section class="p-section">
+        <div class="welcome-section">
+            <h1 class="gl">
+                Bienvenido a Gamype
+            </h1>
+            <p class="gl">
+                Gamype es un software de gestión empresarial diseñado para simplificar tus procesos de recursos humanos e inventario. Optimiza tus operaciones y toma mejores decisiones.
+            </p>
+            <div class="b-content">
+                <p-button class="g-b-label-b" [rounded]="true" label="Contactanos" severity="info"/>
+                <p-button class="g-b-label-b" [rounded]="true" label="Registrarse" severity="info" (onClick)="navigateToRegister()" />
+            </div>
+        </div>
+    </section>
+</main>

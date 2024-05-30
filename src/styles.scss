@@ -1,1 +1,140 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "./variables.scss";
+
+@layer primeng {
+    .p-button:focus {
+        box-shadow: none !important;
+    }
+    p-floatLabel{
+        margin-top: 16px !important;
+        margin-bottom: 16px !important;
+    }
+    .p-button{
+        width: 100%;
+        justify-content: center;
+        align-self: center;
+    }
+    .p-inputtext{
+        width: 100%;
+    }
+    .p-password{
+        width: 100%;
+    }
+}
+
+.d-b{
+    display: block;
+}
+
+.w-100{
+    width: 100%;
+}
+
+:host{
+    --color-blanco: #443838;
+}
+
+.form-content1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-blanco);
+    flex-direction: column;
+}
+
+p-floatLabel{
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.p-card-content{
+    padding: 0;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6{
+    color: var(--primary-color);
+}
+
+h1{
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 16px;
+}
+
+.link:hover{
+    cursor: pointer;
+    color: var(--highlight-text-color);
+}
+
+p{
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.gl{
+    color: var(--gray-50);
+}
+
+.g-b-label{
+    color: var(--gray-50);
+    button{
+        span{
+            color: var(--gray-50);
+        }
+    }
+}
+
+.g-b-label-b{
+    color: var(--gray-50);
+    button{
+        span{
+            color: var(--gray-50);
+            font-weight: bold;
+        }
+    }
+}
+
+.mb-32{
+    margin-bottom: 32px;
+}
+
+.mb-16{
+    margin-bottom: 16px !important;
+}
+
+.mb-8{
+    margin-bottom: 8px;
+}
+
+.ocult{
+    display: none;
+}
+
+.mt-8{
+    margin-top: 8px;
+}
+
+.mt-16{
+    margin-top: 16px;
+}
+
+::ng-deep .p-float-label{
+    margin-top: 16px !important;
+    margin-bottom:16px !important;
+}

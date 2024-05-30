@@ -1,0 +1,28 @@
+$footer-height: 64px;
+
+:host{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    background-color: var(--primary-color);
+}
+
+.gamype-title{
+    margin-left: 32px;
+}
+
+.icon{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.gamype-text{
+    margin-left: 16px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.rights{
+    margin-right: 32px;
+}
