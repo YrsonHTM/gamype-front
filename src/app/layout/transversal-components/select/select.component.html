@@ -2,12 +2,10 @@
     <p-autoComplete 
         [(ngModel)]="selectedItem" 
         [suggestions]="suggestions" 
-        (completeMethod)="search($event)" 
+        (completeMethod)="search($event)"
         size="100"
+        (ngModelChange)="selectItem($event)"
         [field]="searchByParam"
         inputId="float-label-select" />
-    <label for="float-label-select">Ejemplo</label>
+    <label for="float-label-select">{{ labelParam }}</label>
 </p-floatLabel>
-<pre>
-    {{selectedItem}}
-</pre>
