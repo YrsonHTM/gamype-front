@@ -7,12 +7,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { PrimeNgModulesModule } from '../prime-ng-modules/prime-ng-modules.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '../layout/transversal-components/select/select.component';
+import { AutoErrorsDirective } from '../directives/auto-errors.directive';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { SelectComponent } from '../layout/transversal-components/select/select.
     PrimeNgModulesModule,
     ReactiveFormsModule,
     FormsModule,
-    SelectComponent
+    SelectComponent,
+    AutoErrorsDirective
   ]
 })
 export class AuthModule { }

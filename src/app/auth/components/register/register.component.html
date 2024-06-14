@@ -5,25 +5,25 @@
             Crea una cuenta en GAMYPE para empezar a gestionar tu empresa.
         </p>
     </div>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (submit)="registerAcount()">
         <main class="form-content1">
             <p-floatLabel class="w-100">
-                <input id="username" type="text" pInputText formControlName="username" />
-                <label for="username">Nombre de usuario</label>
+                <input id="username" type="text" pInputText formControlName="firstname" />
+                <label for="username">Nombres</label>
             </p-floatLabel>
             <p-floatLabel class="w-100">
-                <input id="correo" type="text" pInputText formControlName="correo" />
+                <input id="apellidos" type="text" pInputText formControlName="lastname" />
+                <label for="apellidos">Apellidos</label>
+            </p-floatLabel>
+            <p-floatLabel class="w-100">
+                <input id="correo" type="text" pInputText formControlName="username" />
                 <label for="correo">Correo Electronico</label>
             </p-floatLabel>
+            <app-select class="w-100 mt-16 mb-16" formControlName="countryCode" [items]=" paises | async" [searchByParam]="'nombre'" [labelParam]="'pais'" [idParam]="'codigo'"></app-select>
             <p-floatLabel class="w-100">
-                <input id="pais" type="text" pInputText formControlName="pais" />
-                <label for="pais">Pais</label>
-            </p-floatLabel>
-            <p-floatLabel class="w-100">
-                <input id="telefono" type="text" pInputText formControlName="correo" />
+                <input id="telefono" type="text" pInputText formControlName="cellPhoneNumber" />
                 <label for="telefono">Telefono</label>
             </p-floatLabel>
-            <app-select class="w-100"></app-select>
             <p-floatLabel class="w-100">
                 <p-password class="w-100 d-b"  formControlName="password" [feedback]="false" />
                 <label for="password">Contraseña</label>
