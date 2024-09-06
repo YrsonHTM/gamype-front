@@ -20,6 +20,10 @@ export class ThemeService {
   private selectedTheme: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(this.theme[0]);
 
   constructor( private store: Store<AppState>, @Inject(DOCUMENT) private document: Document ) {
+    
+    if(!localStorage.getItem('tema')) {
+      localStorage.setItem('tema', this.theme[0]);
+    }
 
     if(localStorage.getItem('tema')) {
       this.loadTheme(localStorage.getItem('tema') as Theme);
@@ -42,8 +46,22 @@ export class ThemeService {
     }
   }
 
+  switchTwoThemes() {
+    const currentTheme = localStorage.getItem('tema') as Theme;
+    if(currentTheme === this.theme[0]) {
+        this.loadTheme(this.theme[1]);
+    } else {
+        this.loadTheme(this.theme[0]);
+    }
+  }
+
+  getCurrentTheme() {
+    return this.selectedTheme.asObservable();
+  }
+
   loadTheme(tema: Theme) {
     localStorage.setItem('tema', tema);
+    this.selectedTheme.next(tema);
       const themeLink = this.document.getElementById('app-theme') as HTMLLinkElement;
       if(themeLink) {
           themeLink.href = `${tema}.css`;

@@ -15,12 +15,15 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoggingInterceptor } from './interceptors/auth.interceptor';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { loaderInterceptor } from './interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    ProgressBarModule,
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({ tema: temaReducer}),
@@ -51,6 +54,11 @@ import { LoggingInterceptor } from './interceptors/auth.interceptor';
    {
     provide: HTTP_INTERCEPTORS,
     useClass: LoggingInterceptor,
+    multi: true
+   },
+   {
+    provide: HTTP_INTERCEPTORS,
+    useClass: loaderInterceptor,
     multi: true
    }
    //provide http client

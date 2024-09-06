@@ -5,8 +5,7 @@ import { Observable } from "rxjs";
 @Injectable()
 export class LoggingInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, handler: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Request URL: ' + req.url);
-    //si la url ontiene '/private' agregar token bearer
+
     if(req.url.includes('/private')){
       const token = localStorage.getItem('token');
       req = req.clone({
@@ -15,8 +14,6 @@ export class LoggingInterceptor implements HttpInterceptor {
         }
       });
     }
-
-
 
     return handler.handle(req);
   }

@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { Login } from '../models/login.interface';
 import { UserData } from '../models/userData.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthService {
 
   urlRegister = environment.gamypeApi + 'fitinv/auth/register';
   urlLogin = environment.gamypeApi + 'fitinv/auth/login';
+  urlGetUserByToken = environment.gamypeApi + 'fitinv/user/perfil';
 
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private userData: BehaviorSubject<UserData | null> = new BehaviorSubject<UserData | null>(null);
@@ -60,6 +62,26 @@ export class AuthService {
     return this.loggedIn.value;
   }
 
+  createHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+  }
+
+  getUserByToken() {
+    return this.http.get(this.urlGetUserByToken, this.createHeaders()).pipe(
+      tap((res: any) => {
+        this.setUserData(res);
+      }),
+      catchError((error) => {
+        return throwError(error);
+      })
+    );
+  }
+
   login(login: Login) {
     return this.http.post(this.urlLogin, login).pipe(
       tap((res: any) => {
@@ -70,6 +92,13 @@ export class AuthService {
         return throwError(error);
       })
     );
+  }
+
+  logOut(router: Router) {
+    this.setLoggedIn(false);
+    this.setUserData(null);
+    localStorage.removeItem('token');
+    router.navigate(['/']);
   }
 
 }

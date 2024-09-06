@@ -1,0 +1,95 @@
+.top-section{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.l-section{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex: 1;
+}
+.r-section{
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.company-section{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px;
+    p-card{
+        flex: 1;
+        max-width: 400px;
+        min-width: 300px;
+        display: block;
+    }
+}
+
+.user-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 20px 0px 20px;
+    ::ng-deep .p-card{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    h2{
+        width: 100%;
+        margin: 0px;
+    }
+}
+
+p-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue-900);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    h3{
+        margin-left: 15px;
+    }
+    .chip{
+        margin-right: 15px;
+        span{
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: var(--surface-b);
+            border-radius: 20px;
+            padding: 5px;
+        }
+    }
+}
+
+.icon{
+    color: var(--primary-color);
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+}
+
+.center-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+p{
+    color: var(--text-color);
+}
+
+p-footer{
+    display: flex;
+    flex-direction: row-reverse;
+}

@@ -8,7 +8,7 @@ const routes: Routes = [
   loadChildren: () => import('./gamype/gamype.module').then(m => m.GamypeModule)
   },
   {
-  path: 'home',
+  path: 'gamype',
   loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule),
   canActivate: [loginGuard]
   },

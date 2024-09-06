@@ -1,0 +1,24 @@
+<header>
+    <div class="left-section">
+        <div class="gamype-title">
+        <!-- <p-menubar styleClass="customMenubar" class="mr-20" [model]="items" /> -->
+        <!-- <p-tieredMenu [model]="items" /> -->
+        <i class="pi pi-briefcase gl icon"></i>
+        <span class="gl">GAMYPE</span>
+        
+        </div>
+    </div>
+    <div class="right-section">
+        <!-- <div class="user-info">
+            <div class="user-name">
+                <span class="gl">{{userNameToShow}}</span>
+            </div>
+        </div> -->
+        
+
+        <p-button class="mr-20" iconPos="right" icon="pi pi-user" [label]="userNameToShow" (onClick)="menu.toggle($event)" />
+        <p-tieredMenu #menu [model]="items" [popup]="true" />
+        <!-- logout -->
+        <!-- <i class="pi pi-sign-out gl icon-logut" (click)="logout()"></i> -->
+    </div>
+</header>
