@@ -12,21 +12,36 @@ import { ToggleDarkComponent } from './themes/components/toggle-dark.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { LoggingInterceptor } from './interceptors/auth.interceptor';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { loaderInterceptor } from './interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
+    ProgressBarModule,
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({ tema: temaReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        }
+      }
+    }),
     BrowserAnimationsModule,
     ToggleDarkComponent,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule
+  ],
+  exports: [
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -36,6 +51,18 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
       deps: [PrimeNGConfig],
       multi: true,
    },
+   {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoggingInterceptor,
+    multi: true
+   },
+   {
+    provide: HTTP_INTERCEPTORS,
+    useClass: loaderInterceptor,
+    multi: true
+   }
+   //provide http client
+   
   ],
   bootstrap: [AppComponent]
 })

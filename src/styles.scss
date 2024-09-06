@@ -61,6 +61,14 @@ h1, h2, h3, h4, h5, h6{
     color: var(--primary-color);
 }
 
+.mt-10{
+    margin-top: 10px;
+}
+
+.mt-20{
+    margin-top: 20px;
+}
+
 h1{
     font-size: 2.5rem;
     font-weight: bold;
@@ -83,6 +91,7 @@ p{
 
 body{
     font-family: 'Roboto', sans-serif;
+    min-width: unset;
     margin: 0;
     padding: 0;
 }
@@ -137,4 +146,20 @@ body{
 ::ng-deep .p-float-label{
     margin-top: 16px !important;
     margin-bottom:16px !important;
+}
+
+.justify-content-between{
+    justify-content: space-between;
+}
+
+.flex{
+    display: flex;
+}
+
+.row{
+    flex-direction: row;
+}
+
+.column{
+    flex-direction: column;
 }

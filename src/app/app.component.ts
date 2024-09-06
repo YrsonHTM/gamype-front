@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoaderService } from './interceptors/loader-service/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'gamype-front';
+  loading$ = this.loaderService.getLoading();
+  constructor(
+    private loaderService: LoaderService
+  ) {
+  }
 }

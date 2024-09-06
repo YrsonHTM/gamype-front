@@ -1,0 +1,66 @@
+header{
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-color);
+}
+
+.left-section{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex: 1;
+}
+
+.right-section{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.gamype-title{
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-left: 32px;
+    .icon{
+        font-size: 2rem;
+        font-weight: bold;
+        transform: translate(0, -2px);
+    }
+    span{
+        display: flex;
+        font-size: 2rem;
+        font-weight: bold;
+        justify-content: center;
+    }
+}
+
+.mr-20{
+    margin-right: 20px;
+}
+
+.icon-logut{
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.user-name{
+    .gl{
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+}
+
+// :host ::ng-deep .p-submenu-list{
+//     transform: translate(-52px, 0px);
+// }

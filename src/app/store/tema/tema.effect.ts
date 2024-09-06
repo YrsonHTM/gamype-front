@@ -17,8 +17,7 @@ export class TemaEffects {
         exhaustMap(() => of(null)
             .pipe(
                 map((_) => {
-                    //establecer tema en el local storage
-                    console.log('claro')
+
                     localStorage.setItem('tema', 'lara-light-blue');
                     const themeLink = this.document.getElementById('app-theme') as HTMLLinkElement;
                     if(themeLink) {
@@ -34,9 +33,8 @@ export class TemaEffects {
         ofType(darkAction),
         exhaustMap(() => of(null)
             .pipe(
-                map((_) => {
-                    //establecer tema en el local storage
-                    console.log('oscuro')
+                map(() => {
+
                     localStorage.setItem('tema', 'lara-dark-blue');
                     const themeLink = this.document.getElementById('app-theme') as HTMLLinkElement;
                     if(themeLink) {

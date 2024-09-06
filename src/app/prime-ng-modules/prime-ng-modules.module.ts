@@ -10,7 +10,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { FloatLabelModule } from 'primeng/floatlabel';
-
+import { StepperModule } from 'primeng/stepper';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { CalendarModule } from 'primeng/calendar';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [],
@@ -25,7 +28,11 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     InputIconModule,
     InputTextModule,
     PasswordModule,
-    FloatLabelModule
+    StepperModule,
+    SplitButtonModule,
+    FloatLabelModule,
+    CalendarModule,
+    MenubarModule
   ],
   exports: [
     ButtonModule,
@@ -37,7 +44,11 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     InputIconModule,
     InputTextModule,
     PasswordModule,
-    FloatLabelModule
+    StepperModule,
+    SplitButtonModule,
+    FloatLabelModule,
+    CalendarModule,
+    MenubarModule
   ],
 })
 export class PrimeNgModulesModule { }

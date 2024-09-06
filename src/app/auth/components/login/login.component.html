@@ -5,7 +5,7 @@
             Software de gestión empresarial para recursos humanos e inventarios.
         </p>
     </div>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (submit)="login()">
         <main class="form-content1">
             <p-floatLabel class="w-100">
                 <input id="username" type="text" pInputText formControlName="username" />
@@ -19,7 +19,7 @@
                 Iniciar sesión
             </p-button>
             <div class="other-actions">
-                <p class="link mt-16 mb-16">
+                <p class="link mt-16 mb-16" (click)="prueba()">
                     ¿Olvidaste tu contraseña?
                 </p>
                 <p class="link" (click)="navigateToRegister()">
