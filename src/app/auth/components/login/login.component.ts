@@ -30,8 +30,7 @@ export class LoginComponent {
   login() {
     this.authService.login(this.form.value as Login).subscribe({
       next: (res: any) => {
-        this.router.navigate(['home']);
-        console.log(res)
+        this.router.navigate(['gamype']);
       },
       error: err => {
         console.error(err);

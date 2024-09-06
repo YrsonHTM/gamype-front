@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homeprotected',
@@ -11,9 +12,14 @@ export class HomeprotectedComponent {
   userData = this.authService.getUserData();
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     console.log(this.userData)
+  }
+
+  goToCreateCompany() {
+    this.router.navigate(['home/create-company']);
   }
 
 }

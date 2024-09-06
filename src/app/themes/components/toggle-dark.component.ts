@@ -43,4 +43,13 @@ export class ToggleDarkComponent implements AfterViewInit {
         console.log('changeTheme');
         this.themeService.switchTheme(theme);
     }
+
+    switchTheme() {
+        const currentTheme = localStorage.getItem('tema') as Theme;
+        if(currentTheme === this.themeService.theme[0]) {
+            this.changeTheme(this.themeService.theme[1]);
+        } else {
+            this.changeTheme(this.themeService.theme[0]);
+        }
+    }
 }

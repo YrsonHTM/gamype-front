@@ -1,0 +1,173 @@
+<main>
+  <p-card class="title-card">
+    <div class="content-card">
+      <i (click)="goBack()" class="pi pi-arrow-left icon" style="font-size: 1.5rem"></i>
+    <h2>
+      Crear Compania
+    </h2>
+    </div>
+  </p-card>
+  <form [formGroup]="empresaForm" class="mt-20" (ngSubmit)="onSubmit()">
+
+  <p-stepper>
+    <p-stepperPanel header="Basico">
+        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+            <p-card header="Informacion basica">
+                <div class="p-fluid">
+                  <div class="p-field">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" pInputText formControlName="name" />
+                  </div>
+                  <div class="p-field">
+                    <label for="razonSocial">Razón Social</label>
+                    <input id="razonSocial" type="text" pInputText formControlName="companyName" />
+                  </div>
+                  <div class="p-field">
+                    <label for="fechaFundacion">Fecha de Fundación</label>
+                    <p-calendar formControlName="foundationDate" />
+                  </div>
+                  
+                    <p class="icon-text">Icono de referencia</p>
+                    <div class="icon-section">
+                    <i *ngFor="let icon of iconOptios" [class.selected]="empresaForm.get('icon')?.value === icon" [class]="'pi ' + icon + ' select-icon'" (click)="selectIcon(icon)"></i>
+                  </div>
+                </div>
+                <div class="flex pt-4 justify-content-between row-reverse mt-10">
+                  <p-button 
+                      label="Siguiente" 
+                      icon="pi pi-arrow-right" 
+                      iconPos="right" 
+                      (onClick)="nextCallback.emit()" />
+              </div>
+            </p-card>
+        </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Avanzado">
+        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+          <p-card header="Informacion avanzada">
+            <div class="p-fluid">
+              <div class="p-field">
+                <label for="tamagnio">Tamaño</label>
+                <input id="tamagnio" type="text" pInputText formControlName="idTamagnio" />
+              </div>
+              <div class="p-field">
+                <label for="idTipoSociedadMercantil">Tipo sociedad mercantil</label>
+                <input id="idTipoSociedadMercantil" type="text" pInputText formControlName="idTipoSociedadMercantil" />
+              </div>
+              <div class="p-field">
+                <label for="idSectorEconomico">Sector socioeconomico</label>
+                <input id="idSectorEconomico" type="email" pInputText formControlName="idSectorEconomico" />
+              </div>
+            </div>
+            <div class="flex pt-4 justify-content-between mt-10">
+              <p-button 
+                  label="Atras" 
+                  icon="pi pi-arrow-left" 
+                  (onClick)="prevCallback.emit()" />
+              <p-button 
+                  label="Siguiente" 
+                  icon="pi pi-arrow-right" 
+                  iconPos="right" 
+                  (onClick)="nextCallback.emit()" />
+          </div>
+          </p-card>
+
+        </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Contacto">
+        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
+          <p-card header="Informacion de contacto">
+            <div class="p-fluid">
+              <div class="p-field">
+                <label for="telefono">Telefono</label>
+                <input id="telefono" type="number" maxlength="15" pInputText formControlName="telefono" />
+              </div>
+              <div class="p-field">
+                <label for="direccion">Direccion</label>
+              <input id="direccion" type="text" pInputText formControlName="direccion" />
+              </div>
+              <div class="p-field">
+                <label for="correo">Correo</label>
+              <input id="correo" type="text" pInputText formControlName="correo" />
+              </div>
+              <div class="p-field">
+                <label for="sitioWeb">Sitio web</label>
+              <input id="sitioWeb" type="text" pInputText formControlName="sitioWeb" />
+              </div>
+            </div>
+            <div class="flex pt-4 justify-content-between mt-10">
+              <p-button label="Atras" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
+              <p-button 
+                  label="Guardar" 
+                  icon="pi pi-arrow-right" 
+                  iconPos="right" 
+                  (onClick)="onSubmit()" />
+          </div>
+          </p-card>
+        </ng-template>
+    </p-stepperPanel>
+</p-stepper>
+</form>
+<button (click)="ver()">
+ver
+</button>
+
+  <!-- <form [formGroup]="empresaForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="activeIndex === 0">
+      <h2>Información Básica</h2>
+      <div class="p-fluid">
+
+        <div class="p-field">
+          <label for="telefono">Teléfono</label>
+          <input id="telefono" type="text" pInputText formControlName="telefono" />
+        </div>
+        <div class="p-field">
+          <label for="direccion">Dirección de la Sede Principal</label>
+          <input id="direccion" type="text" pInputText formControlName="direccion" />
+        </div>
+        <div class="p-field">
+          <label for="correo">Correo</label>
+          <input id="correo" type="email" pInputText formControlName="correo" />
+        </div>
+        <div class="p-field">
+          <label for="sitioWeb">Sitio Web</label>
+          <input id="sitioWeb" type="url" pInputText formControlName="sitioWeb" />
+        </div>
+      </div>
+      <button pButton type="button" (click)="nextStep()" label="Siguiente"></button>
+    </div>
+  
+    <div *ngIf="activeIndex === 1">
+      <h2>Detalles Adicionales</h2>
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="idUsuario">ID Usuario Creación</label>
+          <input id="idUsuario" type="number" pInputText formControlName="idUsuario" />
+        </div>
+        <div class="p-field">
+          <label for="fechaRegistro">Fecha de Registro</label>
+          <input id="fechaRegistro" type="date" pInputText formControlName="fechaRegistro" />
+        </div>
+        <div class="p-field">
+          <label for="icono">Icono</label>
+          <input id="icono" type="text" pInputText formControlName="icono" />
+        </div>
+        <div class="p-field">
+          <label for="idTamagnio">ID Tamaño</label>
+          <select id="idTamagnio" pDropdown formControlName="idTamagnio">
+            <option *ngFor="let tamagnio of tamagnioOptions" [value]="tamagnio.value">{{tamagnio.label}}</option>
+          </select>
+        </div>
+        <div class="p-field">
+          <label for="idTipo">ID Tipo</label>
+          <select id="idTipo" pDropdown formControlName="idTipo">
+            <option *ngFor="let tipo of tipoOptions" [value]="tipo.value">{{tipo.label}}</option>
+          </select>
+        </div>
+      </div>
+      <button pButton type="button" (click)="previousStep()" label="Anterior"></button>
+      <button pButton type="submit" label="Enviar"></button>
+    </div>
+  </form>
+   -->
+</main>
