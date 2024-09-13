@@ -35,12 +35,10 @@ export class ToggleDarkComponent implements AfterViewInit {
     }
 
     onChange(event: any) {
-        console.log('onChange')
         event.checked ? this.changeTheme(this.themeService.theme[0]) : this.changeTheme(this.themeService.theme[1]);
       }
     
     changeTheme(theme: Theme) {
-        console.log('changeTheme');
         this.themeService.switchTheme(theme);
     }
 

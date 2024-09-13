@@ -15,7 +15,6 @@ export class HomeprotectedComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    console.log(this.userData)
   }
 
   goToCreateCompany() {

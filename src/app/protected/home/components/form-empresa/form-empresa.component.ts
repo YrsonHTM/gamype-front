@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EmpresaService } from '../../services/empresa.service';
+import { Sectores } from './models/sectores.interface';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-form-empresa',
   templateUrl: './form-empresa.component.html',
   styleUrl: './form-empresa.component.scss'
 })
-export class FormEmpresaComponent {
+export class FormEmpresaComponent implements OnInit {
   empresaForm: FormGroup;
   activeIndex: number = 0;
   selectedIcon: string = '';
+  tamagnios: any[] = [];
+  filteredTamagnios: any[] = [];
+  sociedadesMercantiles: any[] = [];
+  filteredSociedadesMercantiles: any[] = [];
+  sectoresSocioEconomicos: any[] = [];
+  filteredSectoresSocioEconomicos: any[] = [];
 
   iconOptios = [
     'pi-briefcase',
@@ -33,7 +42,9 @@ export class FormEmpresaComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private empresaService: EmpresaService,
+    private messageService: MessageService,
   ) {
     this.empresaForm = this.fb.group({
       name: ['', Validators.required],
@@ -43,10 +54,22 @@ export class FormEmpresaComponent {
       idTamagnio: [null, Validators.required],
       idTipoSociedadMercantil: [null, Validators.required],
       idSectorEconomico: [null, Validators.required],
-      telefono: ['', [Validators.required, this.maxDigitsValidator(10)]],
+      contactNumber: ['', [Validators.required, this.maxDigitsValidator(10)]],
       direccion: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      sitioWeb: ['', [Validators.required, this.websiteValidator()]],
+      email: ['', [Validators.required, Validators.email]],
+      webSite: ['', [Validators.required, this.websiteValidator()]],
+    });
+  }
+
+  ngOnInit(): void {
+    this.empresaService.getSectoresMercantiles().subscribe((sectores) => {
+      this.sectoresSocioEconomicos = sectores.claseEmpresas;
+    });
+    this.empresaService.getTamagnios().subscribe((tamagnios:any) => {
+      this.tamagnios = tamagnios.claseEmpresas;
+    });
+    this.empresaService.getSociedadesMercantiles().subscribe((sociedades:any) => {
+      this.sociedadesMercantiles = sociedades.claseEmpresas;
     });
   }
 
@@ -58,6 +81,22 @@ export class FormEmpresaComponent {
       }
       return null;
     };
+  }
+
+  filterTamagnios($event){
+    const query = $event.query;
+    this.filteredTamagnios = this.tamagnios.filter(tamagnio => tamagnio.nombre.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  filterSociedadesMercantiles($event){
+    const query = $event.query;
+    this.filteredSociedadesMercantiles = this.sociedadesMercantiles.filter(sociedad => sociedad.nombre.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  filterSectoresSocioEconomicos($event){
+    const query = $event.query;
+    this.filteredSectoresSocioEconomicos = this.sectoresSocioEconomicos.filter(sectores => sectores.nombre.toLowerCase().includes(query.toLowerCase
+    ()));
   }
 
   maxDigitsValidator(max: number): ValidatorFn {
@@ -92,16 +131,34 @@ export class FormEmpresaComponent {
   }
 
   ver() {
-    console.log(this.empresaForm
-    );
+
   }
 
   onSubmit() {
-    console.log(this.empresaForm.value);
-
+    this.empresaForm.markAllAsTouched();
+    Object.keys(this.empresaForm.controls).forEach(field => {
+      const control = this.empresaForm.get(field);
+      control.markAsDirty();
+    });
     if (this.empresaForm.valid) {
-      console.log(this.empresaForm.value);
-      // Aquí puedes manejar el envío del formulario, por ejemplo, hacer una petición a tu API
+      let paBack = this.empresaForm.value;
+      paBack.idTipoSociedadMercantil = paBack.idTipoSociedadMercantil.id;
+      paBack.idTamagnio = paBack.idTamagnio.id;
+      paBack.idSectorEconomico = paBack.idSectorEconomico.id;
+      this.empresaService.guuardarEmpresa(paBack).subscribe(
+        {
+          next: () => {
+          this.messageService.add({severity:'success', summary:'Guardado', detail:'Empresa guardada con exito'});
+          this.goBack();
+          },
+           error: (error) => {
+          this.messageService.add({severity:'error', summary:'Error', detail:'Ocurrio un error al guardar la empresa'});
+        }
+        }
+      );
+    }
+    else{
+      this.messageService.add({severity:'error', summary:'Error', detail:'Favor de llenar todos los campos'});
     }
   }
 }

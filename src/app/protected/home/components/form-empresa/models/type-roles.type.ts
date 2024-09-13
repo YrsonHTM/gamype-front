@@ -1,0 +1,1 @@
+export type rolName = 'Administrador de inventario' | 'Administrador de personal' | 'Administrador total';

@@ -21,124 +21,41 @@
     </div>
 </section>
 <section class="company-section">
-    <p-card>
+    @if (userEmpresas.length === 0 && !loadingEmpresas) {
+        <p-card styleClass="flex-1" class="no-companies">
+            <div class="j-c-a-c f-col flex-1">
+                <h4>
+                    No tienes companias asociadas a tu cuenta.
+                </h4>
+                <p>
+                    Si deseas crear una compania, haz click en el boton de crear compania.
+                </p>
+            </div>
+        </p-card>
+    }
+    <p-card class="company-card" *ngFor="let empresa of userEmpresas">
         <p-header>
             <h3 class="l-section">
-                Company 1
+                {{ empresa.name }}
             </h3>
             <div class="chip r-section">
                 <span>
-                    Admin
+                    {{ findRoleName(empresa.idsRoles[0]) | shortRol}}
                 </span>
             </div>
         </p-header>
-        <div class="center-content">
-            <i class="pi pi-briefcase gl icon"></i>
-            <p>
+        <div class="card-content">
+            <i [ngClass]="empresa.icon" class="pi gl icon mr-10"></i>
+            <p class="info-empresa">
                 Lorem ipsum dolor sit amet, con
             </p>
         </div>
         <p-footer>
             <p-splitButton 
             label="Ir a compania" 
-            (onClick)="save('info')" 
-            [model]="items" />
-        </p-footer>
-    </p-card>
-    <p-card>
-        <p-header>
-            <h3 class="l-section">
-                Company 1
-            </h3>
-            <div class="chip r-section">
-                <span>
-                    Admin
-                </span>
-            </div>
-        </p-header>
-        <div class="center-content">
-            <i class="pi pi-briefcase gl icon"></i>
-            <p>
-                Lorem ipsum dolor sit amet, con
-            </p>
-        </div>
-        <p-footer>
-            <p-splitButton 
-            label="Ir a compania" 
-            (onClick)="save('info')" 
-            [model]="items" />
-        </p-footer>
-    </p-card>
-    <p-card>
-        <p-header>
-            <h3 class="l-section">
-                Company 1
-            </h3>
-            <div class="chip r-section">
-                <span>
-                    Admin
-                </span>
-            </div>
-        </p-header>
-        <div class="center-content">
-            <i class="pi pi-briefcase gl icon"></i>
-            <p>
-                Lorem ipsum dolor sit amet, con
-            </p>
-        </div>
-        <p-footer>
-            <p-splitButton 
-            label="Ir a compania" 
-            (onClick)="save('info')" 
-            [model]="items" />
-        </p-footer>
-    </p-card>
-    <p-card>
-        <p-header>
-            <h3 class="l-section">
-                Company 1
-            </h3>
-            <div class="chip r-section">
-                <span>
-                    Admin
-                </span>
-            </div>
-        </p-header>
-        <div class="center-content">
-            <i class="pi pi-briefcase gl icon"></i>
-            <p>
-                Lorem ipsum dolor sit amet, con
-            </p>
-        </div>
-        <p-footer>
-            <p-splitButton 
-            label="Ir a compania" 
-            (onClick)="save('info')" 
-            [model]="items" />
-        </p-footer>
-    </p-card>
-    <p-card>
-        <p-header>
-            <h3 class="l-section">
-                Company 1
-            </h3>
-            <div class="chip r-section">
-                <span>
-                    Admin
-                </span>
-            </div>
-        </p-header>
-        <div class="center-content">
-            <i class="pi pi-briefcase gl icon"></i>
-            <p>
-                Lorem ipsum dolor sit amet, con
-            </p>
-        </div>
-        <p-footer>
-            <p-splitButton 
-            label="Ir a compania" 
-            (onClick)="save('info')" 
-            [model]="items" />
+            (onClick)="save('info')"
+            (onDropdownClick)="drop('info')"
+            [model]="empresa.items" />
         </p-footer>
     </p-card>
 </section>

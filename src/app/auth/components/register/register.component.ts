@@ -38,11 +38,9 @@ export class RegisterComponent {
     register.countryCode = (this.form.value.countryCode as any).codigo;
     this.authService.registerUser(register).subscribe(
       (response) => {
-        console.log(response);
         this.navigateToLogin();
       },
       (error) => {
-        console.log(error);
       }
     );
   }
