@@ -14,6 +14,11 @@ import { StepperModule } from 'primeng/stepper';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { CalendarModule } from 'primeng/calendar';
 import { MenubarModule } from 'primeng/menubar';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [],
@@ -32,7 +37,12 @@ import { MenubarModule } from 'primeng/menubar';
     SplitButtonModule,
     FloatLabelModule,
     CalendarModule,
-    MenubarModule
+    MenubarModule,
+    KeyFilterModule,
+    AutoCompleteModule,
+    ToastModule,
+    ConfirmDialogModule,
+    DynamicDialogModule
   ],
   exports: [
     ButtonModule,
@@ -48,7 +58,12 @@ import { MenubarModule } from 'primeng/menubar';
     SplitButtonModule,
     FloatLabelModule,
     CalendarModule,
-    MenubarModule
+    MenubarModule,
+    KeyFilterModule,
+    AutoCompleteModule,
+    ToastModule,
+    ConfirmDialogModule,
+    DynamicDialogModule
   ],
 })
 export class PrimeNgModulesModule { }

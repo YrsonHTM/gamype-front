@@ -14,18 +14,19 @@
         <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
             <p-card header="Informacion basica">
                 <div class="p-fluid">
-                  <div class="p-field">
-                    <label for="nombre">Nombre</label>
+                  <p-floatLabel>
                     <input id="nombre" type="text" pInputText formControlName="name" />
-                  </div>
-                  <div class="p-field">
-                    <label for="razonSocial">Razón Social</label>
+                    <label for="nombre">Nombre</label>
+
+                  </p-floatLabel>
+                  <p-floatLabel>
                     <input id="razonSocial" type="text" pInputText formControlName="companyName" />
-                  </div>
-                  <div class="p-field">
-                    <label for="fechaFundacion">Fecha de Fundación</label>
+                    <label for="razonSocial">Razón Social</label>
+                  </p-floatLabel>
+                  <p-floatLabel>
                     <p-calendar formControlName="foundationDate" />
-                  </div>
+                    <label for="fechaFundacion">Fecha de Fundación</label>
+                  </p-floatLabel>
                   
                     <p class="icon-text">Icono de referencia</p>
                     <div class="icon-section">
@@ -46,18 +47,48 @@
         <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
           <p-card header="Informacion avanzada">
             <div class="p-fluid">
+              <p-floatLabel>
+                      <p-autoComplete
+                      id="idTamagnio" 
+              formControlName="idTamagnio"
+              
+              [suggestions]="filteredTamagnios"
+              forceSelection="true"
+              (completeMethod)="filterTamagnios($event)" 
+              field="nombre"
+              >
+          </p-autoComplete>
+              <label for="idTamagnio">Tamaño</label>
+              </p-floatLabel>
               <div class="p-field">
-                <label for="tamagnio">Tamaño</label>
-                <input id="tamagnio" type="text" pInputText formControlName="idTamagnio" />
+                <!-- <app-select></app-select> -->
               </div>
-              <div class="p-field">
+              <p-floatLabel>
+                <p-autoComplete
+                  id="idTipoSociedadMercantil" 
+                  formControlName="idTipoSociedadMercantil"
+                  
+                  [suggestions]="filteredSociedadesMercantiles"
+                  forceSelection="true"
+                  (completeMethod)="filterSociedadesMercantiles($event)" 
+                  field="nombre"
+                  >
+                </p-autoComplete>
                 <label for="idTipoSociedadMercantil">Tipo sociedad mercantil</label>
-                <input id="idTipoSociedadMercantil" type="text" pInputText formControlName="idTipoSociedadMercantil" />
-              </div>
-              <div class="p-field">
-                <label for="idSectorEconomico">Sector socioeconomico</label>
-                <input id="idSectorEconomico" type="email" pInputText formControlName="idSectorEconomico" />
-              </div>
+              </p-floatLabel>
+              <p-floatLabel>
+                <p-autoComplete
+                id="idSectorEconomico" 
+                formControlName="idSectorEconomico"
+                [suggestions]="filteredSectoresSocioEconomicos"
+                forceSelection="true"
+                (completeMethod)="filterSectoresSocioEconomicos($event)" 
+                field="nombre"
+                >
+              </p-autoComplete>
+              <label for="idSectorEconomico">Tipo sociedad mercantil</label>
+
+              </p-floatLabel>
             </div>
             <div class="flex pt-4 justify-content-between mt-10">
               <p-button 
@@ -78,22 +109,22 @@
         <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
           <p-card header="Informacion de contacto">
             <div class="p-fluid">
-              <div class="p-field">
-                <label for="telefono">Telefono</label>
-                <input id="telefono" type="number" maxlength="15" pInputText formControlName="telefono" />
-              </div>
-              <div class="p-field">
+              <p-floatLabel>
+                <input id="contactNumber" type="number" maxlength="15" pInputText formControlName="contactNumber" />
+                <label for="contactNumber">Numero de contacto</label>
+              </p-floatLabel>
+              <p-floatLabel>
+                <input id="direccion" type="text" pInputText formControlName="direccion" />
                 <label for="direccion">Direccion</label>
-              <input id="direccion" type="text" pInputText formControlName="direccion" />
-              </div>
-              <div class="p-field">
-                <label for="correo">Correo</label>
-              <input id="correo" type="text" pInputText formControlName="correo" />
-              </div>
-              <div class="p-field">
-                <label for="sitioWeb">Sitio web</label>
-              <input id="sitioWeb" type="text" pInputText formControlName="sitioWeb" />
-              </div>
+              </p-floatLabel>
+              <p-floatLabel>
+                <input id="email" type="text" pInputText formControlName="email" />
+                <label for="email">Correo de contacto</label>
+              </p-floatLabel>
+              <p-floatLabel>
+                <input id="webSite" type="text" pInputText formControlName="webSite" />
+                <label for="webSite">Sitio web</label>
+              </p-floatLabel>
             </div>
             <div class="flex pt-4 justify-content-between mt-10">
               <p-button label="Atras" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />

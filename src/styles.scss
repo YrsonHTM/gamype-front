@@ -84,7 +84,7 @@ h1{
 p{
     margin: 0;
     color: var(--primary-color);
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 600;
     text-align: center;
 }
@@ -92,12 +92,41 @@ p{
 body{
     font-family: 'Roboto', sans-serif;
     min-width: unset;
+    min-height: 100vh;
+    display: flex;
     margin: 0;
     padding: 0;
 }
 
+.flex-1{
+    flex: 1;
+}
+
+.f-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.f-col{
+    display: flex;
+    flex-direction: column;
+}
+
 .gl{
     color: var(--gray-50);
+}
+
+.j-c-a-c{
+    justify-content: center;
+    align-items: center;
+}
+
+.ml-10{
+    margin-left: 10px;
+}
+
+.mr-10{
+    margin-right: 10px;
 }
 
 .g-b-label{

@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoaderService {
 
+  private requestCount = 0;
   private loading = new BehaviorSubject<boolean>(false);
 
   constructor() { }
@@ -15,7 +16,18 @@ export class LoaderService {
   }
 
   setLoading(value: boolean) {
-    this.loading.next(value);
+    if (value) {
+      this.requestCount++;
+    } else {
+      this.requestCount--;
+    }
+    if (this.requestCount <= 0) {
+      this.requestCount = 0;
+      this.loading.next(value);
+    }
+    else {
+      this.loading.next(true);
+    }
   }
 
 }
