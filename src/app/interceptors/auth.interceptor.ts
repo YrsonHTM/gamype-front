@@ -6,8 +6,8 @@ import { Observable } from "rxjs";
 export class LoggingInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, handler: HttpHandler): Observable<HttpEvent<any>> {
 
-    if(req.url.includes('/private')){
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    if(token){
       req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`

@@ -32,8 +32,11 @@ h2{
 .p-fluid{
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
+
+input.ng-dirty.ng-invalid {
+    color: red
+  }
 
 .select-icon{
     display: flex;

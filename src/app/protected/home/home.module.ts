@@ -8,8 +8,12 @@ import { PrimeNgModulesModule } from '../../prime-ng-modules/prime-ng-modules.mo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '../../layout/layout.module';
 import { PrincipalHomeComponent } from './components/principal-home/principal-home.component';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { SelectComponent } from '../../layout/transversal-components/select/select.component';
+import { ShortRolPipe } from './custom-pipes/short-rol.pipe';
+import { DialogService } from 'primeng/dynamicdialog';
+import { FormUsersPermisosComponent } from './components/form-users-permisos/form-users-permisos.component';
 
 
 @NgModule({
@@ -17,7 +21,9 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
     HomeprotectedComponent,
     FormEmpresaComponent,
     PrincipalHomeComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    ShortRolPipe,
+    FormUsersPermisosComponent
   ],
   imports: [
     CommonModule,
@@ -25,8 +31,9 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
     PrimeNgModulesModule,
     ReactiveFormsModule,
     FormsModule,
-    LayoutModule
+    LayoutModule,
+    SelectComponent
   ],
-  providers: [MessageService]
+  providers: [MessageService,ConfirmationService,DialogService]
 })
 export class HomeModule { }
