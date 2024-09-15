@@ -32,13 +32,13 @@ export class PrincipalHomeComponent implements OnInit {
     this.userNameToShow = this.userName.length > 20 ? this.userName.slice(0, 20) + '...' : this.userName;
   }
   ngOnInit(): void {
-    this.empresaService.getEmpresas().subscribe(data => {
-      this.userEmpresas = data;
-      this.loadingEmpresas = false;
-      this.defineItmesEmpresas();
-    });
     this.empresaService.getRolesAplication().subscribe(data => {
       this.rolesAplicacion = data;
+      this.empresaService.getEmpresas().subscribe(data => {
+        this.userEmpresas = data;
+        this.loadingEmpresas = false;
+        this.defineItmesEmpresas();
+      });
     });
   }
 
@@ -77,39 +77,34 @@ export class PrincipalHomeComponent implements OnInit {
 
   createitems(empresa): MenuItem[] {
     const admin_acces = havePermission(empresa.idsRoles, this.rolesAplicacion, ROLES_USER_EMPRESA.ADMIN_EMPRESA)
-    return [
-      {
-          label: 'Ver',
-          command: () => {
-              this.update();
-          }
-      },
-      admin_acces ? {
+    return admin_acces ? [
+    {
         label: 'Eliminar',
         command: () => {
             this.delete(empresa);
         }
+    },
+    {
+        label: 'Editar',
+        command: () => {
+            this.chageToEdit(empresa);
+        }
+    },
+    {
+        label: 'Accesos',
+        command: () => {
+            this.editUserAccess(empresa);
+        }
     }
-    : {},
-      admin_acces ? {
-          label: 'Editar',
-          command: () => {
-              this.update();
-          }
-      }
-      : {},
-      admin_acces ? {
-          label: 'Accesos',
-          command: () => {
-              this.editUserAccess(empresa);
-          }
-      }
-      : {}
-  ];
+  ] : []; 
   }
 
   save(severity: string) {
     this.messageService.add({ severity: severity, summary: 'Success', detail: 'Data Saved' });
+  }
+
+  chageToEdit(empresa) {
+    this.router.navigate(['gamype/edit-company', empresa.id]);
   }
 
   update() {
@@ -131,8 +126,9 @@ export class PrincipalHomeComponent implements OnInit {
 
   editUserAccess(empresa){
     this.refFormUserAcces = this.dialogService.open(FormUsersPermisosComponent, {
-      header: 'Select a Product',
+      header: 'Accesos de la empresa  ' + empresa.name,
       width: '50vw',
+      data: empresa,
       contentStyle: { overflow: 'auto' },
       breakpoints: {
           '960px': '75vw',

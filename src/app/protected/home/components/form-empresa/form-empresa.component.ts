@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EmpresaService } from '../../services/empresa.service';
 import { Sectores } from './models/sectores.interface';
 import { MessageService } from 'primeng/api';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-form-empresa',
@@ -20,6 +21,9 @@ export class FormEmpresaComponent implements OnInit {
   filteredSociedadesMercantiles: any[] = [];
   sectoresSocioEconomicos: any[] = [];
   filteredSectoresSocioEconomicos: any[] = [];
+  editMode = false;
+  idEmpresa: number;
+  infoEmpresa: any;
 
   iconOptios = [
     'pi-briefcase',
@@ -43,9 +47,11 @@ export class FormEmpresaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private empresaService: EmpresaService,
     private messageService: MessageService,
   ) {
+
     this.empresaForm = this.fb.group({
       name: ['', Validators.required],
       companyName: ['', Validators.required],
@@ -55,21 +61,58 @@ export class FormEmpresaComponent implements OnInit {
       idTipoSociedadMercantil: [null, Validators.required],
       idSectorEconomico: [null, Validators.required],
       contactNumber: ['', [Validators.required, this.maxDigitsValidator(10)]],
-      direccion: ['', Validators.required],
+      addres: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       webSite: ['', [Validators.required, this.websiteValidator()]],
     });
   }
 
   ngOnInit(): void {
-    this.empresaService.getSectoresMercantiles().subscribe((sectores) => {
-      this.sectoresSocioEconomicos = sectores.claseEmpresas;
+    this.idEmpresa = Number(this.route.snapshot.paramMap.get('id'));
+    if(this.idEmpresa) this.editMode = true;
+    this.loadInitialData();
+
+  }
+
+  loadInitialData() {
+    forkJoin({
+      sectoresSocioEconomicos: this.empresaService.getSectoresMercantiles(),
+      tamagnios: this.empresaService.getTamagnios(),
+      sociedadesMercantiles: this.empresaService.getSociedadesMercantiles()
+    }).subscribe({
+      next: (results) => {
+        console.log(results);
+        this.tamagnios = results.tamagnios.claseEmpresas;
+        this.sectoresSocioEconomicos = results.sectoresSocioEconomicos.claseEmpresas;
+        this.sociedadesMercantiles = results.sociedadesMercantiles.claseEmpresas;
+        if(this.editMode)
+        {
+          this.loadInfoEmpresa();
+        }
+      },
+      error: (error) => {
+        console.error('Error loading initial data', error);
+      }
     });
-    this.empresaService.getTamagnios().subscribe((tamagnios:any) => {
-      this.tamagnios = tamagnios.claseEmpresas;
-    });
-    this.empresaService.getSociedadesMercantiles().subscribe((sociedades:any) => {
-      this.sociedadesMercantiles = sociedades.claseEmpresas;
+  }
+
+  loadInfoEmpresa() {
+    this.empresaService.getInfoEmpresa(this.idEmpresa).subscribe((empresa) => {
+      this.infoEmpresa = empresa;
+      console.log(empresa);
+      this.empresaForm.patchValue({
+        name: empresa.name,
+        companyName: empresa.companyName,
+        foundationDate: new Date(empresa.foundationDate),
+        icon: empresa.icon,
+        idTamagnio: this.tamagnios.find(tamagnio => tamagnio.id === empresa.idTamagnio),
+        idTipoSociedadMercantil: this.sociedadesMercantiles.find(sociedad => sociedad.id === empresa.idTipoSociedadMercantil),
+        idSectorEconomico: this.sectoresSocioEconomicos.find(sectores => sectores.id === empresa.idSectorEconomico),
+        contactNumber: empresa.contactNumber,
+        addres: empresa.addres,
+        email: empresa.email,
+        webSite: empresa.webSite,
+      });
     });
   }
 
@@ -129,11 +172,6 @@ export class FormEmpresaComponent implements OnInit {
   goBack() {
     this.router.navigate(['gamype']);
   }
-
-  ver() {
-
-  }
-
   onSubmit() {
     this.empresaForm.markAllAsTouched();
     Object.keys(this.empresaForm.controls).forEach(field => {
@@ -145,14 +183,15 @@ export class FormEmpresaComponent implements OnInit {
       paBack.idTipoSociedadMercantil = paBack.idTipoSociedadMercantil.id;
       paBack.idTamagnio = paBack.idTamagnio.id;
       paBack.idSectorEconomico = paBack.idSectorEconomico.id;
+      if(this.editMode) paBack.id = this.idEmpresa;
       this.empresaService.guuardarEmpresa(paBack).subscribe(
         {
           next: () => {
-          this.messageService.add({severity:'success', summary:'Guardado', detail:'Empresa guardada con exito'});
+          this.messageService.add({severity:'success', summary:'Guardado', detail: this.editMode ? 'Empresa actualizada' : 'Empresa guardada'});
           this.goBack();
           },
            error: (error) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Ocurrio un error al guardar la empresa'});
+          this.messageService.add({severity:'error', summary:'Error', detail: this.editMode ? 'No se pudo actualizar la empresa' : 'No se pudo guardar la empresa'});
         }
         }
       );
