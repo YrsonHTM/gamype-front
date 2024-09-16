@@ -27,12 +27,14 @@
     display: flex;
     flex: 1;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
     margin: 20px;
     .company-card{
         flex: 1;
         max-width: 400px;
-        min-width: 300px;
+        min-width: 400px;
+        height: min-content;
         display: block;
     }
 }
@@ -79,9 +81,10 @@ p-header{
 
 .icon{
     color: var(--primary-color);
-    height: 30px;
-    width: 30px;
-    font-size: 30px;
+    font-weight: bold;
+    height: 45px;
+    width: 45px;
+    font-size: 45px;
 }
 
 .center-content{
@@ -107,6 +110,8 @@ p{
 .card-content{
     display: flex;
     flex-direction: row;
+    height: 60px;
+    align-items: center;
 }
 
 .info-empresa{

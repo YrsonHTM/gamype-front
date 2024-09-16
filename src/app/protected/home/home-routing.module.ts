@@ -21,6 +21,10 @@ const routes: Routes = [
       {
         path: 'settings',
         component: UserSettingsComponent,
+      },
+      {
+        path: 'edit-company/:id',
+        component: FormEmpresaComponent,
       }
     ],
   },

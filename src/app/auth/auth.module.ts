@@ -8,6 +8,7 @@ import { PrimeNgModulesModule } from '../prime-ng-modules/prime-ng-modules.modul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '../layout/transversal-components/select/select.component';
 import { AutoErrorsDirective } from '../directives/auto-errors.directive';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { AutoErrorsDirective } from '../directives/auto-errors.directive';
     FormsModule,
     SelectComponent,
     AutoErrorsDirective
-  ]
+  ],
+  providers: [MessageService]
 })
 export class AuthModule { }
