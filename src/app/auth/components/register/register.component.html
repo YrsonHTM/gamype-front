@@ -1,3 +1,4 @@
+<p-toast />
 <p-card class="login-card">
     <div class="head-section">
         <h1>GAMYPE</h1>
@@ -19,7 +20,7 @@
                 <input id="correo" type="text" pInputText formControlName="username" />
                 <label for="correo">Correo Electronico</label>
             </p-floatLabel>
-            <app-select class="w-100 mt-16 mb-16" formControlName="countryCode" [items]=" paises | async" [searchByParam]="'nombre'" [labelParam]="'pais'" [idParam]="'codigo'"></app-select>
+            <app-select class="w-100 mt-16 mb-16" formControlName="idPais" [items]=" paises | async" [searchByParam]="'nombre'" [labelParam]="'pais'" [idParam]="'codigo'"></app-select>
             <p-floatLabel class="w-100">
                 <input id="telefono" type="text" pInputText formControlName="cellPhoneNumber" />
                 <label for="telefono">Telefono</label>

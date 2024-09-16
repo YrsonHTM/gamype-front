@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { ToggleButton, ToggleButtonModule } from "primeng/togglebutton";
 import { ThemeService } from "../theme.service";
 import { Theme } from "../models/Theme";
-
+/* eslint-disable */
 @Component({
     selector: "toggle-dark",
     template: `<p-toggleButton
@@ -16,7 +16,7 @@ import { Theme } from "../models/Theme";
         ToggleButtonModule
     ],
     })
-
+/* eslint-enable */
 export class ToggleDarkComponent implements AfterViewInit {
 
     @ViewChild('toggleButton') toggleButton!: ToggleButton;

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmpresaService } from '../../services/empresa.service';
-import { Sectores } from './models/sectores.interface';
 import { MessageService } from 'primeng/api';
 import { forkJoin } from 'rxjs';
 
@@ -81,7 +80,6 @@ export class FormEmpresaComponent implements OnInit {
       sociedadesMercantiles: this.empresaService.getSociedadesMercantiles()
     }).subscribe({
       next: (results) => {
-        console.log(results);
         this.tamagnios = results.tamagnios.claseEmpresas;
         this.sectoresSocioEconomicos = results.sectoresSocioEconomicos.claseEmpresas;
         this.sociedadesMercantiles = results.sociedadesMercantiles.claseEmpresas;
@@ -99,7 +97,6 @@ export class FormEmpresaComponent implements OnInit {
   loadInfoEmpresa() {
     this.empresaService.getInfoEmpresa(this.idEmpresa).subscribe((empresa) => {
       this.infoEmpresa = empresa;
-      console.log(empresa);
       this.empresaForm.patchValue({
         name: empresa.name,
         companyName: empresa.companyName,
@@ -115,7 +112,7 @@ export class FormEmpresaComponent implements OnInit {
       });
     });
   }
-
+/* eslint-disable */
   websiteValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const pattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
@@ -125,7 +122,7 @@ export class FormEmpresaComponent implements OnInit {
       return null;
     };
   }
-
+/* eslint-enable */
   filterTamagnios($event){
     const query = $event.query;
     this.filteredTamagnios = this.tamagnios.filter(tamagnio => tamagnio.nombre.toLowerCase().includes(query.toLowerCase()));
@@ -179,7 +176,7 @@ export class FormEmpresaComponent implements OnInit {
       control.markAsDirty();
     });
     if (this.empresaForm.valid) {
-      let paBack = this.empresaForm.value;
+      const paBack = this.empresaForm.value;
       paBack.idTipoSociedadMercantil = paBack.idTipoSociedadMercantil.id;
       paBack.idTamagnio = paBack.idTamagnio.id;
       paBack.idSectorEconomico = paBack.idSectorEconomico.id;
@@ -190,7 +187,7 @@ export class FormEmpresaComponent implements OnInit {
           this.messageService.add({severity:'success', summary:'Guardado', detail: this.editMode ? 'Empresa actualizada' : 'Empresa guardada'});
           this.goBack();
           },
-           error: (error) => {
+           error: () => {
           this.messageService.add({severity:'error', summary:'Error', detail: this.editMode ? 'No se pudo actualizar la empresa' : 'No se pudo guardar la empresa'});
         }
         }

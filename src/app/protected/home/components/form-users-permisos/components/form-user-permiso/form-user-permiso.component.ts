@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersEmpresa } from '../../../../services/utils/users-empresa.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, switchMap, take } from 'rxjs';
+import { take } from 'rxjs';
 import { EmpresaService } from '../../../../services/empresa.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
@@ -38,7 +38,6 @@ export class FormUserPermisoComponent implements OnInit {
     this.empresaService.getRolesAplication().pipe(
       take(1)
     ).subscribe((value) => {
-      console.log('value', value);
       this.Roles = value;
     });
   }

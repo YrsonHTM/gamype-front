@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { take } from 'rxjs';
 import { EmpresaService } from '../../../../services/empresa.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';

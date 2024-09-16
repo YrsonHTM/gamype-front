@@ -39,10 +39,6 @@ export class FormUsersPermisosComponent implements OnInit {
       this.ref.close(ref);
   }
 
-  view(user) {
-    console.log('view', user);
-  }
-
   editUser(user) {
     this.refFormUserAcces = this.dialogService.open(EditUserPermisoComponent, {
       header: 'Editar Usuario ' + user.nombreUsuario,

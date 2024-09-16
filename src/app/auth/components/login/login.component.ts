@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Login } from '../../models/login.interface';
-import { UserData } from '../../models/userData.interface';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private messageService: MessageService
   ) { }
 
   navigateToRegister() {
@@ -29,11 +30,11 @@ export class LoginComponent {
 
   login() {
     this.authService.login(this.form.value as Login).subscribe({
-      next: (res: any) => {
+      next: () => {
         this.router.navigate(['gamype']);
       },
-      error: err => {
-        console.error(err);
+      error: () => {
+        this.messageService.add({severity:'error', summary:'Error', detail:'Error al iniciar sesión'});
       }
     });
   }

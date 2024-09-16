@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Sectores } from '../components/form-empresa/models/sectores.interface';
 import { UsersEmpresa } from './utils/users-empresa.interface';
 

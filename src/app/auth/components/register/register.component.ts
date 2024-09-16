@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PaisesService } from '../../../layout/transversal-services/paises.service';
 import { AuthService } from '../../services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterComponent {
     lastname: ['', [Validators.required, Validators.minLength(3)]],
     firstname: ['', [Validators.required, Validators.minLength(3)]],
     cellPhoneNumber: ['', [Validators.required, Validators.minLength(8)]],
-    countryCode: [null, Validators.required],
+    idPais: [null, Validators.required],
   });
 
   paises = this.paisesService.getPaises();
@@ -26,21 +27,25 @@ export class RegisterComponent {
               private fb: FormBuilder,
               private router: Router,
               private paisesService: PaisesService,
-              private authService: AuthService
+              private authService: AuthService,
+              private messageService: MessageService
   ) {
   }
 
   registerAcount() {
     this.form.markAllAsTouched();
     if(!this.form.valid) return;
-
     const register = this.form.value;
-    register.countryCode = (this.form.value.countryCode as any).codigo;
+    register.idPais = (this.form.value.idPais as any).id;
     this.authService.registerUser(register).subscribe(
-      (response) => {
-        this.navigateToLogin();
-      },
-      (error) => {
+      {
+        next: () => {
+          this.messageService.add({severity:'success', summary:'Registro exitoso', detail:'Usuario registrado correctamente'});
+          this.navigateToLogin();
+        },
+        error: () => {
+          this.messageService.add({severity:'error', summary:'Error', detail:'Error al registrar el usuario'});
+        }
       }
     );
   }

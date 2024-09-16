@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { EmpresaService } from '../../services/empresa.service';
-import { ROLES_USER_EMPRESA, getRoeslUser, havePermission } from '../../services/utils/getRolUser';
+import { ROLES_USER_EMPRESA, havePermission } from '../../services/utils/getRolUser';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormUsersPermisosComponent } from '../form-users-permisos/form-users-permisos.component';
 
@@ -111,9 +111,6 @@ export class PrincipalHomeComponent implements OnInit {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' });
   }
 
-  drop(asd){
-  }
-
   goToCreateCompany() {
     this.router.navigate(['gamype/create-company']);
   }
@@ -134,22 +131,6 @@ export class PrincipalHomeComponent implements OnInit {
           '960px': '75vw',
           '640px': '90vw'
       },
-  });
-
-  this.refFormUserAcces.onClose.subscribe((data: any) => {
-      let summary_and_detail;
-      console.log('data', data);
-      if (data) {
-          const buttonType = data?.buttonType;
-          summary_and_detail = buttonType ? { summary: 'No Product Selected', detail: `Pressed '${buttonType}' button` } : { summary: 'Product Selected', detail: data?.name };
-      } else {
-          summary_and_detail = { summary: 'No Product Selected', detail: 'Pressed Close button' };
-      }
-      this.messageService.add({ severity: 'info', ...summary_and_detail, life: 3000 });
-  });
-
-  this.refFormUserAcces.onMaximize.subscribe((value) => {
-      this.messageService.add({ severity: 'info', summary: 'Maximized', detail: `maximized: ${value.maximized}` });
   });
   }
   
