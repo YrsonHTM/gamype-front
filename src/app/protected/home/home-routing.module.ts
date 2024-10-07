@@ -21,6 +21,14 @@ const routes: Routes = [
       {
         path: 'settings',
         component: UserSettingsComponent,
+      },
+      {
+        path: 'edit-company/:id',
+        component: FormEmpresaComponent,
+      },
+      {
+        path: 'company',
+        loadChildren: () => import('./components/company/company.module').then(m => m.CompanyModule)
       }
     ],
   },

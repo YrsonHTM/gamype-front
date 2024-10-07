@@ -1,0 +1,48 @@
+<p-card class="title" [styleClass]="'card-content'">
+    <h2>
+        {{ 'Bienvenido a la empresa ' }}
+        <strong>"{{empresaInfo().companyName}}"</strong>
+    </h2>
+</p-card>
+
+<p-card class="body" [styleClass]="'card-content-body'">
+    <h2 class="title-body">
+        Informacion de la empresa
+        <i class="icon pi {{empresaInfo().icon}}"></i>
+    </h2>
+    <div class="info-content">
+        <div class="info-item">
+            <p>Nombre de la empresa: <span>{{empresaInfo().companyName}}</span></p>
+            
+        </div>
+        <div class="info-item">
+            <p>Correo de la empresa: <span>{{empresaInfo().email}}</span></p>
+            
+        </div>
+        <div class="info-item">
+            <p>Telefono de la empresa: <span>{{empresaInfo().contactNumber}}</span></p>
+            
+        </div>
+        <div class="info-item">
+            <p>Fecha de Fundacin: <span>{{empresaInfo().foundationDate}}</span></p>
+        </div>
+        <div class="info-item">
+            <p>Fecha de Creacion en la aplicacion: <span>{{empresaInfo().registerDate}}</span></p>
+        </div>
+        <div class="info-item">
+            <p>Direccion: <span>{{empresaInfo().addres}}</span></p>
+        </div>
+        <div class="info-item">
+            <p>Sitio web: <span>{{empresaInfo().webSite}}</span></p>
+        </div>
+        <div class="info-item">
+            <p>Tamaño: <span>{{tamagnioName}}</span></p>
+        </div>
+        <div class="info-item">
+            <p>Sector socieconomico: <span>{{sectorSocioEconomicoName}}</span></p>
+        </div>
+        <div class="info-item">
+            <p>Sociedad mercantil: <span>{{sociendadesMercantilesName}}</span></p>
+        </div>
+    </div>
+</p-card>

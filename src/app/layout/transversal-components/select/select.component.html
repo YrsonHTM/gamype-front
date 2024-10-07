@@ -1,5 +1,6 @@
 <p-floatLabel>
     <p-autoComplete 
+        (onBlur)="onTouchedCb()"
         [(ngModel)]="selectedItem" 
         [suggestions]="suggestions" 
         (completeMethod)="search($event)"

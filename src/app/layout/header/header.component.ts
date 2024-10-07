@@ -56,6 +56,10 @@ export class HeaderComponent {
   ];
   }
 
+  navigateGamype() {
+    this.router.navigate(['/gamype']);
+  }
+
   logout() {
     this.authService.logOut(this.router);
   }

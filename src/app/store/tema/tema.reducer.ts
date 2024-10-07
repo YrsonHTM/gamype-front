@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createReducer, on } from '@ngrx/store';
 import { lightAction, darkAction, resetAction } from './tema.actions';
 
@@ -9,3 +10,4 @@ export const temaReducer = createReducer(
   on(darkAction, (state) => state = 'lara-dark-blue'),
   on(resetAction, (state) => state = initialState)
 );
+/* eslint-enable */

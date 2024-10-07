@@ -5,3 +5,25 @@
     flex-direction: row;
     gap: 10px;
 }
+
+.header{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-content{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+p-table{
+    margin: 20px;
+}

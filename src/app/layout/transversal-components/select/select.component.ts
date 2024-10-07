@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { AutoCompleteCompleteEvent } from '../models/autocompleteEvente.model';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { AbstractControl, ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { AutoErrorsDirective } from '../../../directives/auto-errors.directive';
 
@@ -44,6 +43,8 @@ export class SelectComponent implements ControlValueAccessor {
 
   onChangeCb?: (obj: any) => void;
 
+  onTouchedCb?: () => void;
+
   suggestions: any[] = [];
 
   constructor() { }
@@ -63,10 +64,9 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouchedCb = fn;
   }
   
-  setDisabledState?(isDisabled: boolean): void {
-  }
 
   search(event: AutoCompleteCompleteEvent) {
     if(!this.items) return;

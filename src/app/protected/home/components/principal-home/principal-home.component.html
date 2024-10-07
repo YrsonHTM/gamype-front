@@ -45,16 +45,15 @@
             </div>
         </p-header>
         <div class="card-content">
-            <i [ngClass]="empresa.icon" class="pi gl icon mr-10"></i>
+            <i [ngClass]="empresa.icon" class="pi gl icon mr-20"></i>
             <p class="info-empresa">
-                Lorem ipsum dolor sit amet, con
+                {{empresa.sector || 'Esta empresa no tiene registrado sector'}}
             </p>
         </div>
         <p-footer>
             <p-splitButton 
             label="Ir a compania" 
-            (onClick)="save('info')"
-            (onDropdownClick)="drop('info')"
+            (onClick)="save(empresa)"
             [model]="empresa.items" />
         </p-footer>
     </p-card>

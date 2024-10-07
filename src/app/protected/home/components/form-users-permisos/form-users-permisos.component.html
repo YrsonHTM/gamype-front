@@ -1,5 +1,25 @@
-<p>form-users-permisos works!</p>
 <div class="buttons-section">
-    <p-button type="button" label="Cancel" icon="pi pi-times" (onClick)="closeDialog({ buttonType: 'Cancel', summary: 'Ningun cambio aplicado' })" />
-<p-button type="button" label="Save" icon="pi pi-check" (onClick)="closeDialog({ buttonType: 'Save', summary: 'Cambios guardados' })" />
+    <main>
+        <div class="header">
+            <p-button [disabled]="users.length > 5" (onClick)="addUser()" label="Agregar usuario">
+                <i class="pi pi-plus"></i>
+            </p-button>
+        </div>
+        <p-table [value]="users" [tableStyle]="{ 'min-width': '10rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nombre de usuario</th>
+                    <th>Roles</th>
+                    <th>Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td>{{ user.nombreUsuario }}</td>
+                    <td>{{ userRoles(user) }}</td>
+                    <td><p-button icon="pi pi-pencil" (onClick)="editUser(user)" label="Editar"></p-button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </main>
 </div>
