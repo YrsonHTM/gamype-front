@@ -1,0 +1,16 @@
+:host{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-content{
+    display: flex;
+    margin: 20px;
+    margin-right: 10px;
+    height: 100%;
+    width: 100%;
+    max-height: calc(100vh - 104px);
+    overflow-y: auto;
+    box-sizing: border-box;
+}

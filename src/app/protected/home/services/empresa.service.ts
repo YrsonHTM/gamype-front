@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Observable } from 'rxjs';
-import { Sectores } from '../components/form-empresa/models/sectores.interface';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Sectores, Tamagnio } from '../components/form-empresa/models/sectores.interface';
 import { UsersEmpresa } from './utils/users-empresa.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresaService {
+
+  private rolesAplicacion: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   constructor(
     private http: HttpClient
@@ -18,8 +20,8 @@ export class EmpresaService {
     return this.http.get<Sectores>(`${environment.gamypeApi}fitinv/enterprise/sectoresMercantiles`);
   }
 
-  getTamagnios(): Observable<any> {
-    return this.http.get<any>(`${environment.gamypeApi}fitinv/enterprise/tamagnio`);
+  getTamagnios(): Observable<Tamagnio> {
+    return this.http.get<Tamagnio>(`${environment.gamypeApi}fitinv/enterprise/tamagnio`);
   }
 
   getSociedadesMercantiles(): Observable<any> {
@@ -35,7 +37,7 @@ export class EmpresaService {
   }
 
   getEmpresas(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.gamypeApi}fitinv/enterprise`);
+    return this.http.get<any[]>(`${environment.gamypeApi}fitinv/enterprise`).pipe();
   }
 
   getUserByEmail(email: string): Observable<any> {
@@ -43,7 +45,13 @@ export class EmpresaService {
   }
 
   getRolesAplication(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.gamypeApi}fitinv/enterprise/rolesEmpresa`);
+    return this.http.get<any[]>(`${environment.gamypeApi}fitinv/enterprise/rolesEmpresa`).pipe(
+      tap(roles => this.rolesAplicacion.next(roles))
+    );
+  }
+
+  getRolesAplicationValue() {
+    return this.rolesAplicacion.value;
   }
 
   deleteCompany(id: number): Observable<any> {

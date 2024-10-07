@@ -23,6 +23,7 @@ header{
 }
 
 .gamype-title{
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 22px;
@@ -60,6 +61,7 @@ header{
         margin-right: 10px;
     }
 }
+
 
 // :host ::ng-deep .p-submenu-list{
 //     transform: translate(-52px, 0px);
