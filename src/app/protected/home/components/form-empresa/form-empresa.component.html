@@ -2,9 +2,12 @@
   <p-card class="title-card">
     <div class="content-card">
       <i (click)="goBack()" class="pi pi-arrow-left icon" style="font-size: 1.5rem"></i>
-    <h2>
-      Crear Compania
-    </h2>
+    @if(this.editMode){
+      <h2>Editar Empresa {{infoEmpresa?.name}}</h2>
+    }
+    @else{
+      <h2>Crear Empresa</h2>
+    }
     </div>
   </p-card>
   <form [formGroup]="empresaForm" class="mt-20" (ngSubmit)="onSubmit()">
@@ -114,8 +117,8 @@
                 <label for="contactNumber">Numero de contacto</label>
               </p-floatLabel>
               <p-floatLabel>
-                <input id="direccion" type="text" pInputText formControlName="direccion" />
-                <label for="direccion">Direccion</label>
+                <input id="addres" type="text" pInputText formControlName="addres" />
+                <label for="addres">Direccion</label>
               </p-floatLabel>
               <p-floatLabel>
                 <input id="email" type="text" pInputText formControlName="email" />
@@ -129,7 +132,7 @@
             <div class="flex pt-4 justify-content-between mt-10">
               <p-button label="Atras" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
               <p-button 
-                  label="Guardar" 
+                  [label]="this.editMode ? 'Actualizar' : 'Guardar'" 
                   icon="pi pi-arrow-right" 
                   iconPos="right" 
                   (onClick)="onSubmit()" />
@@ -139,66 +142,4 @@
     </p-stepperPanel>
 </p-stepper>
 </form>
-<button (click)="ver()">
-ver
-</button>
-
-  <!-- <form [formGroup]="empresaForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="activeIndex === 0">
-      <h2>Información Básica</h2>
-      <div class="p-fluid">
-
-        <div class="p-field">
-          <label for="telefono">Teléfono</label>
-          <input id="telefono" type="text" pInputText formControlName="telefono" />
-        </div>
-        <div class="p-field">
-          <label for="direccion">Dirección de la Sede Principal</label>
-          <input id="direccion" type="text" pInputText formControlName="direccion" />
-        </div>
-        <div class="p-field">
-          <label for="correo">Correo</label>
-          <input id="correo" type="email" pInputText formControlName="correo" />
-        </div>
-        <div class="p-field">
-          <label for="sitioWeb">Sitio Web</label>
-          <input id="sitioWeb" type="url" pInputText formControlName="sitioWeb" />
-        </div>
-      </div>
-      <button pButton type="button" (click)="nextStep()" label="Siguiente"></button>
-    </div>
-  
-    <div *ngIf="activeIndex === 1">
-      <h2>Detalles Adicionales</h2>
-      <div class="p-fluid">
-        <div class="p-field">
-          <label for="idUsuario">ID Usuario Creación</label>
-          <input id="idUsuario" type="number" pInputText formControlName="idUsuario" />
-        </div>
-        <div class="p-field">
-          <label for="fechaRegistro">Fecha de Registro</label>
-          <input id="fechaRegistro" type="date" pInputText formControlName="fechaRegistro" />
-        </div>
-        <div class="p-field">
-          <label for="icono">Icono</label>
-          <input id="icono" type="text" pInputText formControlName="icono" />
-        </div>
-        <div class="p-field">
-          <label for="idTamagnio">ID Tamaño</label>
-          <select id="idTamagnio" pDropdown formControlName="idTamagnio">
-            <option *ngFor="let tamagnio of tamagnioOptions" [value]="tamagnio.value">{{tamagnio.label}}</option>
-          </select>
-        </div>
-        <div class="p-field">
-          <label for="idTipo">ID Tipo</label>
-          <select id="idTipo" pDropdown formControlName="idTipo">
-            <option *ngFor="let tipo of tipoOptions" [value]="tipo.value">{{tipo.label}}</option>
-          </select>
-        </div>
-      </div>
-      <button pButton type="button" (click)="previousStep()" label="Anterior"></button>
-      <button pButton type="submit" label="Enviar"></button>
-    </div>
-  </form>
-   -->
 </main>

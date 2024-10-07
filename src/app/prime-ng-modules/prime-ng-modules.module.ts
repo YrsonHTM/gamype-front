@@ -19,6 +19,12 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { TableModule } from 'primeng/table';
+import { ChipsModule } from 'primeng/chips';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SidebarModule } from 'primeng/sidebar';
+import { AccordionModule } from 'primeng/accordion';
+
 
 @NgModule({
   declarations: [],
@@ -42,7 +48,12 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     AutoCompleteModule,
     ToastModule,
     ConfirmDialogModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    TableModule,
+    ChipsModule,
+    MultiSelectModule,
+    SidebarModule,
+    AccordionModule
   ],
   exports: [
     ButtonModule,
@@ -63,7 +74,12 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     AutoCompleteModule,
     ToastModule,
     ConfirmDialogModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    TableModule,
+    ChipsModule,
+    MultiSelectModule,
+    SidebarModule,
+    AccordionModule
   ],
 })
 export class PrimeNgModulesModule { }

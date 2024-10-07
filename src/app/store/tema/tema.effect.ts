@@ -1,11 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of, pipe } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { ThemeService } from '../../themes/theme.service';
 import { darkAction, lightAction, loadThemeSuccess } from './tema.actions';
 import { DOCUMENT } from '@angular/common';
-import { initialState } from './tema.reducer';
 
 @Injectable()
 export class TemaEffects {
@@ -16,7 +15,7 @@ export class TemaEffects {
         ofType(lightAction),
         exhaustMap(() => of(null)
             .pipe(
-                map((_) => {
+                map(() => {
 
                     localStorage.setItem('tema', 'lara-light-blue');
                     const themeLink = this.document.getElementById('app-theme') as HTMLLinkElement;
