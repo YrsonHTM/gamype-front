@@ -30,13 +30,9 @@ export class LayoutCompanyService {
   }
 
   getAllMenus(): Observable<Menu[]> {
-    console.log(
-      
-    );
     const admin_acces = havePermission(this.companyService.getRolesEmpresaValue(), this.companyService.getRolesAplicacionValue(), ROLES_USER_EMPRESA.ADMIN_EMPRESA);
     const admin_inv = havePermission(this.companyService.getRolesEmpresaValue(), this.companyService.getRolesAplicacionValue(), ROLES_USER_EMPRESA.ADMIN_INVENTARIO);
     const admin_rrhh = havePermission(this.companyService.getRolesEmpresaValue(), this.companyService.getRolesAplicacionValue(), ROLES_USER_EMPRESA.ADMIN_RECURSOS_HUMANOS);
-    console.log(admin_acces, admin_inv, admin_rrhh);
     if(admin_acces) {
       return of([
         {id: 1, name: 'Dashboard', icon: 'pi pi-home', url: '/gamype/company/dashboard'},

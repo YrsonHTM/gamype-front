@@ -34,7 +34,6 @@ export class MenuBarComponent implements OnInit {
     this.menus.subscribe(menus => {
       if(!menus) return;
       const menu = menus.find(menu => menu.url === currentUrl);
-      console.log(menu);
       if(menu) this.layoutCompanyService.setSelectedMenu(menu);
     })
   }

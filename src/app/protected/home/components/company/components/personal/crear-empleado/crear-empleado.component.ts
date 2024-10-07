@@ -105,6 +105,8 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   loadInfoEmpleado(empleado){
+    console.log(this.supervisores);
+    console.log(empleado);
       this.form.patchValue({
       id: empleado.id,
       nombres: empleado.nombres,
@@ -121,7 +123,7 @@ export class CrearEmpleadoComponent implements OnInit {
       fechaContratacion: empleado.fechaContratacion ? new Date(empleado.fechaContratacion) : null,
       fechaFinalizacionContratacion: empleado.fechaFinalizacionContratacion ? new Date(empleado.fechaFinalizacionContratacion) : null,
       motivoFinalizacionContratacion: empleado.motivoFinalizacionContratacion,
-      idSupervisor: this.supervisores.find(supervisor => supervisor.id === empleado.supervisor?.id),
+      idSupervisor: this.supervisores.find(supervisor => supervisor.id === empleado?.idSupervisor),
       numeroIdentificacion: empleado.numeroIdentificacion,
       idTipoDocumentoIdentificacion: this.tiposDocumento.find(tipo => tipo.id === empleado?.idTipoDocumentoIdentificacion)
     });

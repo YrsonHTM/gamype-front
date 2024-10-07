@@ -159,9 +159,5 @@ export class PersonalComponent implements OnInit {
       }
     });
   }
-  
-  view($event){
-    console.log($event);
-  }
 
 }
