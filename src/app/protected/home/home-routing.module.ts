@@ -25,6 +25,10 @@ const routes: Routes = [
       {
         path: 'edit-company/:id',
         component: FormEmpresaComponent,
+      },
+      {
+        path: 'company',
+        loadChildren: () => import('./components/company/company.module').then(m => m.CompanyModule)
       }
     ],
   },

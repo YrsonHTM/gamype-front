@@ -1,0 +1,10 @@
+<p-card class="f-1 flex" styleClass="f-1">
+    <div class="item-container">
+        @for (menu of menus | async; track $index) {
+            <div class="item" [class.active]="((selectedMenu|async)?.id ) === menu.id" (click)="selectMenu(menu)">
+                <i [ngClass]="menu.icon" class="gl icon mr-20"></i>
+                <span>{{ menu.name }}</span>
+            </div>
+        }
+    </div>
+</p-card>

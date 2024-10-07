@@ -6,6 +6,7 @@ import { EmpresaService } from '../../services/empresa.service';
 import { ROLES_USER_EMPRESA, havePermission } from '../../services/utils/getRolUser';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormUsersPermisosComponent } from '../form-users-permisos/form-users-permisos.component';
+import { CompanyService } from '../company/services/company.service';
 
 @Component({
   selector: 'app-principal-home',
@@ -26,6 +27,7 @@ export class PrincipalHomeComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private empresaService: EmpresaService,
+    private companyService: CompanyService,
     private confirmationService: ConfirmationService,
     public dialogService: DialogService
   ) {
@@ -99,8 +101,9 @@ export class PrincipalHomeComponent implements OnInit {
   ] : []; 
   }
 
-  save(severity: string) {
-    this.messageService.add({ severity: severity, summary: 'Success', detail: 'Data Saved' });
+  save(empresa) {
+    this.companyService.setRolesEmpresa(empresa.idsRoles);
+    this.router.navigate(['gamype/company/dashboard'],{ queryParams: { empresa: empresa.id } });
   }
 
   chageToEdit(empresa) {

@@ -22,6 +22,9 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TableModule } from 'primeng/table';
 import { ChipsModule } from 'primeng/chips';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { SidebarModule } from 'primeng/sidebar';
+import { AccordionModule } from 'primeng/accordion';
+
 
 @NgModule({
   declarations: [],
@@ -48,7 +51,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DynamicDialogModule,
     TableModule,
     ChipsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    SidebarModule,
+    AccordionModule
   ],
   exports: [
     ButtonModule,
@@ -72,7 +77,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DynamicDialogModule,
     TableModule,
     ChipsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    SidebarModule,
+    AccordionModule
   ],
 })
 export class PrimeNgModulesModule { }

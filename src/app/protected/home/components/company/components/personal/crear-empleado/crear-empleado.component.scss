@@ -1,0 +1,23 @@
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+}
+
+.width-522{
+    width: 522px;
+}
