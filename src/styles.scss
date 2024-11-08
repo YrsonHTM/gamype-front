@@ -61,6 +61,18 @@ h1, h2, h3, h4, h5, h6{
     color: var(--primary-color);
 }
 
+.p-0{
+    padding: 0px;
+}
+
+.p-2{
+    padding: 2px;
+}
+
+.p-5{
+    padding: 5px;
+}
+
 .mt-10{
     margin-top: 10px;
 }
@@ -215,4 +227,8 @@ body{
 
 .column{
     flex-direction: column;
+}
+
+.circle{
+    border-radius: 50%;
 }

@@ -38,15 +38,17 @@ export class LayoutCompanyService {
         {id: 1, name: 'Dashboard', icon: 'pi pi-home', url: '/gamype/company/dashboard'},
         {id: 2, name: 'Cargo', icon: 'pi pi-id-card', url: '/gamype/company/cargo'},
         {id: 3, name: 'Personal', icon: 'pi pi-users', url: '/gamype/company/personal'},
-        {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventario'},
+        {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
+        {id: 7, name: 'elemento', icon: 'pi pi-warehouse', url: '/gamype/company/elemento'},
         {id: 4, name: 'Editar', icon: 'pi pi-pencil', url: '/gamype/company/edit'},
-        {id: 5, name: 'Accesos', icon: 'pi pi-key', url: '/gamype/company/delete'},	
+        {id: 5, name: 'Accesos', icon: 'pi pi-key', url: '/gamype/company/delete'},
       ])
     }
     if(admin_inv){
       return of([
         {id: 1, name: 'Dashboard', icon: 'pi pi-home', url: '/gamype/company/dashboard'},
-        {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventario'},
+        {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
+        {id: 7, name: 'elemento', icon: 'pi pi-warehouse', url: '/gamype/company/elemento'},
       ])
     }
     if(admin_rrhh){
@@ -59,9 +61,13 @@ export class LayoutCompanyService {
     return of([])
   }
 
-  goToUlr(url: string,idEmpresa?: number): void {
-    if(url === this.selectedMenu.value.url) return;
-    this.router.navigate([url],{ queryParams: { empresa: idEmpresa || this.companyService.getCompanyId() } });
+  goToUlr(url: string, idEmpresa?: number, otherParams?: { [key: string]: any }, skip: boolean = false): void {
+    if(url === this.selectedMenu?.value?.url && !skip) return;
+    const queryParams = {
+      empresa: idEmpresa || this.companyService.getCompanyId(),
+      ...otherParams
+    };
+    this.router.navigate([url], { queryParams });
   }
 
 }

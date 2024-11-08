@@ -54,7 +54,7 @@ export class RolesComponent implements OnInit {
                 this.cargos = cargos;
               });
             },
-            error: error => {
+            error: () => {
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al crear el cargo'});
             }
           }
