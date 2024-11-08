@@ -105,8 +105,6 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   loadInfoEmpleado(empleado){
-    console.log(this.supervisores);
-    console.log(empleado);
       this.form.patchValue({
       id: empleado.id,
       nombres: empleado.nombres,
@@ -144,7 +142,7 @@ export class CrearEmpleadoComponent implements OnInit {
 
   filterCargos($event){
     const query = $event.query;
-    this.filteredCargos = this.filteredCargos.filter(cargo => cargo.nombre.toLowerCase().includes(query.toLowerCase()));
+    this.filteredCargos = this.cargos.filter(cargo => cargo.nombre.toLowerCase().includes(query.toLowerCase()));
   }
 
   filterSupervisores($event){

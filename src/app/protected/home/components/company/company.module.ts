@@ -11,6 +11,14 @@ import { CrearRolComponent } from './components/roles/crear-rol/crear-rol.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PersonalComponent } from './components/personal/personal.component';
 import { CrearEmpleadoComponent } from './components/personal/crear-empleado/crear-empleado.component';
+import { InventariosComponent } from './components/inventarios/inventarios.component';
+import { ElementosComponent } from './components/elementos/elementos.component';
+import { ElementoformComponent } from './components/elementos/elementoform/elementoform.component';
+import { CrearInventarioComponent } from './components/inventarios/crear-inventario/crear-inventario.component';
+import { BeatyDatePipe } from './components/beaty-date.pipe';
+import { LoteComponent } from './components/inventarios/lote/lote.component';
+import { FormLotesComponent } from './components/inventarios/lote/form-lotes/form-lotes.component';
+import { FormExistenciasComponent } from './components/inventarios/lote/form-existencias/form-existencias.component';
 
 
 @NgModule({
@@ -21,7 +29,15 @@ import { CrearEmpleadoComponent } from './components/personal/crear-empleado/cre
     RolesComponent,
     CrearRolComponent,
     PersonalComponent,
-    CrearEmpleadoComponent
+    CrearEmpleadoComponent,
+    InventariosComponent,
+    ElementosComponent,
+    ElementoformComponent,
+    CrearInventarioComponent,
+    BeatyDatePipe,
+    LoteComponent,
+    FormLotesComponent,
+    FormExistenciasComponent
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,8 @@ import { DashBoardComponent } from './components/dash-board/dash-board.component
 import { RolesComponent } from './components/roles/roles.component';
 import { companyResolver } from './services/company.resolver';
 import { PersonalComponent } from './components/personal/personal.component';
+import { InventariosComponent } from './components/inventarios/inventarios.component';
+import { ElementosComponent } from './components/elementos/elementos.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,14 @@ const routes: Routes = [
     {
       path: 'personal',
       component: PersonalComponent,
+    },
+    {
+      path: 'inventarios',
+      loadChildren: () => import('./components/inventarios/inventarios.module').then(m => m.InventariosModule),
+    },
+    {
+      path: 'elemento',
+      component: ElementosComponent,
     }
   ],
   }
