@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PaisesService } from '../../../layout/transversal-services/paises.service';
@@ -10,7 +10,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
   form = this.fb.group({
     username: [null, [Validators.required, Validators.email]],
@@ -18,10 +18,12 @@ export class RegisterComponent {
     lastname: ['', [Validators.required, Validators.minLength(3)]],
     firstname: ['', [Validators.required, Validators.minLength(3)]],
     cellPhoneNumber: ['', [Validators.required, Validators.minLength(8)]],
-    idPais: [null, Validators.required],
+    idPais: ['' as any, Validators.required],
   });
 
-  paises = this.paisesService.getPaises();
+  paises = [];
+
+  filteredPaises = [];
 
   constructor(
               private fb: FormBuilder,
@@ -32,11 +34,26 @@ export class RegisterComponent {
   ) {
   }
 
+  ngOnInit(): void {
+    if(this.authService.validateToken()){
+      this.authService.logOut(this.router, true);
+    }
+    this.paisesService.getPaises().subscribe(paises => {
+      this.paises = paises;
+    });
+  }
+
   registerAcount() {
     this.form.markAllAsTouched();
     if(!this.form.valid) return;
-    const register = this.form.value;
-    register.idPais = (this.form.value.idPais as any).id;
+    const register = {
+      username: this.form.get('username').value,
+      password: this.form.get('password').value,
+      lastname: this.form.get('lastname').value,
+      firstname: this.form.get('firstname').value,
+      cellPhoneNumber: this.form.get('cellPhoneNumber').value,
+      idPais: this.form.get('idPais').value.id
+    };
     this.authService.registerUser(register).subscribe(
       {
         next: () => {
@@ -44,7 +61,7 @@ export class RegisterComponent {
           this.navigateToLogin();
         },
         error: () => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Error al registrar el usuario'});
+          this.messageService.add({severity:'error', summary:'Error', detail:'Error al registrar el usuario revise sus datos e intente nuevamente'});
         }
       }
     );
@@ -56,6 +73,11 @@ export class RegisterComponent {
 
   navigateToHome() {
     this.router.navigate(['']);
+  }
+
+  filterElementos($event){
+    const query = $event.query;
+    this.filteredPaises = this.paises.filter(elemento => elemento.nombre.toLowerCase().includes(query.toLowerCase()));
   }
 
 

@@ -39,7 +39,7 @@ export class LayoutCompanyService {
         {id: 2, name: 'Cargo', icon: 'pi pi-id-card', url: '/gamype/company/cargo'},
         {id: 3, name: 'Personal', icon: 'pi pi-users', url: '/gamype/company/personal'},
         {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
-        {id: 7, name: 'elemento', icon: 'pi pi-warehouse', url: '/gamype/company/elemento'},
+        {id: 7, name: 'elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
         {id: 4, name: 'Editar', icon: 'pi pi-pencil', url: '/gamype/company/edit'},
         {id: 5, name: 'Accesos', icon: 'pi pi-key', url: '/gamype/company/delete'},
       ])
@@ -48,7 +48,7 @@ export class LayoutCompanyService {
       return of([
         {id: 1, name: 'Dashboard', icon: 'pi pi-home', url: '/gamype/company/dashboard'},
         {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
-        {id: 7, name: 'elemento', icon: 'pi pi-warehouse', url: '/gamype/company/elemento'},
+        {id: 7, name: 'elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
       ])
     }
     if(admin_rrhh){

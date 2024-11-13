@@ -54,3 +54,51 @@ strong{
     height: 40px;
     font-size: 40px;
 }
+
+.card-content {
+    margin-bottom: 20px;
+}
+
+.card-content-body {
+    padding: 20px;
+}
+
+.title-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.info-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info-item i {
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+.info-item p {
+    margin: 0;
+}
+
+.info-item span {
+    font-weight: bold;
+}
+
+p{
+    font-weight: bold;
+    span{
+        font-weight: 500 !important;
+    }
+}

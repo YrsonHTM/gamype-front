@@ -116,7 +116,7 @@ export class CrearEmpleadoComponent implements OnInit {
       idCargo: empleado.cargo,
       salario: empleado.salario,
       horasSemanales: empleado.horasSemanales,
-      idTipoContrato: empleado.tipoContrato,
+      idTipoContrato: this.tiposContrato.find(contrato => contrato.id === empleado.idTipoContrato),
       notas: empleado.notas,
       fechaContratacion: empleado.fechaContratacion ? new Date(empleado.fechaContratacion) : null,
       fechaFinalizacionContratacion: empleado.fechaFinalizacionContratacion ? new Date(empleado.fechaFinalizacionContratacion) : null,

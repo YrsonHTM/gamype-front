@@ -34,7 +34,7 @@ export class LoginComponent {
         this.router.navigate(['gamype']);
       },
       error: () => {
-        this.messageService.add({severity:'error', summary:'Error', detail:'Error al iniciar sesión'});
+        this.messageService.add({severity:'error', summary:'Error', detail:'Error al iniciar sesión usuario o contraseña incorrectos'});
       }
     });
   }

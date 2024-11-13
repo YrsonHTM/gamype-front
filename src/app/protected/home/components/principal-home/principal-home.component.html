@@ -51,10 +51,19 @@
             </p>
         </div>
         <p-footer>
-            <p-splitButton 
-            label="Ir a compania" 
-            (onClick)="save(empresa)"
-            [model]="empresa.items" />
+            @if(empresa.items.length > 0){
+                <p-splitButton 
+                label="Ir a compania" 
+                (onClick)="save(empresa)"
+                [model]="empresa.items"
+                />
+            }
+            @else{
+                <p-button
+                label="Ir a compania" 
+                (onClick)="save(empresa)">
+                </p-button>
+            }
         </p-footer>
     </p-card>
 </section>
