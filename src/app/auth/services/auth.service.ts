@@ -94,10 +94,11 @@ export class AuthService {
     );
   }
 
-  logOut(router: Router) {
+  logOut(router: Router, noNavgate = false) {
     this.setLoggedIn(false);
     this.setUserData(null);
     localStorage.removeItem('token');
+    if (noNavgate) return;
     router.navigate(['/']);
   }
 

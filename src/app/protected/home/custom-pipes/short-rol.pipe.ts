@@ -6,7 +6,7 @@ import { nombreRol } from '../services/utils/roles-types';
 })
 export class ShortRolPipe implements PipeTransform {
 
-  transform(value: nombreRol, ...args: unknown[]): unknown {
+  transform(value: nombreRol): unknown {
     if (value === 'Administrador de inventario') {
       return 'Admin. inventario';
     }

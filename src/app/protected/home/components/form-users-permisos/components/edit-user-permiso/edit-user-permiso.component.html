@@ -1,0 +1,14 @@
+<form [formGroup]="formUserPermiso">
+    <main>
+          <p-multiSelect
+          [style]="{'width':'100%'}"
+          [options]="Roles" 
+          formControlName="idRoles"
+          optionLabel="nombreRol" 
+          placeholder="Seleccione Roles" />
+    </main>
+    </form>
+    <div class="buttons-content">
+        <p-button type="button" label="Cancelar" icon="pi pi-times" (onClick)="closeDialog(null)" />
+        <p-button type="button" label="Guardar" icon="pi pi-check" (onClick)="closeDialog(formUserPermiso.value)" />
+    </div>

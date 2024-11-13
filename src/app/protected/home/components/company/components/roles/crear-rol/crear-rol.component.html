@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+    <p-floatLabel>
+        <input id="nombre" type="text" pInputText formControlName="nombreCargo" />
+        <label for="nombre">Nombre cargo</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <input id="razonSocial" type="text" pInputText formControlName="descripcion" />
+        <label for="razonSocial">Descripcion</label>
+      </p-floatLabel>
+</form>
+<footer>
+    <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>
+    <p-button type="button" (click)="closeDialog(form.value)">{{ editMode ? 'Editar' : 'Crear' }}</p-button>
+</footer>

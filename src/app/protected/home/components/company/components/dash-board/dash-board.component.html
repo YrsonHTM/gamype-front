@@ -1,0 +1,51 @@
+<p-card class="title" [styleClass]="'card-content'">
+    <h2>
+        {{ 'Bienvenido a la empresa ' }}
+        <strong>"{{empresaInfo().companyName}}"</strong>
+    </h2>
+</p-card>
+
+<p-card class="body" [styleClass]="'card-content-body'">
+    <h2 class="title-body">
+        Información de la empresa
+        <i class="pi pi-info-circle"></i>
+    </h2>
+    <div class="info-content">
+        <div class="info-item">
+            <i class="pi pi-envelope"></i>
+            <p>Correo de la empresa: <span>{{empresaInfo().email}}</span></p>
+        </div>
+        <div class="info-item">
+            <i class="pi pi-phone"></i>
+            <p>Teléfono de la empresa: <span>{{empresaInfo().contactNumber}}</span></p>
+        </div>
+        <div class="info-item">
+            <i class="pi pi-calendar"></i>
+            <p>Fecha de Fundación: <span>{{empresaInfo().foundationDate | beatyDate}}</span></p>
+        </div>
+        <div class="info-item">
+            <i class="pi pi-calendar-plus"></i>
+            <p>Fecha de Creación en la aplicación: <span>{{empresaInfo().registerDate | beatyDate}}</span></p>
+        </div>
+        <div class="info-item">
+            <i class="pi pi-map-marker"></i>
+            <p>Dirección: <span>{{empresaInfo().addres}}</span></p>
+        </div>
+        <div class="info-item">
+            <i class="pi pi-globe"></i>
+            <p>Sitio web: <span>{{empresaInfo().webSite}}</span></p>
+        </div>
+        <div class="info-item">
+            <i class="pi pi-users"></i>
+            <p>Tamaño: <span>{{tamagnioName}}</span></p>
+        </div>
+        <div class="info-item">
+            <i class="pi pi-chart-line"></i>
+            <p>Sector socioeconómico: <span>{{sectorSocioEconomicoName}}</span></p>
+        </div>
+        <div class="info-item">
+            <i class="pi pi-briefcase"></i>
+            <p>Sociedad mercantil: <span>{{sociendadesMercantilesName}}</span></p>
+        </div>
+    </div>
+</p-card>

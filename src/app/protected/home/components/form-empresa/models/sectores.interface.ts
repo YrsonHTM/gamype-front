@@ -11,3 +11,10 @@ export interface ClaseEmpresas {
     nombre: string;
     descripcion: string;
 }
+
+export interface Tamagnio {
+    id: number;
+    nombre: string;
+    descripcion: string;
+    claseEmpresas: ClaseEmpresas[];
+}

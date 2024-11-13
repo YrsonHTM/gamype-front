@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { EmpresaService } from '../../services/empresa.service';
-import { ROLES_USER_EMPRESA, getRoeslUser, havePermission } from '../../services/utils/getRolUser';
+import { ROLES_USER_EMPRESA, havePermission } from '../../services/utils/getRolUser';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormUsersPermisosComponent } from '../form-users-permisos/form-users-permisos.component';
+import { CompanyService } from '../company/services/company.service';
 
 @Component({
   selector: 'app-principal-home',
@@ -26,19 +27,20 @@ export class PrincipalHomeComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private empresaService: EmpresaService,
+    private companyService: CompanyService,
     private confirmationService: ConfirmationService,
     public dialogService: DialogService
   ) {
     this.userNameToShow = this.userName.length > 20 ? this.userName.slice(0, 20) + '...' : this.userName;
   }
   ngOnInit(): void {
-    this.empresaService.getEmpresas().subscribe(data => {
-      this.userEmpresas = data;
-      this.loadingEmpresas = false;
-      this.defineItmesEmpresas();
-    });
     this.empresaService.getRolesAplication().subscribe(data => {
       this.rolesAplicacion = data;
+      this.empresaService.getEmpresas().subscribe(data => {
+        this.userEmpresas = data;
+        this.loadingEmpresas = false;
+        this.defineItmesEmpresas();
+      });
     });
   }
 
@@ -77,46 +79,39 @@ export class PrincipalHomeComponent implements OnInit {
 
   createitems(empresa): MenuItem[] {
     const admin_acces = havePermission(empresa.idsRoles, this.rolesAplicacion, ROLES_USER_EMPRESA.ADMIN_EMPRESA)
-    return [
-      {
-          label: 'Ver',
-          command: () => {
-              this.update();
-          }
-      },
-      admin_acces ? {
+    return admin_acces ? [
+    {
         label: 'Eliminar',
         command: () => {
             this.delete(empresa);
         }
+    },
+    {
+        label: 'Editar',
+        command: () => {
+            this.chageToEdit(empresa);
+        }
+    },
+    {
+        label: 'Accesos',
+        command: () => {
+            this.editUserAccess(empresa);
+        }
     }
-    : {},
-      admin_acces ? {
-          label: 'Editar',
-          command: () => {
-              this.update();
-          }
-      }
-      : {},
-      admin_acces ? {
-          label: 'Accesos',
-          command: () => {
-              this.editUserAccess(empresa);
-          }
-      }
-      : {}
-  ];
+  ] : []; 
   }
 
-  save(severity: string) {
-    this.messageService.add({ severity: severity, summary: 'Success', detail: 'Data Saved' });
+  save(empresa) {
+    this.companyService.setRolesEmpresa(empresa.idsRoles);
+    this.router.navigate(['gamype/company/dashboard'],{ queryParams: { empresa: empresa.id } });
+  }
+
+  chageToEdit(empresa) {
+    this.router.navigate(['gamype/edit-company', empresa.id]);
   }
 
   update() {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' });
-  }
-
-  drop(asd){
   }
 
   goToCreateCompany() {
@@ -131,29 +126,14 @@ export class PrincipalHomeComponent implements OnInit {
 
   editUserAccess(empresa){
     this.refFormUserAcces = this.dialogService.open(FormUsersPermisosComponent, {
-      header: 'Select a Product',
+      header: 'Accesos de la empresa  ' + empresa.name,
       width: '50vw',
+      data: empresa,
       contentStyle: { overflow: 'auto' },
       breakpoints: {
           '960px': '75vw',
           '640px': '90vw'
       },
-  });
-
-  this.refFormUserAcces.onClose.subscribe((data: any) => {
-      let summary_and_detail;
-      console.log('data', data);
-      if (data) {
-          const buttonType = data?.buttonType;
-          summary_and_detail = buttonType ? { summary: 'No Product Selected', detail: `Pressed '${buttonType}' button` } : { summary: 'Product Selected', detail: data?.name };
-      } else {
-          summary_and_detail = { summary: 'No Product Selected', detail: 'Pressed Close button' };
-      }
-      this.messageService.add({ severity: 'info', ...summary_and_detail, life: 3000 });
-  });
-
-  this.refFormUserAcces.onMaximize.subscribe((value) => {
-      this.messageService.add({ severity: 'info', summary: 'Maximized', detail: `maximized: ${value.maximized}` });
   });
   }
   

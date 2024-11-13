@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, of, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Pais } from './models/pais.interface';
