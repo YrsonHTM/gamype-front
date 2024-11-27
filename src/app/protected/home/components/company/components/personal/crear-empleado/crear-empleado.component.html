@@ -1,71 +1,72 @@
 <form [formGroup]="form">
-        <div class="row">
-            <p-floatLabel>
-                <input id="nombre" type="text" pInputText formControlName="nombres" />
-                <label for="nombre">Nombres empleado</label>
-              </p-floatLabel>
-              <p-floatLabel>
-                <input id="apellido" type="text" pInputText formControlName="apellidos" />
-                <label for="apellido">Apellidos empleado</label>
-              </p-floatLabel>
-        </div>
-        <div class="row">
-            <p-floatLabel>
-                <input id="identificador" type="text" pInputText formControlName="identificadorEmpresa" />
-                <label for="identificador">Identificador empresa</label>
-            </p-floatLabel>
-            <p-floatLabel>
-                <input id="telefono" type="text" pInputText formControlName="telefonoLaboral" />
-                <label for="telefono">Telefono laboral</label>
-            </p-floatLabel>
-        </div>
-        <div class="row">
-            <p-floatLabel>
-                <input id="correo" type="text" pInputText formControlName="correoElectronicoLaboral" />
-                <label for="correo">Correo electronico laboral</label>
-            </p-floatLabel>
-            <p-floatLabel>
-                <input id="direccion" type="text" pInputText formControlName="direccionVivienda" />
-                <label for="direccion">Direccion de vivienda</label>
-            </p-floatLabel>
-        </div>
-        <div class="row">
-            <p-floatLabel>
-                <p-autoComplete
-                  id="idTipoDocumento" 
-                  formControlName="idTipoDocumentoIdentificacion"
-                  [suggestions]="filteredDocumento"
-                  forceSelection="true"
-                  (completeMethod)="filterDocumento($event)" 
-                  field="nombre"
-                  >
-                </p-autoComplete>
-                <label for="idTipoDocumento">Tipo documento</label>
-              </p-floatLabel>
-            <p-floatLabel>
-                <input id="direccion" type="number" pInputText formControlName="numeroIdentificacion" />
-                <label for="direccion">Numero de documento</label>
-            </p-floatLabel>
-        </div>
-        <p-accordion class="width-522">
-            <p-accordionTab header="Mas informacion">
+
+        <p-accordion class="width-522" [activeIndex]="0">
+            <p-accordionTab header="Informacion basica">
                 <div class="row">
                     <p-floatLabel>
+                        <input id="nombre" type="text" pInputText formControlName="nombres" />
+                        <label class="required-label" for="nombre">Nombres empleado</label>
+                      </p-floatLabel>
+                      <p-floatLabel>
+                        <input id="apellido" type="text" pInputText formControlName="apellidos" />
+                        <label class="required-label" for="apellido">Apellidos empleado</label>
+                      </p-floatLabel>
+                </div>
+                <div class="row">
+                    <p-floatLabel>
+                        <input id="identificador" type="text" pInputText formControlName="identificadorEmpresa" />
+                        <label for="identificador">Identificador empresa</label>
+                    </p-floatLabel>
+                    <p-floatLabel>
+                        <input id="telefono" type="text" pInputText formControlName="telefonoLaboral" />
+                        <label for="telefono">Telefono laboral</label>
+                    </p-floatLabel>
+                </div>
+                <div class="row">
+                    <p-floatLabel>
+                        <input id="correo" type="text" pInputText formControlName="correoElectronicoLaboral" />
+                        <label for="correo">Correo electronico laboral</label>
+                    </p-floatLabel>
+                    <p-floatLabel>
+                        <input id="direccion" type="text" pInputText formControlName="direccionVivienda" />
+                        <label for="direccion">Direccion de vivienda</label>
+                    </p-floatLabel>
+                </div>
+                <div class="row">
+                    <p-floatLabel >
                         <p-autoComplete
-                          id="idCargo" 
-                          formControlName="idCargo"
-                          [suggestions]="filteredCargos"
+                          [size]="100"
+                          id="idTipoDocumento" 
+                          [dropdown]="true"
+                          [showClear]="true"
+                          formControlName="idTipoDocumentoIdentificacion"
+                          [suggestions]="filteredDocumento"
                           forceSelection="true"
-                          (completeMethod)="filterCargos($event)" 
+                          (completeMethod)="filterDocumento($event)" 
                           field="nombre"
                           >
                         </p-autoComplete>
-                        <label for="idCargo">Cargo</label>
+                        <label for="idTipoDocumento">Tipo documento</label>
                       </p-floatLabel>
+                </div>
+                <div class="row">
+                    <p-floatLabel class="f-1">
+                        <input [size]="100" id="direccion" type="number" pInputText formControlName="numeroIdentificacion" />
+                        <label for="direccion">Numero de documento</label>
+                    </p-floatLabel>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Mas informacion">
+                <div class="row">
+
                     <!-- <p-floatLabel>
                         <input id="cargo" type="text" pInputText formControlName="idCargo" />
                         <label for="cargo">Cargo</label>
                     </p-floatLabel> -->
+                    <p-floatLabel class="f-1">
+                        <input [min]="1" [max]="168" id="horas" type="number" pInputText formControlName="horasSemanales" />
+                        <label for="horas">Horas semanales</label>
+                    </p-floatLabel>
                     <p-floatLabel class="f-1">
                         <input [min]="1" [max]="999999999" id="salario" type="number" pInputText formControlName="salario" />
                         <label for="salario">Salario</label>
@@ -74,7 +75,10 @@
                 <div class="row">
                     <p-floatLabel>
                         <p-autoComplete
+                            [size]="100"
                           id="idTipoContrato" 
+                          [dropdown]="true"
+                          [showClear]="true"
                           formControlName="idTipoContrato"
                           [suggestions]="filteredContrato"
                           forceSelection="true"
@@ -84,10 +88,7 @@
                         </p-autoComplete>
                         <label for="idTipoContrato">Tipo de contrato</label>
                       </p-floatLabel>
-                    <p-floatLabel class="f-1">
-                        <input [min]="1" [max]="168" id="horas" type="number" pInputText formControlName="horasSemanales" />
-                        <label for="horas">Horas semanales</label>
-                    </p-floatLabel>
+
                 </div>
                 <div class="row">
                     <p-floatLabel>
@@ -107,7 +108,26 @@
                     <p-floatLabel>
                         <p-autoComplete
                         [size]="100"
+                          id="idCargo" 
+                          formControlName="idCargo"
+                          [dropdown]="true"
+                          [showClear]="true"
+                          [suggestions]="filteredCargos"
+                          forceSelection="true"
+                          (completeMethod)="filterCargos($event)" 
+                          field="nombre"
+                          >
+                        </p-autoComplete>
+                        <label for="idCargo">Cargo</label>
+                      </p-floatLabel>
+                </div>
+                <div class="row">
+                    <p-floatLabel>
+                        <p-autoComplete
+                        [size]="100"
                           id="supervisor" 
+                          [dropdown]="true"
+                          [showClear]="true"
                           formControlName="idSupervisor"
                           [suggestions]="filteredSupervisores"
                           forceSelection="true"
@@ -121,7 +141,7 @@
                 <div class="row">
                     <p-floatLabel>
                         <p-calendar id="finalizacion" [tabindex]="10000" formControlName="fechaFinalizacionContratacion" />
-                        <label for="finalizacion">Finalizacion de contratacion</label>
+                        <label for="finalizacion">Finalizacion contrato</label>
                       </p-floatLabel>
                     <p-floatLabel>
                         <input id="motivo" type="text" pInputText formControlName="motivoFinalizacionContratacion" />

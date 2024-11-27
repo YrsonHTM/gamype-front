@@ -34,7 +34,7 @@ export class HeaderComponent {
               {
                   label: 'Ajustes',
                   icon: 'pi pi-cog',
-                  routerLink: '/gamype/settings'
+                  // routerLink: '/gamype/settings'
               },
               {
                   label: this.tema.includes('light') ? 'Modo oscuro' : 'Modo claro',

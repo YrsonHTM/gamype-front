@@ -39,7 +39,7 @@ export class CrearEmpleadoComponent implements OnInit {
     identificadorEmpresa: [null],
     telefonoLaboral: [null],
     correoElectronicoLaboral: [null, Validators.email],
-    direccionVivienda: [null, Validators.required],
+    direccionVivienda: [null],
     idCargo: [null],
     salario: [null],
     horasSemanales: [null],
