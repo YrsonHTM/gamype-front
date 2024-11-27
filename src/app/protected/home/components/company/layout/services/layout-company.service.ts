@@ -40,8 +40,8 @@ export class LayoutCompanyService {
         {id: 3, name: 'Personal', icon: 'pi pi-users', url: '/gamype/company/personal'},
         {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
         {id: 7, name: 'elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
-        {id: 4, name: 'Editar', icon: 'pi pi-pencil', url: '/gamype/company/edit'},
-        {id: 5, name: 'Accesos', icon: 'pi pi-key', url: '/gamype/company/delete'},
+        // {id: 4, name: 'Editar', icon: 'pi pi-pencil', url: '/gamype/company/edit'},
+        // {id: 5, name: 'Accesos', icon: 'pi pi-key', url: '/gamype/company/delete'},
       ])
     }
     if(admin_inv){
