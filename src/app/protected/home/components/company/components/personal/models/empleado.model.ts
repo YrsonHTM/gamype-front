@@ -18,4 +18,5 @@ export interface Empleado {
     fechaFinalizacionContratacion: string | null;
     motivoFinalizacionContratacion: string | null;
     idSupervisor: number | null;
+    tipoNroDocumento?: string;
 }

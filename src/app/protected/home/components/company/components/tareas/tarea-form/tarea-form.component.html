@@ -1,0 +1,44 @@
+<form [formGroup]="form">
+    <p-floatLabel>
+        <input id="titulo" type="text" pInputText formControlName="titulo" />
+        <label class="required-label" for="titulo">Titulo</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <input id="descripcion" type="text" pInputText formControlName="descripcion" />
+        <label class="required-label" for="razonSocial">Descripcion</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-calendar class="w-100" appendTo="body" id="fechaInicio" formControlName="fechaInicio" />
+        <label class="required-label" for="fechaInicio">Inicio</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-calendar [minDate]="form.controls['fechaInicio'].value" appendTo="body" id="fechaFin" formControlName="fechaFin" />
+        <label for="fechaFin">Final estimado</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-autoComplete
+          appendTo="body"
+          [dropdown]="true"
+          [showClear]="true"
+          id="id"
+          formControlName="idElemento"
+          [suggestions]="filteredEstados"
+          forceSelection="true"
+          (completeMethod)="filterEstados($event)" 
+          field="title"
+          >
+        </p-autoComplete>
+        <label class="required-label" for="idElemento">Estado</label>
+      </p-floatLabel>
+      <p-multiSelect
+      class="mt-20"
+      appendTo="body"
+      [options]="empleados" 
+      formControlName="involucrados"
+      optionLabel="nombresApellidos" 
+      placeholder="Involucrados" />
+</form>
+<footer>
+    <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>
+    <p-button type="button" (click)="closeDialog(form.value)">{{ editMode ? 'Editar' : 'Asignar' }}</p-button>
+</footer>

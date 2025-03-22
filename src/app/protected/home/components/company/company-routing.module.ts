@@ -7,6 +7,8 @@ import { companyResolver } from './services/company.resolver';
 import { PersonalComponent } from './components/personal/personal.component';
 import { InventariosComponent } from './components/inventarios/inventarios.component';
 import { ElementosComponent } from './components/elementos/elementos.component';
+import { TareasComponent } from './components/tareas/tareas.component';
+import { NominasComponent } from './components/nominas/nominas.component';
 
 const routes: Routes = [
   {
@@ -31,8 +33,16 @@ const routes: Routes = [
       loadChildren: () => import('./components/inventarios/inventarios.module').then(m => m.InventariosModule),
     },
     {
+      path: 'tareas',
+      component: TareasComponent,
+    },
+    {
       path: 'elemento',
       component: ElementosComponent,
+    },
+    {
+      path: 'nominas',
+      component: NominasComponent,
     }
   ],
   }

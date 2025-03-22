@@ -18,6 +18,7 @@ export class AuthService {
 
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private userData: BehaviorSubject<UserData | null> = new BehaviorSubject<UserData | null>(null);
+  private isMater: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -75,6 +76,12 @@ export class AuthService {
     return this.http.get(this.urlGetUserByToken, this.createHeaders()).pipe(
       tap((res: any) => {
         this.setUserData(res);
+        if(res.id === 1){
+          this.isMater = true;
+        }
+        else{
+          this.isMater = false;
+        }
       }),
       catchError((error) => {
         return throwError(error);
@@ -100,6 +107,10 @@ export class AuthService {
     localStorage.removeItem('token');
     if (noNavgate) return;
     router.navigate(['/']);
+  }
+
+  getIsMaster(){
+    return this.isMater;
   }
 
 }

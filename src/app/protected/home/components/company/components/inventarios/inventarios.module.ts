@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { InventariosRoutingModule } from './inventarios-routing.module';
 import { FormExistenciasComponent } from './lote/form-existencias/form-existencias.component';
+import { InventarioHistorialComponent } from './inventario-historial/inventario-historial.component';
 
 
 @NgModule({

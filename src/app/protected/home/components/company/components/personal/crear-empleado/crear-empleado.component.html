@@ -92,7 +92,7 @@
                 </div>
                 <div class="row">
                     <p-floatLabel>
-                        <p-calendar [tabindex]="10000" id="fecha" formControlName="fechaContratacion" />
+                        <p-calendar appendTo="body" id="fecha" formControlName="fechaContratacion" />
                         <label for="fecha">Fecha de contratacion</label>
                       </p-floatLabel>
                     <p-floatLabel>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="row">
                     <p-floatLabel>
-                        <p-calendar id="finalizacion" [tabindex]="10000" formControlName="fechaFinalizacionContratacion" />
+                        <p-calendar appendTo="body" id="finalizacion" [tabindex]="10000" formControlName="fechaFinalizacionContratacion" />
                         <label for="finalizacion">Finalizacion contrato</label>
                       </p-floatLabel>
                     <p-floatLabel>

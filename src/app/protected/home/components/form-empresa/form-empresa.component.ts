@@ -86,9 +86,9 @@ export class FormEmpresaComponent implements OnInit {
       sociedadesMercantiles: this.empresaService.getSociedadesMercantiles()
     }).subscribe({
       next: (results) => {
-        this.tamagnios = results.tamagnios.claseEmpresas;
-        this.sectoresSocioEconomicos = results.sectoresSocioEconomicos.claseEmpresas;
-        this.sociedadesMercantiles = results.sociedadesMercantiles.claseEmpresas;
+        this.tamagnios = results.tamagnios.companyClasses;
+        this.sectoresSocioEconomicos = results.sectoresSocioEconomicos.companyClasses;
+        this.sociedadesMercantiles = results.sociedadesMercantiles.companyClasses;
         if(this.editMode)
         {
           this.loadInfoEmpresa();

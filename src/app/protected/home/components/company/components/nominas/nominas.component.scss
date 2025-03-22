@@ -1,0 +1,110 @@
+:host{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h2{
+    margin: 0;
+    justify-items: center;
+    text-align: center;
+}
+
+h3{
+    margin-top: 0px;
+    justify-items: center;
+    text-align: center;
+}
+
+section{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    gap: 10px;
+    .left-size{
+        display: flex;
+        width: 340px;
+        flex-direction: column;
+    }
+    .right-size{
+        display: flex;
+        flex: 3;
+        flex-direction: column;
+    }
+}
+
+.content-empleado{
+    border-radius: 10px;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    span{
+        max-width: 280px;
+        color: var(--text-color);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.content-empleado:hover{
+    background-color: var(--surface-hover);
+    cursor: pointer;
+}
+
+.empleados-search{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.selected-empleado{
+    background-color: var(--surface-hover);
+    span{
+        color: var(--primary-color);
+    }
+}
+
+.width-200{
+    width: 200px;
+}
+
+.celda-buttons{
+    display: flex;
+    gap: 10px;
+}
+
+.f-rr{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.flex-end{
+    display: flex;
+    margin-left: auto;
+}
+
+.header-table{
+    padding: 0px 20px;
+}
+
+.button-all-tasks{
+    display: flex;
+    justify-content: flex-end;
+    width: 200px;
+    gap: 10px;
+}
+
+.no-selected-emplyee{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    font-size: 20px;
+    color: var(--text-color);
+}
