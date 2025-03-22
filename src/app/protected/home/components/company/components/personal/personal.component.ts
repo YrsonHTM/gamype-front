@@ -5,6 +5,7 @@ import { Empleado } from './models/empleado.model';
 import { EmpleadoService } from './empleado.service';
 import { take } from 'rxjs';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { LayoutCompanyService } from '../../layout/services/layout-company.service';
 
 @Component({
   selector: 'app-personal',
@@ -23,7 +24,8 @@ export class PersonalComponent implements OnInit {
     private dialogService: DialogService,
     private empleadoService: EmpleadoService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private layoutCompanyService: LayoutCompanyService
 
   ) { }
 
@@ -158,6 +160,10 @@ export class PersonalComponent implements OnInit {
         });
       }
     });
+  }
+
+  verTareas(empleado){
+    this.layoutCompanyService.goToUlr('/gamype/company/tareas',null,{idEmpleado: empleado.id},true,'tareas');
   }
 
 }

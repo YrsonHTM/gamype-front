@@ -39,9 +39,16 @@
                 {{ empresa.name }}
             </h3>
             <div class="chip r-section">
-                <span>
-                    {{ findRoleName(empresa.idsRoles[0]) | shortRol}}
-                </span>
+                @if(isMaster){
+                    <span>
+                        Master
+                    </span>
+                }
+                @else {
+                    <span>
+                        {{ findRoleName(empresa.idsRoles[0]) | shortRol}}
+                    </span>
+                }
             </div>
         </p-header>
         <div class="card-content">

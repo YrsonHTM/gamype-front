@@ -15,10 +15,17 @@ import { InventariosComponent } from './components/inventarios/inventarios.compo
 import { ElementosComponent } from './components/elementos/elementos.component';
 import { ElementoformComponent } from './components/elementos/elementoform/elementoform.component';
 import { CrearInventarioComponent } from './components/inventarios/crear-inventario/crear-inventario.component';
-import { BeatyDatePipe } from './components/beaty-date.pipe';
+import { BeatyDatePipe } from './components/pipes/beaty-date.pipe';
 import { LoteComponent } from './components/inventarios/lote/lote.component';
 import { FormLotesComponent } from './components/inventarios/lote/form-lotes/form-lotes.component';
 import { FormExistenciasComponent } from './components/inventarios/lote/form-existencias/form-existencias.component';
+import { InventarioHistorialComponent } from './components/inventarios/inventario-historial/inventario-historial.component';
+import { TareasComponent } from './components/tareas/tareas.component';
+import { TareaFormComponent } from './components/tareas/tarea-form/tarea-form.component';
+import { NominasComponent } from './components/nominas/nominas.component';
+import { FormNominaComponent } from './components/nominas/form-nomina/form-nomina.component';
+import { DateNominaPipe } from './components/pipes/date-nomina.pipe';
+
 
 
 @NgModule({
@@ -37,7 +44,13 @@ import { FormExistenciasComponent } from './components/inventarios/lote/form-exi
     BeatyDatePipe,
     LoteComponent,
     FormLotesComponent,
-    FormExistenciasComponent
+    FormExistenciasComponent,
+    InventarioHistorialComponent,
+    TareasComponent,
+    TareaFormComponent,
+    NominasComponent,
+    FormNominaComponent,
+    DateNominaPipe
   ],
   imports: [
     CommonModule,

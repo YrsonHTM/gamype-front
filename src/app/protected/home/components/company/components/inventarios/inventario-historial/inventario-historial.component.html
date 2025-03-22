@@ -1,0 +1,63 @@
+<header>
+    <p-button icon="pi pi-search-plus" severity="secondary"/>
+<form [formGroup]="basicForm">
+    <p-floatLabel>
+        <p-autoComplete
+          [dropdown]="true"
+          [showClear]="true"
+          size="100"
+          formControlName="anio"
+          [suggestions]="filteredAnios"
+          forceSelection="true"
+          (completeMethod)="filterAnios($event)" 
+          >
+        </p-autoComplete>
+        <label class="required-label" for="idElemento">Seleccione año</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-autoComplete
+          [dropdown]="true"
+          [showClear]="true"
+          size="100"
+          formControlName="mes"
+          [suggestions]="filteredMeses"
+          forceSelection="true"
+          (completeMethod)="filterMeses($event)" 
+          >
+        </p-autoComplete>
+        <label class="required-label" for="idElemento">Seleccione mes</label>
+      </p-floatLabel>
+      <button
+        type="submit"
+        pButton 
+        label="Consultar" 
+        >
+        </button>
+</form>
+</header>
+<div class="divider"></div>
+<p-table #dt1 [value]="historial" [paginator]="historial.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['nombre', 'direccionFisica', 'fechaCreacionRegistro']">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Lote</th>
+            <th>fecha retiro</th>
+            <th>Cantidad</th>
+            <th>Descripcion</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-inventario>
+        <tr>
+            <td>{{inventario?.nombreLote}}</td>
+            <td>{{inventario?.fechaRetiro || 'No hay registro'}}</td>
+            <td>{{(inventario.Cantidad | beatyDate) || 'No hay registro'}}</td>
+            <td>{{inventario?.Descripcion || 'No hay registro'}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+@if(historial.length === 0){
+
+            <h2 class="no-registros">
+                No hay registros
+            </h2>
+
+}

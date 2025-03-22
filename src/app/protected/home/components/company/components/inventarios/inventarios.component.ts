@@ -6,6 +6,7 @@ import { CrearInventarioComponent } from './crear-inventario/crear-inventario.co
 import { LayoutCompanyService } from '../../layout/services/layout-company.service';
 import { take } from 'rxjs';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { InventarioHistorialComponent } from './inventario-historial/inventario-historial.component';
 
 @Component({
   selector: 'app-inventarios',
@@ -95,6 +96,16 @@ export class InventariosComponent implements OnInit {
           }
         });
     }});
+  }
+
+  verHistorial(inventario: getInventario){
+    this.refFormUserAcces = this.dialogService.open(InventarioHistorialComponent, {
+      header: `Historial de "${inventario?.nombre}"`,
+      width: '900px',
+      height: '500px',
+      contentStyle: { overflow: 'auto' },
+      data: inventario
+    });
   }
 
   eliminarElemento(inventario: getInventario){
