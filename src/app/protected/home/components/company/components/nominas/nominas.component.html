@@ -27,9 +27,15 @@
                 <h3>
                     No hay nominas registradas
                 </h3>
-                    <p-button (onClick)="generarNomina()" class="flex width-200 flex-end">
-                        Generar nomina
-                    </p-button>
+                    <section class="head-buttons">
+                        <div class="left-buttons">
+                        </div>
+                        <div class="right-buttons">
+                            <p-button (onClick)="generarNomina()" class="flex width-200 flex-end">
+                                Generar nomina
+                            </p-button>
+                        </div>
+                    </section>
             }
             @else {
                 @if(onViewAllCompany){
@@ -45,17 +51,31 @@
                 @if(empleados.length <= 100)
                 {
                     @if(!onViewAllCompany){
-                        <p-button (onClick)="generarNomina()" class="flex width-200 flex-end">
-                            Generar nomina
-                        </p-button>
+                        <section class="head-buttons">
+                            <div class="left-buttons">
+                                <p-cascadeSelect 
+                                (onChange)="generarInforme($event)"
+                                [options]="informeOptions" 
+                                optionLabel="cname"
+                                optionGroupLabel="name" 
+                                [optionGroupChildren]="[]" 
+                                [style]="{ minWidth: '14rem' }" 
+                                placeholder="Generar informe acumulado" />
+                            </div>
+                            <div class="right-buttons">
+                                <p-button (onClick)="generarNomina()" class="flex width-200 flex-end">
+                                    Generar nomina
+                                </p-button>
+                            </div>
+                        </section>
                     }
                 }
-                <p-table #dt1 [value]="nominas" [paginator]="nominas.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['fechaNomina', 'salarioMensualQuincenal', 'valorNetoPagarTrabajador']">
+                <p-table class="mt-20" #dt1 [value]="nominas" [paginator]="nominas.length > 5" sortField="fechaNomina" [sortOrder]="1" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['fechaNomina', 'salarioMensualQuincenal', 'valorNetoPagarTrabajador']">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Fecha</th>
-                            <th>Salario</th>
-                            <th>Total pagar trabajador</th>
+                            <th pSortableColumn="fechaNomina">Fecha <p-sortIcon field="fechaNomina"/></th>
+                            <th pSortableColumn="salarioMensualQuincenal">Salario <p-sortIcon field="salarioMensualQuincenal"/></th>
+                            <th pSortableColumn="valorNetoPagarTrabajador">Total pagar trabajador <p-sortIcon field="valorNetoPagarTrabajador"/></th>
                             <th>Acciones</th>
                         </tr>
                     </ng-template>
@@ -66,8 +86,11 @@
                             <td>{{nomina?.valorNetoPagarTrabajador | currency}}</td>
                             <td class="celda-buttons">
                                 <p-button (onClick)="descargarNomina(nomina)" icon="pi pi-download" class="p-button-rounded p-button-secondary"></p-button>
-                                <p-button (onClick)="editarNomina(nomina)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
-                                <p-button (onClick)="eliminarNomina(nomina)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
+                                @if(!nomina?.firmado){
+                                    <p-button (onClick)="editarNomina(nomina)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
+                                    <p-button (onClick)="eliminarNomina(nomina)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
+                                    <p-button (onClick)="firmarNomina(nomina)" icon="pi pi-check-square" class="p-button-rounded p-button-danger"></p-button>
+                                }
                             </td>
                         </tr>
                     </ng-template>

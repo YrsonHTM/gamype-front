@@ -1,0 +1,32 @@
+<form [formGroup]="formPrima">
+    <!-- mesnomina -->
+    <div class="form-group">
+
+        <div class="row">
+            <p-floatLabel>
+                <p-selectButton 
+                [options]="periodos"
+                styleClass="flex"
+                formControlName="periodo">
+                    <ng-template let-item pTemplate>
+                        <span>{{item}}</span>
+                    </ng-template>
+            </p-selectButton>
+            </p-floatLabel>
+        </div>
+        <div class="row">
+            <p-floatLabel>
+                <p-calendar 
+                appendTo="body"
+                formControlName="anio"
+                view="year" 
+                dateFormat="yy" />
+                <label class="required-label" for="titulo">Año</label>
+            </p-floatLabel>
+        </div>
+    </div>
+    <footer>
+        <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>
+        <p-button type="button" (click)="closeDialog(formPrima.value)">Generar</p-button>
+    </footer>
+</form>

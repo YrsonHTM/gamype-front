@@ -16,6 +16,7 @@ export interface NominaResumen {
     totalSeguridadSocialTrabajador: number;
     valorNetoPagarTrabajador: number;
     valorTotalCargoEmpleador: number;
+    firmado: string;
 }
 
 export interface CalculoNomina{
