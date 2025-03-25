@@ -1,0 +1,25 @@
+<form [formGroup]="formVacaciones">
+    <!-- mesnomina -->
+    <div class="form-group">
+        <div class="row">
+            <p-floatLabel>
+                <p-calendar 
+                appendTo="body"
+                formControlName="date1"/>
+                <label class="required-label" for="titulo">Inicio</label>
+            </p-floatLabel>
+        </div>
+        <div class="row">
+            <p-floatLabel>
+                <p-calendar 
+                appendTo="body"
+                formControlName="date2"/>
+                <label class="required-label" for="titulo">Fin</label>
+            </p-floatLabel>
+        </div>
+    </div>
+    <footer>
+        <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>
+        <p-button type="button" (click)="closeDialog(formVacaciones.value)">Generar</p-button>
+    </footer>
+</form>

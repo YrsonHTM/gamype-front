@@ -25,6 +25,9 @@ import { TareaFormComponent } from './components/tareas/tarea-form/tarea-form.co
 import { NominasComponent } from './components/nominas/nominas.component';
 import { FormNominaComponent } from './components/nominas/form-nomina/form-nomina.component';
 import { DateNominaPipe } from './components/pipes/date-nomina.pipe';
+import { ReportePrimaComponent } from './components/nominas/reporte-prima/reporte-prima.component';
+import { ReporteCesantiasComponent } from './components/nominas/reporte-cesantias/reporte-cesantias.component';
+import { ReporteVacacionesComponent } from './components/nominas/reporte-vacaciones/reporte-vacaciones.component';
 
 
 
@@ -50,7 +53,10 @@ import { DateNominaPipe } from './components/pipes/date-nomina.pipe';
     TareaFormComponent,
     NominasComponent,
     FormNominaComponent,
-    DateNominaPipe
+    DateNominaPipe,
+    ReportePrimaComponent,
+    ReporteCesantiasComponent,
+    ReporteVacacionesComponent
   ],
   imports: [
     CommonModule,
