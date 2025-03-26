@@ -42,15 +42,15 @@ export class LayoutCompanyService {
         {id: 9, name: 'Nominas', icon: 'pi pi-money-bill', url: '/gamype/company/nominas'},
         {id: 6, name: 'Inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
         {id: 7, name: 'Elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
-        // {id: 4, name: 'Editar', icon: 'pi pi-pencil', url: '/gamype/company/edit'},
-        // {id: 5, name: 'Accesos', icon: 'pi pi-key', url: '/gamype/company/delete'},
+        {id: 10, name: 'Operaciones', icon: 'pi pi-cog', url: '/gamype/company/operaciones'},
       ])
     }
     if(admin_inv){
       return of([
         {id: 1, name: 'Dashboard', icon: 'pi pi-home', url: '/gamype/company/dashboard'},
-        {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
+        {id: 6, name: 'Inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
         {id: 7, name: 'Elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
+        {id: 10, name: 'Operaciones', icon: 'pi pi-cog', url: '/gamype/company/operaciones'},
       ])
     }
     if(admin_rrhh){

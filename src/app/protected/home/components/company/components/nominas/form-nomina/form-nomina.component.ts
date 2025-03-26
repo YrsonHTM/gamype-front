@@ -84,10 +84,11 @@ export class FormNominaComponent implements OnInit {
       this.constantesNomina = constants;
       this.formNomina.markAllAsTouched();
       if(!this.editMode){
+        console.log(this.constantesNomina.salarioIntegralMinimo * 2 > this.empleado.salario);
         this.formNomina.get('fechaNomina').setValue(new Date());
-        this.formNomina.get('idNivelRiesgoLaboral').setValue(this.arl[0]);
+        this.formNomina.get('idNivelRiesgoLaboral').setValue(this.empleado?.cargo?.nivelesRiesgoARL?.id ||this.arl[0]);
         this.formNomina.get('salarioMensualQuincenal').setValue(this.empleado.salario ? this.empleado.salario.toString() : this.constantesNomina.salarioMinimo.toString());
-        this.formNomina.get('auxilioTransporte').setValue(this.constantesNomina.auxilioTransporte.toString());
+        this.formNomina.get('auxilioTransporte').setValue(this.constantesNomina.salarioIntegralMinimo * 2 > this.empleado.salario ? this.constantesNomina.auxilioTransporte.toString() : '0');
         this.formNomina.get('comisiones').setValue('0');
         this.formNomina.get('recargoNocturnoOrdinario').setValue('0');
         this.formNomina.get('trabajoExtraSuplementario').setValue('0');

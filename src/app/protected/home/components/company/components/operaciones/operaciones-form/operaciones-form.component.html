@@ -1,0 +1,22 @@
+<form [formGroup]="form">
+    <p-floatLabel>
+        <input id="name" type="text" pInputText formControlName="name" />
+        <label class="required-label" for="name">Nombre operacion</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <input id="description" type="text" pInputText formControlName="description" />
+        <label class="required-label" for="description">Descripcion</label>
+      </p-floatLabel>
+      <p-floatLabel class="mt-20">
+        <p-checkbox
+        class="checkbox"
+        formControlName="isService"
+        [binary]="true" 
+        inputId="quincena" />
+        <label class="ml-20" for="quincena">Es servicio?</label>
+    </p-floatLabel>
+</form>
+<footer>
+    <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>
+    <p-button type="button" (click)="closeDialog(form.value)">{{ editMode ? 'Editar' : 'Crear' }}</p-button>
+</footer>

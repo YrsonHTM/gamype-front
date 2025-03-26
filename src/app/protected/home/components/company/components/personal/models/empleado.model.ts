@@ -19,4 +19,23 @@ export interface Empleado {
     motivoFinalizacionContratacion: string | null;
     idSupervisor: number | null;
     tipoNroDocumento?: string;
+    cargo?: Cargo;
+}
+export interface Cargo {
+    id: number;
+    nombre: string;
+    descripcion: string;
+    idEmpresa: number;
+    idNivelesRiesgoARL: number;
+    nivelesRiesgoARL: NivelesRiesgoARL;
+    fechaCreacionRegistro: string;
+    fechaFinalizacionRegistro: string | null;
+    usuarioCreacionRegistro: string | null;
+}
+
+export interface NivelesRiesgoARL {
+    id: number;
+    nombreClase: string;
+    descripcion: string;
+    valor: number;
 }
