@@ -147,7 +147,6 @@ export class NominasComponent implements OnInit {
           this.empleados = empleados;
           this.filteredEmpleados = empleados;
           this.arl = arl;
-          console.log(empleados)
               // Obtener los parámetros de la ruta
           this.activatedRouter.queryParams.subscribe(params => {
             const id = Number(params['idEmpleado']);
