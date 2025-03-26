@@ -1,12 +1,12 @@
 <p-card class="title">
     <h2>
-        Cargos de la empresa
+        Operaciones en inventario
     </h2>
 </p-card>
 <main class="flex f-1">
     <p-card class="flex f-1" styleClass="flex f-1 f-col p-20">
         <p-header class="flex header-table">
-            @if( cargos.length > 5)
+            @if( operaciones.length > 5)
             {
             <div class="flex">
                 <span class="p-input-icon-left ml-auto">
@@ -15,30 +15,28 @@
                 </span>
             </div>
             }
-            @if(cargos.length <= 30)
+            @if(operaciones.length <= 30)
             {
-                <p-button (onClick)="crearCargo()" class="flex width-200 flex-end">
-                    Crear cargo
+                <p-button (onClick)="crearOperacion()" class="flex width-200 flex-end">
+                    Crear operacion
                 </p-button>
             }
         </p-header>
-        <p-table #dt1 [value]="cargos" [paginator]="cargos.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['nombre', 'descripcion']" >
+        <p-table #dt1 [value]="operaciones" [paginator]="operaciones.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['name', 'description']" >
             <ng-template pTemplate="header">
                 <tr>
                     <th>Nombre</th>
                     <th>Descripcion</th>
-                    <th>Tipo Arl</th>
                     <th>Acciones</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-cargo>
+            <ng-template pTemplate="body" let-operation>
                 <tr>
-                    <td>{{cargo.nombre}}</td>
-                    <td>{{cargo.descripcion}}</td>
-                    <td>{{cargo?.nivelesRiesgoARL?.nombreClase || 'No hay registro'}}</td>
+                    <td>{{operation.name}}</td>
+                    <td>{{operation.description}}</td>
                     <td class="celda-buttons">
-                        <p-button (onClick)="editarCargo(cargo)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
-                        <p-button (onClick)="eliminar(cargo)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
+                        <p-button (onClick)="editarCargo(operation)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
+                        <p-button (onClick)="eliminar(operation)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
                     </td>
                 </tr>
             </ng-template>

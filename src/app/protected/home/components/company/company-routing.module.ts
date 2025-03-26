@@ -9,6 +9,7 @@ import { InventariosComponent } from './components/inventarios/inventarios.compo
 import { ElementosComponent } from './components/elementos/elementos.component';
 import { TareasComponent } from './components/tareas/tareas.component';
 import { NominasComponent } from './components/nominas/nominas.component';
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
     {
       path: 'nominas',
       component: NominasComponent,
+    },
+    {
+      path: 'operaciones',
+      component: OperacionesComponent,
     }
   ],
   }

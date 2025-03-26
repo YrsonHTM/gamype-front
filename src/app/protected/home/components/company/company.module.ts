@@ -28,6 +28,8 @@ import { DateNominaPipe } from './components/pipes/date-nomina.pipe';
 import { ReportePrimaComponent } from './components/nominas/reporte-prima/reporte-prima.component';
 import { ReporteCesantiasComponent } from './components/nominas/reporte-cesantias/reporte-cesantias.component';
 import { ReporteVacacionesComponent } from './components/nominas/reporte-vacaciones/reporte-vacaciones.component';
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
+import { OperacionesFormComponent } from './components/operaciones/operaciones-form/operaciones-form.component';
 
 
 
@@ -56,7 +58,9 @@ import { ReporteVacacionesComponent } from './components/nominas/reporte-vacacio
     DateNominaPipe,
     ReportePrimaComponent,
     ReporteCesantiasComponent,
-    ReporteVacacionesComponent
+    ReporteVacacionesComponent,
+    OperacionesComponent,
+    OperacionesFormComponent
   ],
   imports: [
     CommonModule,
