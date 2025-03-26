@@ -15,22 +15,6 @@ import { ConstantesNomina } from '../../tareas/models/tareas.model';
 })
 export class FormNominaComponent implements OnInit {
 
-  //formulario
-  // {
-  //   "idEmpleado": 2,
-  //   "fechaNomina": "2025-03-01",
-  //   "fraccionMes": true,
-  //   "salarioMensualQuincenal": 1000000.00,
-  //   "comisiones": 200000.00,
-  //   "recargoNocturnoOrdinario": 50000.00,
-  //   "trabajoExtraSuplementario": 100000.00,
-  //   "trabajoDominicalFestivo": 75000.00,
-  //   "auxilioTransporte": 200000.00,
-  //   "exentoAportesParafiscales": false,
-  //   "idNivelRiesgoLaboral": 3,
-  //   "idNomina": 1
-  // }
-
   periodos = [
 'Primera quincena',
 'Segunda quincena'
@@ -84,11 +68,11 @@ export class FormNominaComponent implements OnInit {
       this.constantesNomina = constants;
       this.formNomina.markAllAsTouched();
       if(!this.editMode){
-        console.log(this.constantesNomina.salarioIntegralMinimo * 2 > this.empleado.salario);
+        this.formNomina.get('fraccionMes').setValue(this.empleado.fraccionMes||false);
         this.formNomina.get('fechaNomina').setValue(new Date());
-        this.formNomina.get('idNivelRiesgoLaboral').setValue(this.empleado?.cargo?.nivelesRiesgoARL?.id ||this.arl[0]);
+        this.formNomina.get('idNivelRiesgoLaboral').setValue(this.empleado?.cargo?.nivelesRiesgoARL || this.arl[0]);
         this.formNomina.get('salarioMensualQuincenal').setValue(this.empleado.salario ? this.empleado.salario.toString() : this.constantesNomina.salarioMinimo.toString());
-        this.formNomina.get('auxilioTransporte').setValue(this.constantesNomina.salarioIntegralMinimo * 2 > this.empleado.salario ? this.constantesNomina.auxilioTransporte.toString() : '0');
+        this.formNomina.get('auxilioTransporte').setValue(this.empleado.auxilioTransporte  ? this.constantesNomina.auxilioTransporte.toString() : '0');
         this.formNomina.get('comisiones').setValue('0');
         this.formNomina.get('recargoNocturnoOrdinario').setValue('0');
         this.formNomina.get('trabajoExtraSuplementario').setValue('0');

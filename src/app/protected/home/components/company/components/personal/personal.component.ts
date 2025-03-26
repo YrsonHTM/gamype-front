@@ -61,7 +61,9 @@ export class PersonalComponent implements OnInit {
           motivoFinalizacionContratacion: data.motivoFinalizacionContratacion,
           idSupervisor: data.idSupervisor?.id || null,
           idTipoDocumentoIdentificacion: data.idTipoDocumentoIdentificacion?.id || null,
-          numeroIdentificacion: data.numeroIdentificacion
+          numeroIdentificacion: data.numeroIdentificacion,
+          auxilioTransporte: data.auxilioTransporte,
+          fraccionMes: data.fraccionMes === 'Quincenal'
         };
         this.empleadoService.crearEmpleado(paBack as Empleado).subscribe({
           next: res => {
@@ -116,7 +118,9 @@ export class PersonalComponent implements OnInit {
           motivoFinalizacionContratacion: data.motivoFinalizacionContratacion,
           idSupervisor: data.idSupervisor?.id || null,
           idTipoDocumentoIdentificacion: data.idTipoDocumentoIdentificacion?.id || null,
-          numeroIdentificacion: data.numeroIdentificacion
+          numeroIdentificacion: data.numeroIdentificacion,
+          auxilioTransporte: data.auxilioTransporte || null,
+          fraccionMes: data.fraccionMes === 'Quincenal'
         };
         this.empleadoService.crearEmpleado(paBack as Empleado).subscribe({
           next: res => {

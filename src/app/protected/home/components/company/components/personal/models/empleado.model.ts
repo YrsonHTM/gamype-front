@@ -20,6 +20,8 @@ export interface Empleado {
     idSupervisor: number | null;
     tipoNroDocumento?: string;
     cargo?: Cargo;
+    auxilioTransporte: boolean;
+    fraccionMes: boolean;
 }
 export interface Cargo {
     id: number;
