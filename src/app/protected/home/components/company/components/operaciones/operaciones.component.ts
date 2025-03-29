@@ -7,7 +7,7 @@ import { take } from 'rxjs';
 import { CrearRolComponent } from '../roles/crear-rol/crear-rol.component';
 import { OperacionesFormComponent } from './operaciones-form/operaciones-form.component';
 import { OperacionesService } from './operaciones.service';
-import { getOperation } from './models/operacion.model';
+import { getOperation, operationCreate } from './models/operacion.model';
 
 @Component({
   selector: 'app-operaciones',
@@ -41,6 +41,7 @@ refFormUserAcces: DynamicDialogRef | undefined;
 
   this.refFormUserAcces.onClose.subscribe((data: any) => {
       if (data) {
+        console.log(data);
         this.operacionesService.crearOperacions(data).pipe(take(1)).subscribe(
           {
             next: res => {
@@ -49,7 +50,7 @@ refFormUserAcces: DynamicDialogRef | undefined;
               this.loadOperaciones();
             },
             error: () => {
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al crear el cargo'});
+              this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al crear la operacion'});
             }
           }
         );
@@ -57,20 +58,20 @@ refFormUserAcces: DynamicDialogRef | undefined;
   });
   }
 
-  editarCargo(cargo: Cargos){
-    this.refFormUserAcces = this.dialogService.open(CrearRolComponent, {
+  editarOperacion(operacion: operationCreate){
+    this.refFormUserAcces = this.dialogService.open(OperacionesFormComponent, {
       header: 'Editar Cargo',
-      width: '350px',
+      width: '400px',
       contentStyle: { overflow: 'auto' },
-      data: cargo
+      data: operacion
   });
 
   this.refFormUserAcces.onClose.subscribe((data: any) => {
       if (data) {
-        this.operacionesService.crearOperacions(data).subscribe({
+        this.operacionesService.editarOperacion(data).subscribe({
           next: res => {
             if(!res) return;
-            this.messageService.add({severity:'success', summary: 'Cargo Editado', detail: 'Cargo editado exitosamente'});
+            this.messageService.add({severity:'success', summary: 'Cargo Editado', detail: 'Operacion editada exitosamente'});
             this.loadOperaciones();
           },
           error: error => {

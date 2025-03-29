@@ -31,12 +31,13 @@
         type="submit"
         pButton 
         label="Consultar" 
+        (click)="consultarHistorial()"
         >
         </button>
 </form>
 </header>
 <div class="divider"></div>
-<p-table #dt1 [value]="historial" [paginator]="historial.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['nombre', 'direccionFisica', 'fechaCreacionRegistro']">
+<p-table #dt1 [value]="resumenHistorial" [paginator]="resumenHistorial.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['nombre', 'direccionFisica', 'fechaCreacionRegistro']">
     <ng-template pTemplate="header">
         <tr>
             <th>Lote</th>
@@ -47,7 +48,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-inventario>
         <tr>
-            <td>{{inventario?.nombreLote}}</td>
+            <td>{{inventario?.lote}}</td>
             <td>{{inventario?.fechaRetiro || 'No hay registro'}}</td>
             <td>{{(inventario.Cantidad | beatyDate) || 'No hay registro'}}</td>
             <td>{{inventario?.Descripcion || 'No hay registro'}}</td>

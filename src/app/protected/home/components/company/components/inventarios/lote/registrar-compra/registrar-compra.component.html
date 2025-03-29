@@ -1,0 +1,73 @@
+<form [formGroup]="form">
+    <div class="row">
+      <p-floatLabel>
+        <p-autoComplete
+          [dropdown]="true"
+          [showClear]="true"
+          id="idElemento"
+          size="100"
+          formControlName="idElemento"
+          [suggestions]="filteredElementos"
+          forceSelection="true"
+          (completeMethod)="filterElementos($event)" 
+          field="codigoAndNombre"
+          >
+        </p-autoComplete>
+        <label class="required-label" for="idElemento">Elemento</label>
+      </p-floatLabel>
+      <p-button (onClick)="addElemento()" icon="pi pi-plus" class="p-button-rounded p-button-secondary"></p-button>
+    </div>
+      <div class="row">
+        <p-floatLabel>
+          <input id="lote" type="text" pInputText formControlName="lote" />
+          <label class="required-label" for="lote">Nombre lote</label>
+        </p-floatLabel>
+  
+      <p-floatLabel class="mt-10">
+        <p-inputNumber 
+        [size]="100"
+        formControlName="valorUnitario"
+        inputId="valorUnitario" 
+        mode="decimal" 
+        [min]="0"  />
+        <label class="required-label" for="valorUnitario">Valor</label>
+      </p-floatLabel>
+      </div>
+      <div class="row">
+        <p-floatLabel>
+          <p-autoComplete
+              appendTo="body"
+            [dropdown]="true"
+            [showClear]="true"
+            id="operacion"
+            size="100"
+            formControlName="operacion"
+            [suggestions]="filteredOperaciones"
+            forceSelection="true"
+            (completeMethod)="filterOperaciones($event)" 
+            field="name"
+            >
+          </p-autoComplete>
+          <label class="required-label" for="operacion">Operacion</label>
+        </p-floatLabel>
+        <p-button (onClick)="crearOperacion()" icon="pi pi-plus" class="p-button-rounded p-button-secondary"></p-button>
+      </div>
+      <p-floatLabel>
+        <input id="lote" type="text" pInputText formControlName="concept" />
+        <label class="required-label" for="lote">Concepto</label>
+      </p-floatLabel>
+      <div class="row">
+        <p-floatLabel>
+          <p-calendar class="w-100" appendTo="body" id="fechaOperacion" formControlName="executionDate" />
+          <label class="required-label" for="executionDate">Fecha ejecutada</label>
+        </p-floatLabel>
+        <p-floatLabel class="f-1">
+          <input [min]="0" [max]="999999999" id="existencias" type="number" pInputText formControlName="movedStock" />
+          <label class="required-label" for="movedStock">Cantidad</label>
+      </p-floatLabel>
+      </div>
+</form>
+<footer>
+    <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>
+    <p-button type="button" (click)="closeDialog(form.value)">Guardar</p-button>
+</footer>

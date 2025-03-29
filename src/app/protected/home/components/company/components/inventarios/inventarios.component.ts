@@ -102,7 +102,6 @@ export class InventariosComponent implements OnInit {
     this.refFormUserAcces = this.dialogService.open(InventarioHistorialComponent, {
       header: `Historial de "${inventario?.nombre}"`,
       width: '900px',
-      height: '500px',
       contentStyle: { overflow: 'auto' },
       data: inventario
     });

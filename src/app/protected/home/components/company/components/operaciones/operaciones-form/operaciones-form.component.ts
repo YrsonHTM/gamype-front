@@ -12,7 +12,7 @@ export class OperacionesFormComponent {
 
   form = this.fb.group({
     name: ['', [Validators.required]],
-    description: ['', [Validators.required]],
+    description: [''],
     isService: [false],
     id: [null]
   });

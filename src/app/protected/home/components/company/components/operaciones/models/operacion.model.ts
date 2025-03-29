@@ -19,4 +19,5 @@ export interface getOperation{
     id: number;
     name: string;
     description: string;
+    isService: boolean;
 }

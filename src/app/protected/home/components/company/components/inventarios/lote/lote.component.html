@@ -13,14 +13,17 @@
             <div class="flex">
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" [(ngModel)]="searchValue" (ngModelChange)="dt1.filterGlobal($event, 'contains')" placeholder="Filtrar cargos" />
+                    <input pInputText type="text" [(ngModel)]="searchValue" (ngModelChange)="dt1.filterGlobal($event, 'contains')" placeholder="Filtrar lotes" />
                 </span>
             </div>
             }
             @if(lotes.length <= 30)
             {
-                <p-button (onClick)="crearLote()" class="flex width-200 flex-end">
-                    Crear lote
+                <!-- <p-button (onClick)="crearLote()" class="flex width-200 flex-end">
+                    Crear lote vacio
+                </p-button> -->
+                <p-button (onClick)="compraElementos()" class="flex width-200 flex-end">
+                    Compra de lote
                 </p-button>
             }
         </p-header>
@@ -41,10 +44,11 @@
                     <td>{{(lote.existencias | beatyDate) || 'No hay registro'}}</td>
                     <td>{{(lote.valorUnitario | beatyDate) || 'No hay registro'}}</td>
                     <td class="celda-buttons">
-                        <div class="adding-buttons">
+                        <!-- <div class="adding-buttons">
                             <p-button label="Agregar" icon="pi pi-plus" size="small" styleClass="p-2" [outlined]="true" (onClick)="agregarExistencias(lote)" />
                             <p-button label="Extraer" icon="pi pi-minus" size="small" styleClass="p-2" [outlined]="true" severity="danger" (onClick)="extraerExistencias(lote)"/>
-                        </div>
+                        </div> -->
+                        <p-button (onClick)="operacionLote(lote)" icon="pi pi-cog" class="p-button-rounded p-button-secondary"></p-button>
                         <p-button (onClick)="editarLote(lote)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
                         <p-button (onClick)="eliminarLote(lote)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
                     </td>

@@ -4,4 +4,5 @@ export interface Elemento {
     codigo: string;
     descripcion: string;
     codigoAndNombre?: string;
+    name?: string;
 }
