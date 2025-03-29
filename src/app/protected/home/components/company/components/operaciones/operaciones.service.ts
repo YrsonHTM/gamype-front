@@ -27,4 +27,8 @@ export class OperacionesService {
     return this.http.delete(`${environment.gamypeApi}fitinv/operation/${id}`);
   }
 
+  editarOperacion(operation: operationCreate){
+    return this.http.put(`${environment.gamypeApi}fitinv/operation`, operation);
+  }
+
 }

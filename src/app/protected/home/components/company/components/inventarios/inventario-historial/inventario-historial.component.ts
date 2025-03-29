@@ -2,6 +2,9 @@ import { Component, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
 import { Empresa } from '../../../models/empresa.model';
+import { InventarioService } from '../inventario.service';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { getInventarioHistorial } from '../models/inventario.model';
 
 @Component({
   selector: 'app-inventario-historial',
@@ -20,7 +23,9 @@ export class InventarioHistorialComponent {
 
   filteredMeses: string[] = [];
 
-  historial = [];
+  historial : getInventarioHistorial[] = [];
+
+  resumenHistorial: any[] = [];
 
   basicForm = this.fb.group({
     mes: ['', Validators.required],
@@ -30,12 +35,13 @@ export class InventarioHistorialComponent {
   constructor(
     private fb: FormBuilder,
     private companyService: CompanyService,
+    private inventarioService: InventarioService,
+    public config: DynamicDialogConfig,
   ) {
 
   }
 
   ngOnInit(): void {
-
     this.formBasicValidators();
     this.companyService.getCompany().subscribe((company) => {
       this.infoEmpresa.set(company);
@@ -101,4 +107,27 @@ export class InventarioHistorialComponent {
     this.filteredMeses = this.meses().filter(elemento => elemento.toLowerCase().includes(query.toLowerCase()));
   }
 
+  consultarHistorial(){
+    this.inventarioService.getEjecuciones(this.config.data.id).subscribe((historial) => {
+      this.historial = historial;
+      const allMovements = [];
+      this.historial.forEach(element => {
+        element.executions.forEach(execution => {
+          allMovements.push({
+            lote: execution.movements[0].sourceBatch,
+            fecha: execution.registrationDate,
+            tipo: execution.operationType,
+            concepto: execution.concept,
+            cantidad: execution.movements[0].movedStock,
+            entrada: execution.movements[0].entryAmount,
+            salida: execution.movements[0].exitAmount, 
+            stockAntes: execution.movements[0].stockBeforeMovement,
+            operacion: element.name,
+          });
+        });
+      });
+      this.resumenHistorial = allMovements;
+      console.log(this.resumenHistorial);
+    });
+  }
 }

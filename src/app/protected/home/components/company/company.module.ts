@@ -30,6 +30,8 @@ import { ReporteCesantiasComponent } from './components/nominas/reporte-cesantia
 import { ReporteVacacionesComponent } from './components/nominas/reporte-vacaciones/reporte-vacaciones.component';
 import { OperacionesComponent } from './components/operaciones/operaciones.component';
 import { OperacionesFormComponent } from './components/operaciones/operaciones-form/operaciones-form.component';
+import { LoteOperacionFormComponent } from './components/inventarios/lote/lote-operacion-form/lote-operacion-form.component';
+import { RegistrarCompraComponent } from './components/inventarios/lote/registrar-compra/registrar-compra.component';
 
 
 
@@ -60,7 +62,9 @@ import { OperacionesFormComponent } from './components/operaciones/operaciones-f
     ReporteCesantiasComponent,
     ReporteVacacionesComponent,
     OperacionesComponent,
-    OperacionesFormComponent
+    OperacionesFormComponent,
+    LoteOperacionFormComponent,
+    RegistrarCompraComponent
   ],
   imports: [
     CommonModule,
