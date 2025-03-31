@@ -32,6 +32,8 @@ import { OperacionesComponent } from './components/operaciones/operaciones.compo
 import { OperacionesFormComponent } from './components/operaciones/operaciones-form/operaciones-form.component';
 import { LoteOperacionFormComponent } from './components/inventarios/lote/lote-operacion-form/lote-operacion-form.component';
 import { RegistrarCompraComponent } from './components/inventarios/lote/registrar-compra/registrar-compra.component';
+import { EntidadesComponent } from './components/entidades/entidades.component';
+import { FormEntidadComponent } from './components/entidades/form-entidad/form-entidad.component';
 
 
 
@@ -64,7 +66,9 @@ import { RegistrarCompraComponent } from './components/inventarios/lote/registra
     OperacionesComponent,
     OperacionesFormComponent,
     LoteOperacionFormComponent,
-    RegistrarCompraComponent
+    RegistrarCompraComponent,
+    EntidadesComponent,
+    FormEntidadComponent
   ],
   imports: [
     CommonModule,

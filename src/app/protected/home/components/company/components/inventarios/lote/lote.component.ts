@@ -194,7 +194,7 @@ export class LoteComponent implements OnInit {
     loteFunc.idElemento = loteFunc.elemento;
     this.refFormUserAcces = this.dialogService.open(LoteOperacionFormComponent, {
       header: 'Ejecutar operación',
-      width: '350px',
+      width: '400px',
       data: loteFunc,
       contentStyle: { overflow: 'auto' },
   });
@@ -205,6 +205,7 @@ export class LoteComponent implements OnInit {
           operationTypeId: data.operacion.id,
           concept: data.concept,
           executionDate: this.formatFechaToString(data.executionDate),
+          relatedEntityId: data.relatedEntityId.id,
           movements: [
             {
               sourceBatchId: loteFunc.id,
@@ -256,6 +257,7 @@ export class LoteComponent implements OnInit {
               operationTypeId: data.operacion.id,
               concept: data.concept,
               executionDate: this.formatFechaToString(data.executionDate),
+              relatedEntityId: data.relatedEntityId?.id,
               movements: [
                 {
                   sourceBatchId: lote.id,

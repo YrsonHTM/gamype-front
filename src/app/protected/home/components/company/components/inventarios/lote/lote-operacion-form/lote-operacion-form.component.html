@@ -1,4 +1,15 @@
 <form [formGroup]="form">
+  <p-floatLabel>
+    <p-selectButton 
+    [options]="tipoMovimiento"
+    styleClass="flex"
+    formControlName="tipoMovimineto"
+    optionLabel="icon">
+        <ng-template let-item pTemplate>
+            <span>{{item}}</span>
+        </ng-template>
+</p-selectButton>
+</p-floatLabel>
     <p-floatLabel>
         <p-autoComplete
             appendTo="body"
@@ -23,17 +34,25 @@
         <p-calendar class="w-100" appendTo="body" id="fechaOperacion" formControlName="executionDate" />
         <label class="required-label" for="executionDate">Fecha ejecutada</label>
       </p-floatLabel>
-      <p-floatLabel>
-        <p-selectButton 
-        [options]="tipoMovimiento"
-        styleClass="flex"
-        formControlName="tipoMovimineto"
-        optionLabel="icon">
-            <ng-template let-item pTemplate>
-                <span>{{item}}</span>
-            </ng-template>
-    </p-selectButton>
-    </p-floatLabel>
+      <div class="row">
+        <p-floatLabel>
+          <p-autoComplete
+              appendTo="body"
+            [dropdown]="true"
+            [showClear]="true"
+            id="operacion"
+            size="100"
+            formControlName="relatedEntityId"
+            [suggestions]="filteredEntidades"
+            forceSelection="true"
+            (completeMethod)="filterEntidades($event)" 
+            field="name"
+            >
+          </p-autoComplete>
+          <label for="operacion">Proovedor</label>
+        </p-floatLabel>
+        <p-button (onClick)="crearEntidad()" icon="pi pi-plus" class="p-button-rounded p-button-secondary"></p-button>
+      </div>
       <p-floatLabel class="f-1">
         <input [min]="0" [max]="999999999" id="existencias" type="number" pInputText formControlName="movedtStock" />
         <label class="required-label" for="movedtStock">Cantidad</label>

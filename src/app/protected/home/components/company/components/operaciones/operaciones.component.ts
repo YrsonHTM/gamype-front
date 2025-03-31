@@ -41,7 +41,6 @@ refFormUserAcces: DynamicDialogRef | undefined;
 
   this.refFormUserAcces.onClose.subscribe((data: any) => {
       if (data) {
-        console.log(data);
         this.operacionesService.crearOperacions(data).pipe(take(1)).subscribe(
           {
             next: res => {

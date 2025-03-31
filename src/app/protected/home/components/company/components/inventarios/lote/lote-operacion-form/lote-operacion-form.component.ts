@@ -2,7 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OperacionesService } from '../../../operaciones/operaciones.service';
 import { getOperation } from '../../../operaciones/models/operacion.model';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { EntidadCreate, GetEntidad, ResponseEntidadModal } from '../../../entidades/models/entidad.model';
+import { FormEntidadComponent } from '../../../entidades/form-entidad/form-entidad.component';
+import { CompanyService } from '../../../../services/company.service';
+import { EntidadesService } from '../../../entidades/entidades.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lote-operacion-form',
@@ -18,9 +23,23 @@ export class LoteOperacionFormComponent implements OnInit {
 
   ref = inject(DynamicDialogRef);
 
+  refFormUserAcces = inject(DynamicDialogRef);
+
+  dialogService = inject(DialogService);
+
+  companyService = inject(CompanyService);
+
+  entidadesService = inject(EntidadesService);
+
+  messageService = inject(MessageService);
+
   operaciones : getOperation[] = [];
 
   filteredOperaciones: getOperation[] = [];
+
+  filteredEntidades: GetEntidad[] = [];
+
+  entidades: GetEntidad[] = [];
 
   tipoMovimiento: string[] = ['Entrada', 'Salida'];
 
@@ -29,6 +48,7 @@ export class LoteOperacionFormComponent implements OnInit {
     concept: [null, Validators.required],
     executionDate: [new Date()],
     tipoMovimineto: ['Salida', Validators.required],
+    relatedEntityId: [null],
     movedtStock: [0],
   });
 
@@ -37,12 +57,68 @@ export class LoteOperacionFormComponent implements OnInit {
       this.operaciones = operaciones;
       this.filteredOperaciones = operaciones;
     });
+    this.loadEntidades();
+    this.valueChanges();
   }
 
   filterOperaciones($event){
     const query = $event.query;
     this.filteredOperaciones = this.operaciones.filter(elemento => elemento.name.toLowerCase().includes(query.toLowerCase()));
   }
+
+    filterEntidades($event){
+      const query = $event.query;
+      this.filteredEntidades = this.entidades.filter(elemento => elemento.name.toLowerCase().includes(query.toLowerCase()));
+    }
+
+    valueChanges(){
+      this.form.get('tipoMovimineto').valueChanges.subscribe((value) => {
+        this.loadEntidades(value);
+      });
+    }
+  
+    crearEntidad(): void {
+            this.refFormUserAcces = this.dialogService.open(FormEntidadComponent, {
+              header: this.form.value.tipoMovimineto ? 'Crear provedor' : 'Crear cliente',
+              width: '400px',
+              contentStyle: { overflow: 'auto' },
+          });
+        
+          this.refFormUserAcces.onClose.subscribe((data: ResponseEntidadModal) => {
+              if (data) {
+                const paBack: EntidadCreate = {
+                  name: data.name,
+                  documentTypeId: data.documentTypeId.id,
+                  identificationCode: data.identificationCode,
+                  contactPhone: data.contactPhone,
+                  email: data.email,
+                  companyId: this.companyService.getCompanyId(),
+                  isNaturalPerson: data.isNaturalPerson === 'Persona Natural' ? true : false,
+                  relationType: this.form.value.tipoMovimineto === 'Entrada',
+                }
+                this.entidadesService.CreateEntidades(paBack).subscribe({
+                  next: (data) => {
+                    this.messageService.add({severity:'success', summary: 'Exito', detail: 'Registro exitoso'});
+                      this.loadEntidades();
+                  },
+                  error: (error) => {
+                    this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar'});
+                  }
+                });
+            }
+          });
+      }
+
+    loadEntidades(value?: string){
+      if(value){
+        this.form.get('relatedEntityId').setValue(null);
+      }
+      const tipoMovimineto = value || this.form.value.tipoMovimineto;
+      this.entidadesService.getEntidades(tipoMovimineto === 'Entrada').subscribe(entidades => {
+        this.entidades = entidades;
+        this.filteredEntidades = entidades;
+      });
+    }
 
   closeDialog(ref) {
     this.form.markAllAsTouched();

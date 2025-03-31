@@ -1,0 +1,93 @@
+<p-card class="title">
+    <h2>
+        Provedores y Clientes
+    </h2>
+</p-card>
+<main class="flex f-1">
+    
+    <p-card class="flex f-1" styleClass="flex f-1 f-col p-20">
+        <p-tabView>
+            <p-tabPanel header="Provedores">
+                <p-header class="flex header-table">
+                    @if( provedores.length > 5)
+                    {
+                    <div class="flex">
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" [(ngModel)]="searchValue" (ngModelChange)="dt1.filterGlobal($event, 'contains')" placeholder="Filtrar cargos" />
+                        </span>
+                    </div>
+                    }
+                    @if(provedores.length <= 30)
+                    {
+                        <p-button (onClick)="crear(true)" class="flex width-200 flex-end">
+                            Crear provedor
+                        </p-button>
+                    }
+                </p-header>
+                <p-table #dt1 [value]="provedores" [paginator]="provedores.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['nombre', 'descripcion']" >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Telefono</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-cargo>
+                        <tr>
+                            <td>{{cargo.name}}</td>
+                            <td>{{cargo.email || 'No hay registro'}}</td>
+                            <td>{{cargo?.phone || 'No hay registro'}}</td>
+                            <td class="celda-buttons">
+                                <p-button (onClick)="editar(cargo)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
+                                <p-button (onClick)="eliminar(cargo)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Clientes">
+                <p-header class="flex header-table">
+                    @if( clientes.length > 5)
+                    {
+                    <div class="flex">
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" [(ngModel)]="searchValue" (ngModelChange)="dt1.filterGlobal($event, 'contains')" placeholder="Filtrar cargos" />
+                        </span>
+                    </div>
+                    }
+                    @if(clientes.length <= 30)
+                    {
+                        <p-button (onClick)="crear(false)" class="flex width-200 flex-end">
+                            Crear cliente
+                        </p-button>
+                    }
+                </p-header>
+                <p-table #dt1 [value]="clientes" [paginator]="clientes.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['nombre', 'descripcion']" >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Telefono</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-cliente>
+                        <tr>
+                            <td>{{cliente.name}}</td>
+                            <td>{{cliente?.email || 'No hay registro'}}</td>
+                            <td>{{cliente?.phone || 'No hay registro'}}</td>
+                            <td class="celda-buttons">
+                                <p-button (onClick)="editar(cliente)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
+                                <p-button (onClick)="eliminar(cliente)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+        </p-tabView>
+
+    </p-card>
+</main>

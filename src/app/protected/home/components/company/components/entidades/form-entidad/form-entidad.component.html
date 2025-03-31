@@ -1,0 +1,49 @@
+<form [formGroup]="form">
+    <p-floatLabel>
+        <input id="name" type="text" pInputText formControlName="name" />
+        <label class="required-label" for="name">Nombre provedor</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-selectButton 
+        [options]="periodos"
+        styleClass="flex"
+        formControlName="isNaturalPerson"
+        optionLabel="icon">
+            <ng-template let-item pTemplate>
+                <span>{{item}}</span>
+            </ng-template>
+    </p-selectButton>
+    </p-floatLabel>
+    <p-floatLabel>
+      <p-autoComplete
+        appendTo="body"
+        [dropdown]="true"
+        [showClear]="true"
+        id="id"
+        formControlName="documentTypeId"
+        [suggestions]="filteredTiposDocumentos"
+        forceSelection="true"
+        (completeMethod)="filterTiposDocumento($event)" 
+        field="nombre"
+        >
+      </p-autoComplete>
+      <label class="required-label" for="documentTypeId">Tipo de documento</label>
+    </p-floatLabel>
+      <p-floatLabel>
+        <input id="identificationCode" type="text" pInputText formControlName="identificationCode" />
+        <label for="identificationCode">Numero de documento</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <input id="contactPhone" type="text" pInputText formControlName="contactPhone" />
+        <label for="contactPhone">Telefono</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <input id="email" type="text" pInputText formControlName="email" />
+        <label for="email">Correo</label>
+      </p-floatLabel>
+
+</form>
+<footer>
+    <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>
+    <p-button type="button" (click)="closeDialog(form.value)">{{ editMode ? 'Editar' : 'Crear' }}</p-button>
+</footer>
