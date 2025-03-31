@@ -66,6 +66,25 @@
           <label class="required-label" for="movedStock">Cantidad</label>
       </p-floatLabel>
       </div>
+      <div class="row">
+        <p-floatLabel>
+          <p-autoComplete
+              appendTo="body"
+            [dropdown]="true"
+            [showClear]="true"
+            id="operacion"
+            size="100"
+            formControlName="relatedEntityId"
+            [suggestions]="filteredEntidades"
+            forceSelection="true"
+            (completeMethod)="filterEntidades($event)" 
+            field="name"
+            >
+          </p-autoComplete>
+          <label for="operacion">Proovedor</label>
+        </p-floatLabel>
+        <p-button (onClick)="crearEntidad(true)" icon="pi pi-plus" class="p-button-rounded p-button-secondary"></p-button>
+      </div>
 </form>
 <footer>
     <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>

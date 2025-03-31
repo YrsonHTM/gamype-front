@@ -28,6 +28,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { TabViewModule } from 'primeng/tabview';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CheckboxModule,
     CascadeSelectModule,
     SelectButtonModule,
-    InputNumberModule
+    InputNumberModule,
+    TabViewModule
   ],
   exports: [
     ButtonModule,
@@ -91,7 +93,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CheckboxModule,
     CascadeSelectModule,
     SelectButtonModule,
-    InputNumberModule
+    InputNumberModule,
+    TabViewModule
   ],
 })
 export class PrimeNgModulesModule { }

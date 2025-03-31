@@ -15,6 +15,7 @@ export interface MovimientoCreate {
     operationTypeId: number;
     concept: string;
     executionDate: string;
+    relatedEntityId: number;
     movements: Movement[];
 }
 
@@ -32,4 +33,8 @@ export interface compraLoteResponse {
     movedStock: number;
     operacion: getOperation;
     valorUnitario: number;
+    relatedEntityId: {
+        id: number;
+        name: string;
+    };
 }

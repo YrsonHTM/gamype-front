@@ -43,6 +43,7 @@ export class LayoutCompanyService {
         {id: 6, name: 'Inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
         {id: 7, name: 'Elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
         {id: 10, name: 'Operaciones', icon: 'pi pi-cog', url: '/gamype/company/operaciones'},
+        {id: 11, name: 'Entidades', icon: 'pi pi-building', url: '/gamype/company/entidades'},
       ])
     }
     if(admin_inv){
@@ -51,6 +52,7 @@ export class LayoutCompanyService {
         {id: 6, name: 'Inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
         {id: 7, name: 'Elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
         {id: 10, name: 'Operaciones', icon: 'pi pi-cog', url: '/gamype/company/operaciones'},
+        {id: 11, name: 'Entidades', icon: 'pi pi-building', url: '/gamype/company/entidades'},
       ])
     }
     if(admin_rrhh){

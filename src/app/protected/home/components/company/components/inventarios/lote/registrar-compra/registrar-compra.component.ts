@@ -9,6 +9,10 @@ import { forkJoin, take } from 'rxjs';
 import { ElementoformComponent } from '../../../elementos/elementoform/elementoform.component';
 import { MessageService } from 'primeng/api';
 import { OperacionesFormComponent } from '../../../operaciones/operaciones-form/operaciones-form.component';
+import { EntidadesService } from '../../../entidades/entidades.service';
+import { EntidadCreate, GetEntidad, ResponseEntidadModal } from '../../../entidades/models/entidad.model';
+import { FormEntidadComponent } from '../../../entidades/form-entidad/form-entidad.component';
+import { CompanyService } from '../../../../services/company.service';
 
 @Component({
   selector: 'app-registrar-compra',
@@ -31,6 +35,10 @@ export class RegistrarCompraComponent implements OnInit {
 
   messageService = inject(MessageService);
 
+  entidadesService = inject(EntidadesService);
+
+  companyService = inject(CompanyService);
+
   elementos: Elemento[] = [];
 
   filteredElementos: Elemento[] = [];
@@ -38,6 +46,10 @@ export class RegistrarCompraComponent implements OnInit {
   operaciones : getOperation[] = [];
 
   filteredOperaciones: getOperation[] = [];
+
+  entidades: GetEntidad[] = [];
+
+  filteredEntidades: GetEntidad[] = [];
   
   form = this.fb.group({
     lote: ['', Validators.required],
@@ -46,6 +58,7 @@ export class RegistrarCompraComponent implements OnInit {
     operacion: [null, Validators.required],
     concept: [null, Validators.required],
     executionDate: [new Date(), Validators.required],
+    relatedEntityId: [null],
     movedStock: [0],
   });
 
@@ -71,12 +84,15 @@ export class RegistrarCompraComponent implements OnInit {
   cargaData(){
     forkJoin([
       this.elementoService.getElementos(),
-      this.operacionesService.getOperacionesEmpresa()
-    ]).subscribe(([elementos, operaciones]) => {
+      this.operacionesService.getOperacionesEmpresa(),
+      this.entidadesService.getEntidades(true)
+    ]).subscribe(([elementos, operaciones, entidades]) => {
       this.elementos = elementos;
       this.operaciones = operaciones;
       this.filteredElementos = elementos;
-      this.filteredOperaciones = operaciones
+      this.filteredOperaciones = operaciones;
+      this.entidades = entidades;
+      this.filteredEntidades = entidades;
     });
   }
 
@@ -90,9 +106,47 @@ export class RegistrarCompraComponent implements OnInit {
     this.filteredOperaciones = this.operaciones.filter(elemento => elemento.name.toLowerCase().includes(query.toLowerCase()));
   }
 
+  filterEntidades($event){
+    const query = $event.query;
+    this.filteredEntidades = this.entidades.filter(elemento => elemento.name.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  crearEntidad(relationType: boolean): void {
+          this.refFormUserAcces = this.dialogService.open(FormEntidadComponent, {
+            header: relationType ? 'Crear provedor' : 'Crear cliente',
+            width: '400px',
+            contentStyle: { overflow: 'auto' },
+        });
+      
+        this.refFormUserAcces.onClose.subscribe((data: ResponseEntidadModal) => {
+            if (data) {
+              const paBack: EntidadCreate = {
+                name: data.name,
+                documentTypeId: data.documentTypeId.id,
+                identificationCode: data.identificationCode,
+                contactPhone: data.contactPhone,
+                email: data.email,
+                companyId: this.companyService.getCompanyId(),
+                isNaturalPerson: data.isNaturalPerson === 'Persona Natural' ? true : false,
+                relationType: relationType,
+              }
+              this.entidadesService.CreateEntidades(paBack).subscribe({
+                next: (data) => {
+                  this.messageService.add({severity:'success', summary: 'Exito', detail: 'Registro exitoso'});
+                  if(relationType){
+                    this.loadEntidades();
+                  }
+                },
+                error: (error) => {
+                  this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar'});
+                }
+              });
+          }
+        });
+    }
+
   closeDialog(ref) {
     this.form.markAllAsTouched();
-    console.log(this.form);
     Object.keys(this.form.controls).forEach(field => {
       const control = this.form.get(field);
       control.markAsDirty();
@@ -102,6 +156,14 @@ export class RegistrarCompraComponent implements OnInit {
         return;
     }
       this.ref.close(ref);
+  }
+
+  loadEntidades(){
+    this.entidadesService.getEntidades(true).subscribe(entidades => {
+      this.entidades = entidades;
+      this.filteredEntidades = entidades;
+    }
+    );
   }
 
   addElemento(){
