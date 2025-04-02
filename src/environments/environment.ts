@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    gamypeApi: 'https://gamypev1-fmguh4btd6gecfcp.eastus2-01.azurewebsites.net/',
-    authApi: 'https://gamypev1-fmguh4btd6gecfcp.eastus2-01.azurewebsites.net/fitinv/auth/',
+    gamypeApi: 'https://gamypev1api-cnbfbtb4bhc5ayfg.eastus-01.azurewebsites.net/',
+    authApi: 'https://gamypev1api-cnbfbtb4bhc5ayfg.eastus-01.azurewebsites.net/fitinv/auth/',
 };
