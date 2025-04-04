@@ -27,6 +27,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Descripcion</th>
+                    <th>Tipo operacion</th>
                     <th>Acciones</th>
                 </tr>
             </ng-template>
@@ -34,6 +35,7 @@
                 <tr>
                     <td>{{operation.name}}</td>
                     <td>{{operation.description}}</td>
+                    <td>{{operation.operationType ? 'Entrada' : 'Salida' }}</td>
                     <td class="celda-buttons">
                         <p-button (onClick)="editarOperacion(operation)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
                         <p-button (onClick)="eliminar(operation)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>

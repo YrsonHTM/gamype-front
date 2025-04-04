@@ -13,7 +13,7 @@ export class OperacionesFormComponent {
   form = this.fb.group({
     name: ['', [Validators.required]],
     description: [''],
-    isService: [false],
+    operationType: [false],
     id: [null]
   });
 
@@ -26,12 +26,12 @@ export class OperacionesFormComponent {
   ngOnInit(): void {
     if(this.config.data){
       this.editMode = true;
-      const { id, name, description, isService } = this.config.data;
+      const { id, name, description, operationType } = this.config.data;
       this.form.patchValue({
         id,
         name: name,
         description: description,
-        isService: isService
+        operationType: operationType
       })
     }
   }

@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { CompanyService } from '../../services/company.service';
 import { environment } from '../../../../../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { getInventario, getInventarioHistorial, Inventario } from './models/inventario.model';
-import { ActivatedRoute } from '@angular/router';
+import { getInventario, getInventarioHistorial, GetMovimientos, Inventario } from './models/inventario.model';
 import { Lote, MovimientoCreate } from './lote/models/lote.model';
+import * as XLSX from 'xlsx';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +72,20 @@ export class InventarioService {
   getEjecuciones(idInventario: number): Observable<getInventarioHistorial[]> {
     return this.http.get<getInventarioHistorial[]>(`${environment.gamypeApi}fitinv/operation/executed/${this.companyService.getCompanyId()}?inventoryId=${idInventario}`);
   }
+  
+  getMovimientos(idInventario: number, month: number, year: number): Observable<GetMovimientos[]> {
+    return this.http.get<GetMovimientos[]>(`${environment.gamypeApi}fitinv/operation/detailed-history?inventoryId=${idInventario}&month=${month}&year=${year}`);
+  }
 
+  exportToExcel(data: any[], fileName: string): void {
+    // Crear hoja de trabajo
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+    
+    // Crear libro de trabajo
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Movimientos');
+    
+    // Guardar el archivo
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
+  }
 }
