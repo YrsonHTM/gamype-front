@@ -43,7 +43,6 @@
             <th>Operacion</th>
             <th>Elemento</th>
             <th>Movimiento</th>
-            <th>Lote</th>
             <th>Concepto</th>
             <th>Fecha</th>
         </tr>
@@ -53,7 +52,6 @@
             <td>{{inventario?.operationName}}</td>
             <td>{{inventario?.itemName}}</td>
             <td>{{inventario?.movedStock || 'No hay registro'}}</td>
-            <td>{{inventario.batchName || 'No hay registro'}}</td>
             <td>{{inventario?.concept || 'No hay registro'}}</td>
             <td>{{(inventario.executionDate | beatyDate) || 'No hay registro'}}</td>
         </tr>
