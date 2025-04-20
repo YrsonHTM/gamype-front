@@ -1,12 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - gamypev1
+name: Build and deploy Node.js app to Azure Web App - gamype
 
 on:
   push:
     branches:
-      - develop
+      - deploy
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install, build
+      - name: npm install and build
         run: |
           npm install
           npm run build --if-present
@@ -67,7 +67,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'gamypev1'
+          app-name: 'gamype'
           slot-name: 'Production'
           package: .
           
