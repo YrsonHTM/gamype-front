@@ -116,6 +116,7 @@ refFormUserAcces: DynamicDialogRef | undefined;
       take(1)
     ).subscribe(operacion => {
       this.operaciones = operacion;
+      console.log(this.operaciones);
     });
   }
 }

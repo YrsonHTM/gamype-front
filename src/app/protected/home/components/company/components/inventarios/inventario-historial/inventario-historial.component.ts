@@ -4,7 +4,8 @@ import { CompanyService } from '../../../services/company.service';
 import { Empresa } from '../../../models/empresa.model';
 import { InventarioService } from '../inventario.service';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { getInventarioHistorial } from '../models/inventario.model';
+import { getInventarioHistorial, GetMovimientos } from '../models/inventario.model';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-inventario-historial',
@@ -17,15 +18,18 @@ export class InventarioHistorialComponent {
 
   anios = signal<string[]>([]);
 
+  mesesAnio = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ];
+
   filteredAnios: string[] = [];
 
   meses = signal<string[]>([]);
 
   filteredMeses: string[] = [];
 
-  historial : getInventarioHistorial[] = [];
-
-  resumenHistorial: any[] = [];
+  historial : GetMovimientos[] = [];
 
   basicForm = this.fb.group({
     mes: ['', Validators.required],
@@ -37,6 +41,7 @@ export class InventarioHistorialComponent {
     private companyService: CompanyService,
     private inventarioService: InventarioService,
     public config: DynamicDialogConfig,
+    private messageService: MessageService,
   ) {
 
   }
@@ -108,26 +113,49 @@ export class InventarioHistorialComponent {
   }
 
   consultarHistorial(){
-    this.inventarioService.getEjecuciones(this.config.data.id).subscribe((historial) => {
-      this.historial = historial;
-      const allMovements = [];
-      this.historial.forEach(element => {
-        element.executions.forEach(execution => {
-          allMovements.push({
-            lote: execution.movements[0].sourceBatch,
-            fecha: execution.registrationDate,
-            tipo: execution.operationType,
-            concepto: execution.concept,
-            cantidad: execution.movements[0].movedStock,
-            entrada: execution.movements[0].entryAmount,
-            salida: execution.movements[0].exitAmount, 
-            stockAntes: execution.movements[0].stockBeforeMovement,
-            operacion: element.name,
-          });
-        });
-      });
-      this.resumenHistorial = allMovements;
-      console.log(this.resumenHistorial);
+    this.inventarioService.getMovimientos(this.config.data.id, this.mesesAnio.indexOf(this.basicForm.get('mes')?.value) + 1, Number(this.basicForm.get('anio')?.value)).subscribe((res) => {
+      this.historial = res;
     });
+  }
+
+  descargaExcel(){
+
+    if(this.historial.length === 0){
+      this.messageService.add({ severity: 'warn', summary: 'Advertencia', detail: 'No hay datos para exportar' });
+      return;
+    }
+        // Primero mapeamos los datos para darles formato si es necesario
+        const dataToExport = this.historial.map(movement => ({
+          'Operación': movement.operationName,
+          'Descripción Operación': movement.operationDescription,
+          'Tipo Operación': movement.operationType ? 'Servicio' : 'Producto',
+          'Cantidad Movida': movement.movedStock,
+          'Stock Antes': movement.stockBefore,
+          'Stock Después': movement.stockAfter,
+          'Código Lote': movement.batchCode,
+          'Elemento': movement.itemName,
+          'Código Elemento': movement.itemCode,
+          'Unidad Medida': movement.measurementUnit,
+          'Inventario': movement.inventoryName,
+          'Concepto': movement.concept,
+          'Fecha Ejecución': new Date(movement.executionDate).toLocaleString(),
+          'Fecha Registro': new Date(movement.registrationDate).toLocaleString(),
+          'Registrado Por': movement.registeredBy,
+          'Valor Unitario': movement.unitValue,
+          'Nombre Entidad': movement.relatedEntityName,
+          'Identificación': movement.relatedEntityIdentification,
+          'Teléfono': movement.relatedEntityContactPhone,
+          'Email': movement.relatedEntityEmail,
+          'Dirección': movement.relatedEntityAddress,
+          'Es Persona Natural': movement.relatedEntityIsNaturalPerson ? 'Sí' : 'No',
+          'Tipo Relación': movement.relatedEntityRelationType ? 'Provedor' : 'Cliente'
+        }));
+    
+        this.inventarioService.exportToExcel(dataToExport, this.config.data.nombre + ' ' + this.basicForm.get('mes')?.value + ' ' + this.basicForm.get('anio')?.value);
+  }
+
+  private formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es-ES'); // Formato español
   }
 }

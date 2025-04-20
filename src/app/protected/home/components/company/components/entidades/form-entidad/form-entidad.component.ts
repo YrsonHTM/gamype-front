@@ -38,9 +38,9 @@ export class FormEntidadComponent implements OnInit {
     id: [null],
     name: [null as null | string, Validators.required],
     documentTypeId: [null as null | string | DocumentType, Validators.required],
-    identificationCode: [null as null | string],
-    contactPhone: [null as null | string, Validators.required],
-    email: [null as null | string , Validators.email],
+    identificationCode: [null as null | string, Validators.required],
+    contactPhone: [null as null | string,],
+    email: [null as null | string ],
     isNaturalPerson: [this.periodos[0], Validators.required],
     relationType: [true]
   });

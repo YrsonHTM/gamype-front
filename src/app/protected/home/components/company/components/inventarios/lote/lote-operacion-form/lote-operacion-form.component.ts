@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OperacionesService } from '../../../operaciones/operaciones.service';
 import { getOperation } from '../../../operaciones/models/operacion.model';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EntidadCreate, GetEntidad, ResponseEntidadModal } from '../../../entidades/models/entidad.model';
 import { FormEntidadComponent } from '../../../entidades/form-entidad/form-entidad.component';
 import { CompanyService } from '../../../../services/company.service';
@@ -22,6 +22,8 @@ export class LoteOperacionFormComponent implements OnInit {
   operacionesService = inject(OperacionesService);
 
   ref = inject(DynamicDialogRef);
+
+  config = inject(DynamicDialogConfig);
 
   refFormUserAcces = inject(DynamicDialogRef);
 
@@ -74,6 +76,17 @@ export class LoteOperacionFormComponent implements OnInit {
     valueChanges(){
       this.form.get('tipoMovimineto').valueChanges.subscribe((value) => {
         this.loadEntidades(value);
+      });
+
+      //validar si es salida de elementos que no puedan salir mas de los que hay en stock
+      this.form.get('movedtStock').valueChanges.subscribe((value) => {
+        if(this.form.value.tipoMovimineto === 'Salida'){
+          const stock = this.config.data.existencias;
+          if(stock < value){
+            this.form.get('movedtStock').setValue(stock);
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'No puede salir mas de lo que hay en stock'});
+          }
+        }
       });
     }
   
