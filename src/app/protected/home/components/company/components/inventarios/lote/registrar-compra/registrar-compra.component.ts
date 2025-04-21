@@ -77,7 +77,9 @@ export class RegistrarCompraComponent implements OnInit {
   generateLoteName(){
     const idElemento = this.form.get('idElemento').value as Elemento;
     const date = new Date();
-    const loteName = `${idElemento.codigoAndNombre}-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+    // recortar codigoandnombre a maximo 8 caracteres 
+    const newCodigoAndNombre = idElemento.codigoAndNombre.length > 8 ? idElemento.codigoAndNombre.substring(0, 8) : idElemento.codigoAndNombre;
+    const loteName = `${newCodigoAndNombre}-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
     this.form.get('lote').setValue(loteName);
   }
 

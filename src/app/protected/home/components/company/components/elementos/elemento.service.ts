@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Elemento } from './models/elementos.model';
+import { Elemento, getUnidad } from './models/elementos.model';
 import { environment } from '../../../../../../../environments/environment';
 import { CompanyService } from '../../services/company.service';
 import { Observable } from 'rxjs';
@@ -36,5 +36,8 @@ export class ElementoService {
     return this.http.delete(`${environment.gamypeApi}fitinv/inventory/item/${id}`);
   }
 
+  getUnidades() {
+    return this.http.get<getUnidad[]>(`${environment.gamypeApi}fitinv/unidades-medida/id-nombre`);
+  }
 
 }

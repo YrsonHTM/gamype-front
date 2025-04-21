@@ -48,3 +48,36 @@ export interface movimientoEjecucion{
     movementType: string;
     movementDate: string;
 }
+
+export interface GetMovimientos{
+    movementId: number;
+    operationName: string;
+    operationDescription: string;
+    operationType: boolean;
+    movedStock: number;
+    stockBefore: number;
+    stockAfter: number;
+    batchCode: string;
+    itemName: string;
+    itemCode: string;
+    measurementUnit: string;
+    inventoryId: number;
+    inventoryName: string;
+    concept: string;
+    executionDate: string;
+    registrationDate: string;
+    registeredBy: string;
+    unitValue: number;
+    entryValue: number;
+    exitValue: number;
+    companyId: number;
+    companyName: string;
+    relatedEntityId: number;
+    relatedEntityName: string;
+    relatedEntityIdentification: string;
+    relatedEntityContactPhone: string;
+    relatedEntityEmail: string;
+    relatedEntityAddress?: any;
+    relatedEntityIsNaturalPerson: boolean;
+    relatedEntityRelationType: boolean;
+  }
