@@ -10,6 +10,7 @@ export interface Elemento {
         id: number;
         nombre: string;
     };
+    typicalMeasureUnitId?: number;
 }
 
 export interface getUnidad{

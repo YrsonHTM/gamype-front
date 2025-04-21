@@ -38,7 +38,7 @@ export class ElementoformComponent implements OnInit {
       if(this.config.data){
         this.editMode = true;
         this.elementoService.getElemento(this.config.data.id).subscribe(elemento => {
-          this.form.patchValue({...elemento, nombre : elemento.name, unidad: elemento.unidadMedidaTipica});
+          this.form.patchValue({...elemento, nombre : elemento.name, unidad: this.unidades.find(arl => arl.id == elemento.typicalMeasureUnitId)});
         })
         this.form.patchValue(this.config.data)
       }

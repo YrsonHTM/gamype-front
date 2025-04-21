@@ -23,11 +23,12 @@
                 </p-button>
             }
         </p-header>
-        <p-table #dt1 [value]="elementos" [paginator]="elementos.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['id', 'codigoAndNombre']">
+        <p-table #dt1 [value]="elementos" [paginator]="elementos.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['id', 'codigoAndNombre','abreviaturaUnidadMedida']">
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID</th>
                     <th>Codigo - Nombre</th>
+                    <th>Unidad medida</th>
                     <th>Acciones</th>
                 </tr>
             </ng-template>
@@ -35,6 +36,7 @@
                 <tr>
                     <td>{{elemento.id}}</td>
                     <td>{{elemento?.codigoAndNombre || 'No hay registro'}}</td>
+                    <td>{{elemento?.abreviaturaUnidadMedida || 'No hay registro'}}</td>
                     <td class="celda-buttons">
                         <p-button (onClick)="editarElemento(elemento)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
                         <p-button (onClick)="eliminarElemento(elemento)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
