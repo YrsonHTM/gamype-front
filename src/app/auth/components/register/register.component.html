@@ -21,21 +21,7 @@
                 <label class="required-label" for="correo">Correo Electronico</label>
             </p-floatLabel>
             <!-- <app-select class="w-100 mt-16 mb-16" formControlName="idPais" [items]=" paises | async" [searchByParam]="'nombre'" [labelParam]="'pais'" [idParam]="'codigo'"></app-select> -->
-            <p-floatLabel>
-                <p-autoComplete
-                  id="idPais"
-                  size="100"
-                  [dropdown]="true"
-                  [showClear]="true"
-                  formControlName="idPais"
-                  [suggestions]="filteredPaises"
-                  forceSelection="true"
-                  (completeMethod)="filterElementos($event)" 
-                  field="nombre"
-                  >
-                </p-autoComplete>
-                <label class="required-label" for="idPais">Pais</label>
-              </p-floatLabel>
+
             <p-floatLabel class="w-100">
                 <input id="telefono" type="text" pInputText formControlName="cellPhoneNumber" />
                 <label class="required-label" for="telefono">Telefono</label>

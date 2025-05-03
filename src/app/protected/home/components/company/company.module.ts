@@ -34,6 +34,7 @@ import { LoteOperacionFormComponent } from './components/inventarios/lote/lote-o
 import { RegistrarCompraComponent } from './components/inventarios/lote/registrar-compra/registrar-compra.component';
 import { EntidadesComponent } from './components/entidades/entidades.component';
 import { FormEntidadComponent } from './components/entidades/form-entidad/form-entidad.component';
+import { AutoTooltipModule } from '../../directives/directives.module';
 
 
 
@@ -68,7 +69,7 @@ import { FormEntidadComponent } from './components/entidades/form-entidad/form-e
     LoteOperacionFormComponent,
     RegistrarCompraComponent,
     EntidadesComponent,
-    FormEntidadComponent
+    FormEntidadComponent,
   ],
   imports: [
     CommonModule,
