@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PaisesService } from '../../../layout/transversal-services/paises.service';
 import { AuthService } from '../../services/auth.service';
 import { MessageService } from 'primeng/api';
 
@@ -18,17 +17,11 @@ export class RegisterComponent implements OnInit {
     lastname: ['', [Validators.required, Validators.minLength(3)]],
     firstname: ['', [Validators.required, Validators.minLength(3)]],
     cellPhoneNumber: ['', [Validators.required, Validators.minLength(8)]],
-    idPais: ['' as any, Validators.required],
   });
-
-  paises = [];
-
-  filteredPaises = [];
 
   constructor(
               private fb: FormBuilder,
               private router: Router,
-              private paisesService: PaisesService,
               private authService: AuthService,
               private messageService: MessageService
   ) {
@@ -38,9 +31,6 @@ export class RegisterComponent implements OnInit {
     if(this.authService.validateToken()){
       this.authService.logOut(this.router, true);
     }
-    this.paisesService.getPaises().subscribe(paises => {
-      this.paises = paises;
-    });
   }
 
   registerAcount() {
@@ -52,7 +42,6 @@ export class RegisterComponent implements OnInit {
       lastname: this.form.get('lastname').value,
       firstname: this.form.get('firstname').value,
       cellPhoneNumber: this.form.get('cellPhoneNumber').value,
-      idPais: this.form.get('idPais').value.id
     };
     this.authService.registerUser(register).subscribe(
       {
@@ -60,8 +49,9 @@ export class RegisterComponent implements OnInit {
           this.messageService.add({severity:'success', summary:'Registro exitoso', detail:'Usuario registrado correctamente'});
           this.navigateToLogin();
         },
-        error: () => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Error al registrar el usuario revise sus datos e intente nuevamente'});
+        error: (error) => {
+          console.log(error);
+          this.messageService.add({severity:'error', summary:'Error', detail:'Usuario ya registrado, revise sus datos e intente nuevamente'});
         }
       }
     );
@@ -73,11 +63,6 @@ export class RegisterComponent implements OnInit {
 
   navigateToHome() {
     this.router.navigate(['']);
-  }
-
-  filterElementos($event){
-    const query = $event.query;
-    this.filteredPaises = this.paises.filter(elemento => elemento.nombre.toLowerCase().includes(query.toLowerCase()));
   }
 
 

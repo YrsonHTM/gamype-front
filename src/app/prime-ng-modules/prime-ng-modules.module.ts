@@ -29,6 +29,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TabViewModule } from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { TabViewModule } from 'primeng/tabview';
     CascadeSelectModule,
     SelectButtonModule,
     InputNumberModule,
-    TabViewModule
+    TabViewModule,
+    TooltipModule
   ],
   exports: [
     ButtonModule,
@@ -94,7 +96,8 @@ import { TabViewModule } from 'primeng/tabview';
     CascadeSelectModule,
     SelectButtonModule,
     InputNumberModule,
-    TabViewModule
+    TabViewModule,
+    TooltipModule
   ],
 })
 export class PrimeNgModulesModule { }

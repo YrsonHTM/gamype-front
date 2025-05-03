@@ -60,7 +60,12 @@
 @if(historial.length === 0){
 
             <h2 class="no-registros">
+              @if(consulted){
                 No hay registros
+              }
+              @else {
+                Oprima en el boton consultar para ver el historial
+              }
             </h2>
 
 }

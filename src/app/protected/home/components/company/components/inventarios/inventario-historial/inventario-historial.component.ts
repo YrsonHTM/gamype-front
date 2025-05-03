@@ -25,6 +25,8 @@ export class InventarioHistorialComponent {
 
   filteredAnios: string[] = [];
 
+  consulted = false;
+
   meses = signal<string[]>([]);
 
   filteredMeses: string[] = [];
@@ -114,6 +116,7 @@ export class InventarioHistorialComponent {
 
   consultarHistorial(){
     this.inventarioService.getMovimientos(this.config.data.id, this.mesesAnio.indexOf(this.basicForm.get('mes')?.value) + 1, Number(this.basicForm.get('anio')?.value)).subscribe((res) => {
+      this.consulted = true;
       this.historial = res;
     });
   }
