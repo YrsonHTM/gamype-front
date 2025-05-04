@@ -32,6 +32,11 @@ export class CrearEmpleadoComponent implements OnInit {
 
   filteredDocumento = [];
 
+  periodos = [
+    'Quincenal',
+    'Mensual',
+      ];
+
   form = this.fb.group({
     id: [null],
     nombres: [null, Validators.required],
@@ -39,7 +44,7 @@ export class CrearEmpleadoComponent implements OnInit {
     identificadorEmpresa: [null],
     telefonoLaboral: [null],
     correoElectronicoLaboral: [null, Validators.email],
-    direccionVivienda: [null, Validators.required],
+    direccionVivienda: [null],
     idCargo: [null],
     salario: [null],
     horasSemanales: [null],
@@ -51,6 +56,8 @@ export class CrearEmpleadoComponent implements OnInit {
     idSupervisor: [null],
     idTipoDocumentoIdentificacion: [null],
     numeroIdentificacion: [null],
+    auxilioTransporte: [true],
+    fraccionMes: [null],
   });
 
   constructor(
@@ -123,7 +130,9 @@ export class CrearEmpleadoComponent implements OnInit {
       motivoFinalizacionContratacion: empleado.motivoFinalizacionContratacion,
       idSupervisor: this.supervisores.find(supervisor => supervisor.id === empleado?.idSupervisor),
       numeroIdentificacion: empleado.numeroIdentificacion,
-      idTipoDocumentoIdentificacion: this.tiposDocumento.find(tipo => tipo.id === empleado?.idTipoDocumentoIdentificacion)
+      idTipoDocumentoIdentificacion: this.tiposDocumento.find(tipo => tipo.id === empleado?.idTipoDocumentoIdentificacion),
+      fraccionMes: empleado.fraccionMes ? 'Quincenal' : 'Mensual',
+      auxilioTransporte: empleado.auxilioTransporte
     });
   }
 

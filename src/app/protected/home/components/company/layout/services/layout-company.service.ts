@@ -38,17 +38,21 @@ export class LayoutCompanyService {
         {id: 1, name: 'Dashboard', icon: 'pi pi-home', url: '/gamype/company/dashboard'},
         {id: 2, name: 'Cargo', icon: 'pi pi-id-card', url: '/gamype/company/cargo'},
         {id: 3, name: 'Personal', icon: 'pi pi-users', url: '/gamype/company/personal'},
-        {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
-        {id: 7, name: 'elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
-        {id: 4, name: 'Editar', icon: 'pi pi-pencil', url: '/gamype/company/edit'},
-        {id: 5, name: 'Accesos', icon: 'pi pi-key', url: '/gamype/company/delete'},
+        {id: 8, name: 'Tareas', icon: 'pi pi-list', url: '/gamype/company/tareas'},
+        {id: 9, name: 'Nominas', icon: 'pi pi-money-bill', url: '/gamype/company/nominas'},
+        {id: 6, name: 'Inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
+        {id: 7, name: 'Elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
+        {id: 10, name: 'Operaciones', icon: 'pi pi-cog', url: '/gamype/company/operaciones'},
+        {id: 11, name: 'Entidades', icon: 'pi pi-building', url: '/gamype/company/entidades'},
       ])
     }
     if(admin_inv){
       return of([
         {id: 1, name: 'Dashboard', icon: 'pi pi-home', url: '/gamype/company/dashboard'},
-        {id: 6, name: 'inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
-        {id: 7, name: 'elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
+        {id: 6, name: 'Inventario', icon: 'pi pi-warehouse', url: '/gamype/company/inventarios'},
+        {id: 7, name: 'Elemento', icon: 'pi pi-box', url: '/gamype/company/elemento'},
+        {id: 10, name: 'Operaciones', icon: 'pi pi-cog', url: '/gamype/company/operaciones'},
+        {id: 11, name: 'Entidades', icon: 'pi pi-building', url: '/gamype/company/entidades'},
       ])
     }
     if(admin_rrhh){
@@ -56,17 +60,27 @@ export class LayoutCompanyService {
         {id: 1, name: 'Dashboard', icon: 'pi pi-home', url: '/gamype/company/dashboard'},
         {id: 2, name: 'Cargo', icon: 'pi pi-id-card', url: '/gamype/company/cargo'},
         {id: 3, name: 'Personal', icon: 'pi pi-users', url: '/gamype/company/personal'},
+        {id: 8, name: 'Tareas', icon: 'pi pi-list', url: '/gamype/company/tareas'},
+        {id: 9, name: 'Nominas', icon: 'pi pi-money-bill', url: '/gamype/company/nominas'},
       ])
     }
     return of([])
   }
 
-  goToUlr(url: string, idEmpresa?: number, otherParams?: { [key: string]: any }, skip: boolean = false): void {
+  goToUlr(url: string, idEmpresa?: number, otherParams?: { [key: string]: any }, skip: boolean = false, setSelectedMenu?: string): void {
     if(url === this.selectedMenu?.value?.url && !skip) return;
     const queryParams = {
       empresa: idEmpresa || this.companyService.getCompanyId(),
       ...otherParams
     };
+    if(setSelectedMenu) {
+      this.getAllMenus().subscribe(menus => {
+        const menu = menus.find(m => m.name === setSelectedMenu);
+        if(menu) {
+          this.setSelectedMenu(menu);
+        }
+      });
+    }
     this.router.navigate([url], { queryParams });
   }
 

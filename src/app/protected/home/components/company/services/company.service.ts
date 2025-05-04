@@ -46,6 +46,10 @@ export class CompanyService {
     return this.company.asObservable();
   }
 
+  getCompanyValue(){
+    return this.company.value
+  }
+
   getCompanyId(){
     return this.company.value.id;
   }

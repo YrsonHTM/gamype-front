@@ -15,10 +15,27 @@ import { InventariosComponent } from './components/inventarios/inventarios.compo
 import { ElementosComponent } from './components/elementos/elementos.component';
 import { ElementoformComponent } from './components/elementos/elementoform/elementoform.component';
 import { CrearInventarioComponent } from './components/inventarios/crear-inventario/crear-inventario.component';
-import { BeatyDatePipe } from './components/beaty-date.pipe';
+import { BeatyDatePipe } from './components/pipes/beaty-date.pipe';
 import { LoteComponent } from './components/inventarios/lote/lote.component';
 import { FormLotesComponent } from './components/inventarios/lote/form-lotes/form-lotes.component';
 import { FormExistenciasComponent } from './components/inventarios/lote/form-existencias/form-existencias.component';
+import { InventarioHistorialComponent } from './components/inventarios/inventario-historial/inventario-historial.component';
+import { TareasComponent } from './components/tareas/tareas.component';
+import { TareaFormComponent } from './components/tareas/tarea-form/tarea-form.component';
+import { NominasComponent } from './components/nominas/nominas.component';
+import { FormNominaComponent } from './components/nominas/form-nomina/form-nomina.component';
+import { DateNominaPipe } from './components/pipes/date-nomina.pipe';
+import { ReportePrimaComponent } from './components/nominas/reporte-prima/reporte-prima.component';
+import { ReporteCesantiasComponent } from './components/nominas/reporte-cesantias/reporte-cesantias.component';
+import { ReporteVacacionesComponent } from './components/nominas/reporte-vacaciones/reporte-vacaciones.component';
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
+import { OperacionesFormComponent } from './components/operaciones/operaciones-form/operaciones-form.component';
+import { LoteOperacionFormComponent } from './components/inventarios/lote/lote-operacion-form/lote-operacion-form.component';
+import { RegistrarCompraComponent } from './components/inventarios/lote/registrar-compra/registrar-compra.component';
+import { EntidadesComponent } from './components/entidades/entidades.component';
+import { FormEntidadComponent } from './components/entidades/form-entidad/form-entidad.component';
+import { AutoTooltipModule } from '../../directives/directives.module';
+
 
 
 @NgModule({
@@ -37,7 +54,22 @@ import { FormExistenciasComponent } from './components/inventarios/lote/form-exi
     BeatyDatePipe,
     LoteComponent,
     FormLotesComponent,
-    FormExistenciasComponent
+    FormExistenciasComponent,
+    InventarioHistorialComponent,
+    TareasComponent,
+    TareaFormComponent,
+    NominasComponent,
+    FormNominaComponent,
+    DateNominaPipe,
+    ReportePrimaComponent,
+    ReporteCesantiasComponent,
+    ReporteVacacionesComponent,
+    OperacionesComponent,
+    OperacionesFormComponent,
+    LoteOperacionFormComponent,
+    RegistrarCompraComponent,
+    EntidadesComponent,
+    FormEntidadComponent,
   ],
   imports: [
     CommonModule,

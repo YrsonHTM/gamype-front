@@ -1,6 +1,8 @@
 <form [formGroup]="form">
     <p-floatLabel>
         <p-autoComplete
+          [dropdown]="true"
+          [showClear]="true"
           id="idElemento"
           size="100"
           formControlName="idElemento"
@@ -10,21 +12,21 @@
           field="codigoAndNombre"
           >
         </p-autoComplete>
-        <label for="idElemento">Elemento</label>
+        <label class="required-label" for="idElemento">Elemento</label>
       </p-floatLabel>
     <p-floatLabel>
         <input id="lote" type="text" pInputText formControlName="lote" />
-        <label for="lote">Nombre lote</label>
+        <label class="required-label" for="lote">Nombre lote</label>
       </p-floatLabel>
 
-      <p-floatLabel class="f-1">
-        <input [min]="1" [max]="999999999" id="existencias" type="number" pInputText formControlName="existencias" />
-        <label for="existencias">Existencias</label>
-    </p-floatLabel>
-
-    <p-floatLabel class="f-1">
-        <input [min]="1" [max]="999999999" id="valorUnitario" type="number" pInputText formControlName="valorUnitario" />
-        <label for="valorUnitario">Valor</label>
+    <p-floatLabel class="mt-10">
+      <p-inputNumber 
+      [size]="100"
+      formControlName="valorUnitario"
+      inputId="valorUnitario" 
+      mode="decimal" 
+      [min]="0"  />
+      <label class="required-label" for="valorUnitario">Valor</label>
     </p-floatLabel>
 </form>
 <footer>

@@ -1,0 +1,88 @@
+<p-card class="title">
+    <h2>
+        Tareas
+    </h2>
+</p-card>
+<section>
+    <p-card class="left-size" styleClass="h-100 w-100">
+        <h3>
+            Personal
+        </h3>
+        <p-iconField iconPosition="right">
+            <p-inputIcon styleClass="pi pi-search" />
+            <input type="text" pInputText placeholder="Buscar" (input)="filterEmpleados($event)" />
+        </p-iconField>
+        <div class="empleados-search">
+            @for(empleado of filteredEmpleados; track $index){
+                <div class="content-empleado" (click)="selectIdEmpleado(empleado)" [class.selected-empleado]="empleado?.id === selectedEmpleado?.id">
+                    <span> {{empleado.nombresApellidos}} </span>
+                    <span> {{empleado.tipoNroDocumento || 'No tiene identificacion'}}</span>
+                </div>
+            }
+        </div>
+    </p-card>
+    <p-card class="right-size" styleClass="h-100">
+        @if(selectedEmpleado || onViewAllCompany){
+            @if(tareas.length === 0){
+                <h3>
+                    No hay tareas asignadas
+                </h3>
+                                    <p-button (onClick)="crearTarea()" class="flex width-200 flex-end">
+                        Asignar tarea
+                    </p-button>
+            }
+            @else {
+                @if(onViewAllCompany){
+                    <h3>
+                        Todas las tareas de la empresa
+                    </h3>
+                }
+                @else {
+                    <h3>
+                        Tareas de "{{selectedEmpleado?.nombresApellidos}}"
+                    </h3>
+                }
+                @if(empleados.length <= 100)
+                {
+                    @if(!onViewAllCompany){
+                        <p-button (onClick)="crearTarea()" class="flex width-200 flex-end">
+                            Asignar tarea
+                        </p-button>
+                    }
+                }
+                <p-table #dt1 [value]="tareas" [paginator]="tareas.length > 5" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [globalFilterFields]="['title', 'startDate', 'description']">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Inicio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-empleado>
+                        <tr>
+                            <td>{{empleado.title}}</td>
+                            <td>{{(empleado?.startDate | beatyDate) || 'No hay registro'}}</td>
+                            <td>{{(empleado?.estadoName | beatyDate) || 'No hay registro'}}</td>
+                            <td class="celda-buttons">
+                                <p-button (onClick)="editarTarea(empleado)" icon="pi pi-pencil" class="p-button-rounded p-button-secondary"></p-button>
+                                <p-button (onClick)="eliminarTarea(empleado)" icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
+                                @if(!onViewAllCompany){
+                                    <p-button (onClick)="desasignarTarea(empleado)" icon="pi pi-user-minus" class="p-button-rounded p-button-danger"></p-button>
+                                }
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            }
+        }
+        @if(!selectedEmpleado && !onViewAllCompany){
+            <div class="no-selected-emplyee">
+                <h3>
+                    Selecciona un empleado para ver sus tareas
+                </h3>
+                <p-button class="button-all-tasks" label="Ver todas las tareas" (onClick)="setOnViewAllCompanyTrue()" icon="pi pi-list" ></p-button>
+            </div>
+        }
+    </p-card>
+</section>

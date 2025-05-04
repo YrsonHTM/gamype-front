@@ -28,8 +28,24 @@ export class FormEmpresaComponent implements OnInit {
     'pi-briefcase',
     'pi-building',
     'pi-chart-line',
-    'pi-users',
-    'pi-sitemap'
+    'pi-sitemap',
+    'pi-address-book',
+    'pi-bitcoin',
+    'pi-cart-plus',
+    'pi-car',
+    'pi-euro',
+    'pi-gift',
+    'pi-globe',
+    'pi-dollar',
+    'pi-credit-card',
+    'pi-calendar',
+    'pi-cloud',
+    'pi-database',
+    'pi-folder',
+    'pi-lock',
+    'pi-phone',
+    'pi-save',
+    'pi-server',
   ]
   tamagnioOptions = [
     { label: 'Pequeña', value: 1 },
@@ -62,7 +78,7 @@ export class FormEmpresaComponent implements OnInit {
       contactNumber: ['', [Validators.required, this.maxDigitsValidator(10)]],
       addres: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      webSite: ['', [Validators.required, this.websiteValidator()]],
+      webSite: ['', [this.websiteValidator()]],
     });
   }
 
@@ -80,9 +96,9 @@ export class FormEmpresaComponent implements OnInit {
       sociedadesMercantiles: this.empresaService.getSociedadesMercantiles()
     }).subscribe({
       next: (results) => {
-        this.tamagnios = results.tamagnios.claseEmpresas;
-        this.sectoresSocioEconomicos = results.sectoresSocioEconomicos.claseEmpresas;
-        this.sociedadesMercantiles = results.sociedadesMercantiles.claseEmpresas;
+        this.tamagnios = results.tamagnios.companyClasses;
+        this.sectoresSocioEconomicos = results.sectoresSocioEconomicos.companyClasses;
+        this.sociedadesMercantiles = results.sociedadesMercantiles.companyClasses;
         if(this.editMode)
         {
           this.loadInfoEmpresa();
@@ -132,7 +148,6 @@ export class FormEmpresaComponent implements OnInit {
     const query = $event.query;
     this.filteredSociedadesMercantiles = this.sociedadesMercantiles.filter(sociedad => sociedad.nombre.toLowerCase().includes(query.toLowerCase()));
   }
-
   filterSectoresSocioEconomicos($event){
     const query = $event.query;
     this.filteredSectoresSocioEconomicos = this.sectoresSocioEconomicos.filter(sectores => sectores.nombre.toLowerCase().includes(query.toLowerCase

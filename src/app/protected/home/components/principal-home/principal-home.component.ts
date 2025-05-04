@@ -7,6 +7,8 @@ import { ROLES_USER_EMPRESA, havePermission } from '../../services/utils/getRolU
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormUsersPermisosComponent } from '../form-users-permisos/form-users-permisos.component';
 import { CompanyService } from '../company/services/company.service';
+import { RolesTypes } from '../../services/utils/roles-types';
+import { GetEmpresas } from '../../services/utils/users-empresa.interface';
 
 @Component({
   selector: 'app-principal-home',
@@ -18,9 +20,10 @@ export class PrincipalHomeComponent implements OnInit {
   userName = this.authService.getUserData()?.firstname + ' ' + this.authService.getUserData()?.lastname;
   userNameToShow = '';
   loadingEmpresas = true;
-  userEmpresas : any[] = [];
-  rolesAplicacion: any[] = [];
+  userEmpresas : GetEmpresas[] = [];
+  rolesAplicacion: RolesTypes[] = [];
   refFormUserAcces: DynamicDialogRef | undefined;
+  isMaster: boolean = false;
 
   constructor(
     private messageService: MessageService,
@@ -36,11 +39,33 @@ export class PrincipalHomeComponent implements OnInit {
   ngOnInit(): void {
     this.empresaService.getRolesAplication().subscribe(data => {
       this.rolesAplicacion = data;
-      this.empresaService.getEmpresas().subscribe(data => {
-        this.userEmpresas = data;
-        this.loadingEmpresas = false;
-        this.defineItmesEmpresas();
-      });
+      this.isMaster = this.authService.getIsMaster();
+      if(this.isMaster){
+        this.empresaService.masterSearch().subscribe(data => {
+          //mapeo de data
+          const auxNewData = data.map((empresa) => {
+            return {
+              id: empresa.id,
+              name: empresa.name,
+              icon: empresa.icon,
+              sector: empresa.economicSector,
+              tamagnio: empresa.companySyze,
+              tipoSociedad: empresa.societyType,
+              idsRoles: [1]
+            }
+          }); 
+          this.userEmpresas = auxNewData;
+          this.loadingEmpresas = false;
+          this.defineItmesEmpresas();
+        });
+      }
+      else{
+        this.empresaService.getEmpresas().subscribe(data => {
+          this.userEmpresas = data;
+          this.loadingEmpresas = false;
+          this.defineItmesEmpresas();
+        });
+      }
     });
   }
 

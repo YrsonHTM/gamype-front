@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Elemento } from './models/elementos.model';
+import { Elemento, getUnidad } from './models/elementos.model';
 import { environment } from '../../../../../../../environments/environment';
 import { CompanyService } from '../../services/company.service';
 import { Observable } from 'rxjs';
@@ -16,25 +16,28 @@ export class ElementoService {
   ) { }
 
   getInvetarios() {
-    return this.http.get(`${environment.gamypeApi}fitinv/inventario/${this.companyService.getCompanyId()}`);
+    return this.http.get(`${environment.gamypeApi}fitinv/inventory/${this.companyService.getCompanyId()}`);
   }
 
   // /create/elemento/{idEmpresa}
   createElemento(elemento: Elemento) {
-    return this.http.post(`${environment.gamypeApi}fitinv/inventario/create/elemento/${this.companyService.getCompanyId()}`, elemento);
+    return this.http.post(`${environment.gamypeApi}fitinv/inventory/create/item/${this.companyService.getCompanyId()}`, elemento);
   }
 
   getElementos(): Observable<Elemento[]> {
-    return this.http.get<Elemento[]>(`${environment.gamypeApi}fitinv/inventario/elementos/${this.companyService.getCompanyId()}?query=`);
+    return this.http.get<Elemento[]>(`${environment.gamypeApi}fitinv/inventory/elementos/${this.companyService.getCompanyId()}?query=`);
   }
 
   getElemento(id: number): Observable<Elemento> {
-    return this.http.get<Elemento>(`${environment.gamypeApi}fitinv/inventario/elemento/${id}`);
+    return this.http.get<Elemento>(`${environment.gamypeApi}fitinv/inventory/item/${id}`);
   }
 
   deleteElemento(id: number) {
-    return this.http.delete(`${environment.gamypeApi}fitinv/inventario/elemento/${id}`);
+    return this.http.delete(`${environment.gamypeApi}fitinv/inventory/item/${id}`);
   }
 
+  getUnidades() {
+    return this.http.get<getUnidad[]>(`${environment.gamypeApi}fitinv/unidades-medida/id-nombre`);
+  }
 
 }

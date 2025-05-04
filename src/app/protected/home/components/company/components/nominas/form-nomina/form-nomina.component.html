@@ -1,0 +1,154 @@
+<form [formGroup]="formNomina">
+    <!-- mesnomina -->
+    <div class="form-group">
+
+        <div class="row">
+            <p-floatLabel class="mt-10">
+                <p-inputNumber 
+                formControlName="salarioMensualQuincenal"
+                inputId="minmax" 
+                mode="decimal" 
+                [min]="constantesNomina?.salarioMinimo"  />
+                <label class="required-label" for="minmax">Salario</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <p-calendar 
+                appendTo="body"
+                formControlName="fechaNomina"
+                view="month" 
+                dateFormat="mm/yy" 
+                [readonlyInput]="true" />
+                <label class="required-label" for="titulo">Mes nomina</label>
+            </p-floatLabel>
+        </div>
+        <div class="row">
+            <p-floatLabel class="mt-20">
+                <p-checkbox
+                class="checkbox"
+                formControlName="fraccionMes"
+                [binary]="true" 
+                inputId="quincena" />
+                <label class="ml-20 w-200" for="quincena">Nomina Quincenal</label>
+            </p-floatLabel>
+            <p-floatLabel class="mt-10">
+                <p-inputNumber 
+                formControlName="diasTrabajados"
+                inputId="minmax" 
+                mode="decimal" 
+                [min]="0"
+                [max]="formNomina.get('fraccionMes').value ? 15 : 30"
+                />
+                <label class="required-label" for="minmax">Dias</label>
+            </p-floatLabel>
+        </div>
+        @if(formNomina.get('fraccionMes').value){
+            <p-floatLabel>
+                <p-selectButton 
+                [options]="periodos"
+                styleClass="flex"
+                formControlName="periodo"
+                optionLabel="icon">
+                    <ng-template let-item pTemplate>
+                        <span>{{item}}</span>
+                    </ng-template>
+                </p-selectButton>
+            </p-floatLabel>
+        }
+        @if(validarSalarioIntegral()){
+            <p-floatLabel class="mt-20">
+                <p-checkbox
+                class="checkbox"
+                formControlName="salarioIntegral"
+                [binary]="true" 
+                inputId="quincena" />
+                <label class="ml-20" for="quincena">Salario integral</label>
+            </p-floatLabel>
+        }
+        <div class="row">
+            <p-floatLabel class="mt-10 mb-20">
+                <p-inputNumber 
+                class="mb-20"
+                [className]="'mb-20'"
+                formControlName="comisiones"
+                inputId="comisiones" 
+                mode="decimal" 
+                [min]="0"  />
+                <label class="required-label" for="comisiones">Comisiones</label>
+            </p-floatLabel>
+            <p-floatLabel class="mt-10">
+                <p-inputNumber 
+                formControlName="recargoNocturnoOrdinario"
+                inputId="recargoNocturnoOrdinario" 
+                mode="decimal" 
+                [min]="0"  />
+                <label class="required-label" for="recargoNocturnoOrdinario">Recargo nocturno</label>
+            </p-floatLabel>
+        </div>
+        <div class="row">
+            <p-floatLabel class="mt-10">
+                <p-inputNumber 
+                formControlName="trabajoExtraSuplementario"
+                inputId="trabajoExtraSuplementario" 
+                mode="decimal" 
+                [min]="0"  />
+                <label class="required-label" for="trabajoExtraSuplementario">Horas extras</label>
+            </p-floatLabel>
+            <!-- trabajo dominical festivo -->
+            <p-floatLabel class="mt-10">
+                <p-inputNumber 
+                formControlName="trabajoDominicalFestivo"
+                inputId="trabajoDominicalFestivo" 
+                mode="decimal" 
+                [min]="0"  />
+                <label class="required-label" for="trabajoDominicalFestivo">Trabajo dominical o festivo</label>
+            </p-floatLabel>
+        </div>
+        <div class="row">
+                    <!-- trabajo extra -->
+        <p-floatLabel class="mt-10">
+            <p-inputNumber 
+            formControlName="recargoNocturnoOrdinario"
+            inputId="recargoNocturnoOrdinario" 
+            mode="decimal" 
+            [min]="0"  />
+            <label class="required-label" for="recargoNocturnoOrdinario">Recargo nocturno</label>
+        </p-floatLabel>
+        <!-- auxilioTransporte -->
+        <p-floatLabel class="mt-10">
+            <p-inputNumber 
+            formControlName="auxilioTransporte"
+            inputId="auxilioTransporte" 
+            mode="decimal" 
+            [min]="0"  />
+            <label class="required-label" for="auxilioTransporte">Auxilio de transporte</label>
+        </p-floatLabel>
+        </div>
+        <p-floatLabel class="mt-20">
+            <p-checkbox
+            class="checkbox"
+            formControlName="exentoAportesParafiscales"
+            [binary]="true" 
+            inputId="exentoAportesParafiscales" />
+            <label class="ml-20" for="exentoAportesParafiscales"> Esta excento de aportes parafiscales?</label>
+        </p-floatLabel>
+            <p-floatLabel>
+                <p-autoComplete
+                  appendTo="body"
+                  [dropdown]="true"
+                  [showClear]="true"
+                  id="id"
+                  formControlName="idNivelRiesgoLaboral"
+                  [suggestions]="filteredArl"
+                  forceSelection="true"
+                  (completeMethod)="filterArl($event)" 
+                  field="nombreClase"
+                  >
+                </p-autoComplete>
+                <label class="required-label" for="idNivelRiesgoLaboral">Clase Arl</label>
+              </p-floatLabel>
+    </div>
+    <footer>
+        <p-button type="button" severity="secondary" (click)="closeDialog(null)">Cancelar</p-button>
+        <p-button type="button" (click)="closeDialog(formNomina.value)">{{ editMode ? 'Actualizar' : 'Generar' }}</p-button>
+    </footer>
+</form>

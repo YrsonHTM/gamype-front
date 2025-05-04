@@ -1,0 +1,38 @@
+:host{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+h2{
+    margin: 0;
+    justify-items: center;
+    text-align: center;
+}
+
+main{
+    margin-top: 20px;
+}
+
+.width-200{
+    width: 200px;
+}
+
+.celda-buttons{
+    display: flex;
+    gap: 10px;
+}
+
+.f-rr{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.flex-end{
+    display: flex;
+    margin-left: auto;
+}
+
+.header-table{
+    padding: 0px 20px;
+}

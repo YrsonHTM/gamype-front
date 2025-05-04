@@ -1,11 +1,26 @@
 <form [formGroup]="form">
     <p-floatLabel>
         <input id="nombre" type="text" pInputText formControlName="nombre" />
-        <label for="nombre">Nombre elemento</label>
+        <label class="required-label" for="nombre">Nombre elemento</label>
       </p-floatLabel>
       <p-floatLabel>
         <input id="razonSocial" type="text" pInputText formControlName="codigo" />
         <label for="razonSocial">Codigo elemento</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-autoComplete
+          appendTo="body"
+          [dropdown]="true"
+          [showClear]="true"
+          id="id"
+          formControlName="unidad"
+          [suggestions]="filteredUnidad"
+          forceSelection="true"
+          (completeMethod)="filterUnidad($event)" 
+          field="nombre"
+          >
+        </p-autoComplete>
+        <label for="unidad">Unidad tipica</label>
       </p-floatLabel>
       <p-floatLabel>
         <input id="razonSocial" type="text" pInputText formControlName="descripcion" />

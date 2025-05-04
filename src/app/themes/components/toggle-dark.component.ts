@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
-import { ToggleButton, ToggleButtonModule } from "primeng/togglebutton";
+import { ToggleButton, ToggleButtonChangeEvent, ToggleButtonModule } from "primeng/togglebutton";
 import { ThemeService } from "../theme.service";
 import { Theme } from "../models/Theme";
 /* eslint-disable */
@@ -34,7 +34,7 @@ export class ToggleDarkComponent implements AfterViewInit {
         }
     }
 
-    onChange(event: any) {
+    onChange(event: ToggleButtonChangeEvent) {
         event.checked ? this.changeTheme(this.themeService.theme[0]) : this.changeTheme(this.themeService.theme[1]);
       }
     

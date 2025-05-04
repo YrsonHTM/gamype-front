@@ -17,6 +17,9 @@ p-card{
 .item{
     border-radius: 10px;
     padding: 10px;
+    i{
+        color: var(--text-color);
+    }
 }
 
 .item:hover{

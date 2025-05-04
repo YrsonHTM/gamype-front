@@ -23,6 +23,10 @@
     }
 }
 
+app-root{
+    min-width: 100vw;
+}
+
 .d-b{
     display: block;
 }
@@ -157,6 +161,7 @@ body{
     margin-right: 10px;
 }
 
+
 .mr-20{
     margin-right: 20px;
 }
@@ -232,3 +237,7 @@ body{
 .circle{
     border-radius: 50%;
 }
+
+.required-label::after {
+    content: ' *';
+  }

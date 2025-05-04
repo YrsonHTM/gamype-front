@@ -34,9 +34,9 @@ export class DashBoardComponent {
       sociedadesMercantiles: this.empresaService.getSociedadesMercantiles()
     }).subscribe({
       next: (results) => {
-        this.tamagnioName = results.tamagnios.claseEmpresas.find(tamagnio => tamagnio.id === this.empresaInfo().idTamagnio).nombre;
-        this.sectorSocioEconomicoName = results.sectoresSocioEconomicos.claseEmpresas.find(sector => sector.id === this.empresaInfo().idSectorEconomico).nombre;
-        this.sociendadesMercantilesName = results.sociedadesMercantiles.claseEmpresas.find(sociedad => sociedad.id === this.empresaInfo().idTipoSociedadMercantil).nombre;
+        this.tamagnioName = results.tamagnios.companyClasses.find(tamagnio => tamagnio.id === this.empresaInfo().idTamagnio)?.nombre;
+        this.sectorSocioEconomicoName = results.sectoresSocioEconomicos.companyClasses.find(sector => sector.id === this.empresaInfo().idSectorEconomico)?.nombre;
+        this.sociendadesMercantilesName = results.sociedadesMercantiles.companyClasses.find(sociedad => sociedad.id === this.empresaInfo().idTipoSociedadMercantil)?.nombre;
       },
       error: (error) => {
         console.error('Error loading initial data', error);

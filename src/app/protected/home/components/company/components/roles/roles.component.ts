@@ -43,7 +43,8 @@ export class RolesComponent implements OnInit {
 
   this.refFormUserAcces.onClose.subscribe((data: any) => {
       if (data) {
-        this.rolesService.crearCargo(data).pipe(take(1)).subscribe(
+        const paBack = {...data, idNivelesRiesgoARL: data.idNivelesRiesgoARL.id};
+        this.rolesService.crearCargo(paBack).pipe(take(1)).subscribe(
           {
             next: res => {
               if(!res) return;
@@ -73,7 +74,8 @@ export class RolesComponent implements OnInit {
 
   this.refFormUserAcces.onClose.subscribe((data: any) => {
       if (data) {
-        this.rolesService.crearCargo(data).subscribe({
+        const paBack = {...data, idNivelesRiesgoARL: data.idNivelesRiesgoARL.id};
+        this.rolesService.crearCargo(paBack).subscribe({
           next: res => {
             if(!res) return;
             this.messageService.add({severity:'success', summary: 'Cargo Editado', detail: 'Cargo editado exitosamente'});

@@ -3,6 +3,7 @@ export interface Sectores {
     nombre: string;
     descripcion: string;
     claseEmpresas: ClaseEmpresas[];
+    companyClasses: ClaseEmpresas[];
 }
 
 export interface ClaseEmpresas {
@@ -17,4 +18,5 @@ export interface Tamagnio {
     nombre: string;
     descripcion: string;
     claseEmpresas: ClaseEmpresas[];
+    companyClasses: ClaseEmpresas[];
 }

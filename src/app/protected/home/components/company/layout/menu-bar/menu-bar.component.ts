@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LayoutCompanyService } from '../services/layout-company.service';
 import { Menu } from '../models/menu.model';
 import { Observable, of } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { havePermission } from '../../../../services/utils/getRolUser';
-import { EmpresaService } from '../../../../services/empresa.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar',

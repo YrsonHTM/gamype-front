@@ -16,6 +16,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { FormUsersPermisosComponent } from './components/form-users-permisos/form-users-permisos.component';
 import { FormUserPermisoComponent } from './components/form-users-permisos/components/form-user-permiso/form-user-permiso.component';
 import { EditUserPermisoComponent } from './components/form-users-permisos/components/edit-user-permiso/edit-user-permiso.component';
+import { AutoTooltipModule } from './directives/directives.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { EditUserPermisoComponent } from './components/form-users-permisos/compo
     ReactiveFormsModule,
     FormsModule,
     LayoutModule,
-    SelectComponent
+    SelectComponent,
+    AutoTooltipModule
   ],
   providers: [MessageService,ConfirmationService,DialogService]
 })

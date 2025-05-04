@@ -40,7 +40,7 @@ export class EmpleadoService {
   }
 
   getTiposDocumentos(){
-    return this.http.get<any[]>(`${environment.gamypeApi}fitinv/empleados/tiposIdentificacion`).pipe(
+    return this.http.get<DocumentType[]>(`${environment.gamypeApi}fitinv/empleados/tiposIdentificacion`).pipe(
       catchError(err => {
         return of([]);
       }));

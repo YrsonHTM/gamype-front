@@ -48,7 +48,8 @@ export class ElementosComponent implements OnInit {
         this.elementoService.createElemento({
           nombre: data.nombre,
           codigo: data.codigo,
-          descripcion: data.descripcion
+          descripcion: data.descripcion,
+          idUnidadMedidaTipica: data?.unidad?.id
         }).subscribe({
           next: () => {
             this.messageService.add({severity:'success', summary: 'Elemento creado', detail: 'Elemento creado exitosamente'});
@@ -101,7 +102,8 @@ export class ElementosComponent implements OnInit {
         id: data.id,
         nombre: data.nombre,
         codigo: data.codigo,
-        descripcion: data.descripcion
+        descripcion: data.descripcion,
+        idUnidadMedidaTipica: data?.unidad?.id
       }).subscribe({
         next: () => {
           this.messageService.add({severity:'success', summary: 'Elemento creado', detail: 'Elemento editado exitosamente'});

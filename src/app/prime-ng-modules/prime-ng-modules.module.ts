@@ -24,6 +24,12 @@ import { ChipsModule } from 'primeng/chips';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SidebarModule } from 'primeng/sidebar';
 import { AccordionModule } from 'primeng/accordion';
+import { CheckboxModule } from 'primeng/checkbox';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TabViewModule } from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -53,7 +59,13 @@ import { AccordionModule } from 'primeng/accordion';
     ChipsModule,
     MultiSelectModule,
     SidebarModule,
-    AccordionModule
+    AccordionModule,
+    CheckboxModule,
+    CascadeSelectModule,
+    SelectButtonModule,
+    InputNumberModule,
+    TabViewModule,
+    TooltipModule
   ],
   exports: [
     ButtonModule,
@@ -79,7 +91,13 @@ import { AccordionModule } from 'primeng/accordion';
     ChipsModule,
     MultiSelectModule,
     SidebarModule,
-    AccordionModule
+    AccordionModule,
+    CheckboxModule,
+    CascadeSelectModule,
+    SelectButtonModule,
+    InputNumberModule,
+    TabViewModule,
+    TooltipModule
   ],
 })
 export class PrimeNgModulesModule { }

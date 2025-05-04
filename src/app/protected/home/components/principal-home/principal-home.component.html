@@ -9,12 +9,12 @@
 <section class="top-section">
     <div class="l-section">
         <h2>
-            Companias
+            Compañias
         </h2>
     </div>
     <div class="r-section">
         <p-button 
-        label="Crear comapnia" 
+        label="Crear compañia" 
         icon="pi pi-plus" 
         (onClick)="goToCreateCompany()"
         />
@@ -25,10 +25,10 @@
         <p-card styleClass="flex-1" class="no-companies">
             <div class="j-c-a-c f-col flex-1">
                 <h4>
-                    No tienes companias asociadas a tu cuenta.
+                    No tienes compañias asociadas a tu cuenta.
                 </h4>
                 <p>
-                    Si deseas crear una compania, haz click en el boton de crear compania.
+                    Si deseas crear una compañia, haz click en el boton de crear compañia.
                 </p>
             </div>
         </p-card>
@@ -39,9 +39,16 @@
                 {{ empresa.name }}
             </h3>
             <div class="chip r-section">
-                <span>
-                    {{ findRoleName(empresa.idsRoles[0]) | shortRol}}
-                </span>
+                @if(isMaster){
+                    <span>
+                        Master
+                    </span>
+                }
+                @else {
+                    <span>
+                        {{ findRoleName(empresa.idsRoles[0]) | shortRol}}
+                    </span>
+                }
             </div>
         </p-header>
         <div class="card-content">
@@ -53,14 +60,14 @@
         <p-footer>
             @if(empresa.items.length > 0){
                 <p-splitButton 
-                label="Ir a compania" 
+                label="Ir a compañia" 
                 (onClick)="save(empresa)"
                 [model]="empresa.items"
                 />
             }
             @else{
                 <p-button
-                label="Ir a compania" 
+                label="Ir a compañia" 
                 (onClick)="save(empresa)">
                 </p-button>
             }

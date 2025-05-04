@@ -21,7 +21,7 @@ export class FormLotesComponent {
     id: [null],
     lote: ['', Validators.required],
     idElemento: ['', Validators.required],
-    existencias: ['', Validators.required],
+    existencias: ['0', Validators.required],
     valorUnitario: ['', Validators.required],
   });
 
@@ -35,9 +35,6 @@ export class FormLotesComponent {
   ngOnInit(): void {
       if(this.config.data){
       this.editMode = true;
-      this.elementoService.getElemento(this.config.data.id).subscribe(elemento => {
-        this.form.patchValue(elemento);
-      })
       this.form.patchValue(this.config.data)
     }
 

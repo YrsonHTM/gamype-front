@@ -19,16 +19,16 @@
                 <div class="p-fluid">
                   <p-floatLabel>
                     <input id="nombre" type="text" pInputText formControlName="name" />
-                    <label for="nombre">Nombre</label>
+                    <label class="required-label" for="nombre">Nombre</label>
 
                   </p-floatLabel>
                   <p-floatLabel>
                     <input id="razonSocial" type="text" pInputText formControlName="companyName" />
-                    <label for="razonSocial">Razón Social</label>
+                    <label class="required-label" for="razonSocial">Razón Social</label>
                   </p-floatLabel>
                   <p-floatLabel>
-                    <p-calendar formControlName="foundationDate" />
-                    <label for="fechaFundacion">Fecha de Fundación</label>
+                    <p-calendar appendTo="body" formControlName="foundationDate" />
+                    <label class="required-label" for="fechaFundacion">Fecha de Fundación</label>
                   </p-floatLabel>
                   
                     <p class="icon-text">Icono de referencia</p>
@@ -51,17 +51,18 @@
           <p-card header="Informacion avanzada">
             <div class="p-fluid">
               <p-floatLabel>
-                      <p-autoComplete
-                      id="idTamagnio" 
+                <p-autoComplete
+                id="idTamagnio" 
               formControlName="idTamagnio"
-              
+              [dropdown]="true"
+              [showClear]="true"
               [suggestions]="filteredTamagnios"
               forceSelection="true"
               (completeMethod)="filterTamagnios($event)" 
               field="nombre"
               >
           </p-autoComplete>
-              <label for="idTamagnio">Tamaño</label>
+              <label class="required-label" for="idTamagnio">Tamaño</label>
               </p-floatLabel>
               <div class="p-field">
                 <!-- <app-select></app-select> -->
@@ -70,17 +71,20 @@
                 <p-autoComplete
                   id="idTipoSociedadMercantil" 
                   formControlName="idTipoSociedadMercantil"
-                  
+                  [dropdown]="true"
+                  [showClear]="true"
                   [suggestions]="filteredSociedadesMercantiles"
                   forceSelection="true"
                   (completeMethod)="filterSociedadesMercantiles($event)" 
                   field="nombre"
                   >
                 </p-autoComplete>
-                <label for="idTipoSociedadMercantil">Tipo sociedad mercantil</label>
+                <label class="required-label" for="idTipoSociedadMercantil">Tipo sociedad mercantil</label>
               </p-floatLabel>
               <p-floatLabel>
                 <p-autoComplete
+                [dropdown]="true"
+                [showClear]="true"
                 id="idSectorEconomico" 
                 formControlName="idSectorEconomico"
                 [suggestions]="filteredSectoresSocioEconomicos"
@@ -89,7 +93,7 @@
                 field="nombre"
                 >
               </p-autoComplete>
-              <label for="idSectorEconomico">Tipo sociedad mercantil</label>
+              <label class="required-label" for="idSectorEconomico">Actividad económica principal</label>
 
               </p-floatLabel>
             </div>
@@ -114,15 +118,15 @@
             <div class="p-fluid">
               <p-floatLabel>
                 <input id="contactNumber" type="number" maxlength="15" pInputText formControlName="contactNumber" />
-                <label for="contactNumber">Numero de contacto</label>
+                <label class="required-label" for="contactNumber">Numero de contacto</label>
               </p-floatLabel>
               <p-floatLabel>
                 <input id="addres" type="text" pInputText formControlName="addres" />
-                <label for="addres">Direccion</label>
+                <label class="required-label" for="addres">Direccion</label>
               </p-floatLabel>
               <p-floatLabel>
                 <input id="email" type="text" pInputText formControlName="email" />
-                <label for="email">Correo de contacto</label>
+                <label class="required-label" for="email">Correo de contacto</label>
               </p-floatLabel>
               <p-floatLabel>
                 <input id="webSite" type="text" pInputText formControlName="webSite" />

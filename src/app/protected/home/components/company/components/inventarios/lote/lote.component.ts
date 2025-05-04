@@ -5,9 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { LayoutCompanyService } from '../../../layout/services/layout-company.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormLotesComponent } from './form-lotes/form-lotes.component';
-import { Lote } from './models/lote.model';
+import { compraLoteResponse, Lote, MovimientoCreate } from './models/lote.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormExistenciasComponent } from './form-existencias/form-existencias.component';
+import { LoteOperacionFormComponent } from './lote-operacion-form/lote-operacion-form.component';
+import { RegistrarCompraComponent } from './registrar-compra/registrar-compra.component';
 
 @Component({
   selector: 'app-lote',
@@ -182,6 +184,100 @@ export class LoteComponent implements OnInit {
           },
           error: () => {
             this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al agregar existencias'});
+          }
+        });
+    }
+  });
+  }
+
+  operacionLote(loteFunc: Lote){
+    loteFunc.idElemento = loteFunc.elemento;
+    this.refFormUserAcces = this.dialogService.open(LoteOperacionFormComponent, {
+      header: 'Ejecutar operación',
+      width: '400px',
+      data: loteFunc,
+      contentStyle: { overflow: 'auto' },
+  });
+
+  this.refFormUserAcces.onClose.subscribe((data) => {
+      if (data) {
+        const operacion : MovimientoCreate = {
+          operationTypeId: data.operacion.id,
+          concept: data.concept,
+          executionDate: this.formatFechaToString(data.executionDate),
+          relatedEntityId: data.relatedEntityId.id,
+          movements: [
+            {
+              sourceBatchId: loteFunc.id,
+              movedtStock: data.tipoMovimineto === 'Entrada' ? data.movedtStock : -data.movedtStock,
+              entryAmount: 0
+            }
+          ]
+        }
+        this.inventarioService.extecuteOperacion(operacion).subscribe({
+          next: () => {
+            this.messageService.add({severity:'success', summary: 'Operación ejecutada', detail: 'Operación ejecutada exitosamente'});
+            this.loadLotes();
+          },
+          error: () => {
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al ejecutar la operación'});
+          }
+        });
+    }
+  });
+  }
+
+  formatFechaToString(fecha: Date): string{
+    //final format example 2025-03-19T05:00:00.000
+    return fecha.toISOString().split('T')[0] + 'T05:00:00.000';
+  }
+
+  compraElementos(){
+    this.refFormUserAcces = this.dialogService.open(RegistrarCompraComponent, {
+      header: 'Compra lote',
+      width: '500px',
+      contentStyle: { overflow: 'auto' },
+  });
+
+  this.refFormUserAcces.onClose.subscribe((data: compraLoteResponse) => {
+      if (data) {
+        const crearLote : Lote = {
+          lote: data.lote,
+          idElemento: data.idElemento.id,
+          existencias: data.movedStock,
+          valorUnitario: data.valorUnitario,
+          idInventario: this.inventarioService.getIdInventarioValue(),
+          elemento: data.idElemento
+        }
+        this.inventarioService.createOrEditLote(
+          crearLote
+        ).subscribe({
+          next: (lote: Lote) => {
+            const operacion : MovimientoCreate = {
+              operationTypeId: data.operacion.id,
+              concept: data.concept,
+              executionDate: this.formatFechaToString(data.executionDate),
+              relatedEntityId: data.relatedEntityId?.id,
+              movements: [
+                {
+                  sourceBatchId: lote.id,
+                  movedtStock: data.movedStock,
+                  entryAmount: 0
+                }
+              ]
+            }
+            this.inventarioService.extecuteOperacion(operacion).subscribe({
+              next: () => {
+                this.messageService.add({severity:'success', summary: 'Compra registrada', detail: 'Compra registrada exitosamente'});
+                this.loadLotes();
+              },
+              error: () => {
+                this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al realizar la compra'});
+              }
+            });
+          },
+          error: () => {
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al crear el lote'});
           }
         });
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ElementoService } from '../elemento.service';
+import { getUnidad } from '../models/elementos.model';
 
 @Component({
   selector: 'app-elementoform',
@@ -15,9 +16,13 @@ export class ElementoformComponent implements OnInit {
   form: FormGroup = this.fb.group({
     id: [null],
     nombre: ['', Validators.required],
-    codigo: ['', Validators.required],
-    descripcion: ['', Validators.required],
+    codigo: ['',],
+    unidad: [null],
+    descripcion: ['',],
   });
+
+  unidades: getUnidad[] = [];
+  filteredUnidad: getUnidad[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -27,13 +32,17 @@ export class ElementoformComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.elementoService.getUnidades().subscribe((data: getUnidad[]) => {
+      this.unidades = data;
+      this.filteredUnidad = data;
       if(this.config.data){
-      this.editMode = true;
-      this.elementoService.getElemento(this.config.data.id).subscribe(elemento => {
-        this.form.patchValue(elemento);
-      })
-      this.form.patchValue(this.config.data)
-    }
+        this.editMode = true;
+        this.elementoService.getElemento(this.config.data.id).subscribe(elemento => {
+          this.form.patchValue({...elemento, nombre : elemento.name, unidad: this.unidades.find(arl => arl.id == elemento.typicalMeasureUnitId)});
+        })
+        this.form.patchValue(this.config.data)
+      }
+    })
   }
 
   closeDialog(ref) {
@@ -47,6 +56,10 @@ export class ElementoformComponent implements OnInit {
         return;
     }
       this.ref.close(ref);
+  }
+
+  filterUnidad(event) {
+    this.filteredUnidad = this.unidades.filter(arl => arl.nombre.toLowerCase().includes(event.query.toLowerCase()));
   }
 
 }

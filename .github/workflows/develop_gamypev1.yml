@@ -6,12 +6,14 @@ name: Build and deploy Node.js app to Azure Web App - gamype
 on:
   push:
     branches:
-      - develop
+      - deploy
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read #This is required for actions/checkout
 
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +23,7 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install, build, and test
+      - name: npm install and build
         run: |
           npm install
           npm run build --if-present
@@ -30,7 +32,7 @@ jobs:
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: node-app
           path: release.zip
@@ -43,10 +45,11 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: node-app
 
@@ -54,15 +57,15 @@ jobs:
         run: unzip release.zip
       
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_07B5D1980CCF4ADAB139AE0B4AADA445 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CAA4874E03824C50A57958B1B06E854E }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B6CBD11DA7914129A5362C7FAB66AF6D }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FE96434E5D2643BBBCFAE9F4C3B3A943 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A1C996E60EE548219D0B8B7A00E7C753 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B0135DC0E300409A865E5E5FC44E8973 }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'gamype'
           slot-name: 'Production'
