@@ -36,7 +36,9 @@ export class FormNominaComponent implements OnInit {
     exentoAportesParafiscales: [true,Validators.required],
     idNivelRiesgoLaboral: ['' as any,Validators.required],
     idNomina: [null],
-    periodo: [this.periodos[0],Validators.required]
+    periodo: [this.periodos[0],Validators.required],
+    salarioIntegral: [false],
+    diasTrabajados: [0],
   });
 
   arl: Arl[] = [];
@@ -57,6 +59,7 @@ export class FormNominaComponent implements OnInit {
     if(this.config.data?.nomina){
       this.editMode = true;
     }
+    this.valueChanges();
     forkJoin([
       this.nominasService.getARL(),
       this.empleadoService.getEmpleado(this.config.data.idEmpleado),
@@ -69,6 +72,7 @@ export class FormNominaComponent implements OnInit {
       this.formNomina.markAllAsTouched();
       if(!this.editMode){
         this.formNomina.get('fraccionMes').setValue(this.empleado.fraccionMes||false);
+        this.formNomina.get('diasTrabajados').setValue(this.empleado.fraccionMes ? 15 : 30);
         this.formNomina.get('fechaNomina').setValue(new Date());
         this.formNomina.get('idNivelRiesgoLaboral').setValue(this.empleado?.cargo?.nivelesRiesgoARL || this.arl[0]);
         this.formNomina.get('salarioMensualQuincenal').setValue(this.empleado.salario ? this.empleado.salario.toString() : this.constantesNomina.salarioMinimo.toString());
@@ -86,6 +90,15 @@ export class FormNominaComponent implements OnInit {
 
   filterArl(event) {
     this.filteredArl = this.arl.filter(arl => arl.nombreClase.toLowerCase().includes(event.query.toLowerCase()));
+  }
+
+  valueChanges(){
+    //validar que el salatio integral cumple el minimo salario integral
+    this.formNomina.get('salarioMensualQuincenal').valueChanges.subscribe((value) => {
+      if(Number(value) <= (this.formNomina.get('fraccionMes').value ? this.constantesNomina?.salarioIntegralMinimo/2 : this.constantesNomina?.salarioIntegralMinimo)){
+        this.formNomina.get('salarioIntegral').setValue(false);
+      }
+    });
   }
 
   loadNomina(){
@@ -106,6 +119,7 @@ export class FormNominaComponent implements OnInit {
       this.formNomina.get('salarioMensualQuincenal').setValue(nomina.salarioMensualQuincenal.toString());
       this.formNomina.get('trabajoExtraSuplementario').setValue(nomina.trabajoExtraSuplementario.toString());
       this.formNomina.get('trabajoDominicalFestivo').setValue(nomina.trabajoDominicalFestivo.toString());
+      this.formNomina.get('salarioIntegral').setValue(nomina.salarioIntegral);
     });
   }
 
@@ -126,6 +140,11 @@ export class FormNominaComponent implements OnInit {
         return;
     }
       this.ref.close(ref);
+  }
+
+  validarSalarioIntegral(): boolean {
+    if(!this.constantesNomina?.salarioIntegralMinimo) return false;
+    return (this.formNomina.get('fraccionMes').value ? this.constantesNomina?.salarioIntegralMinimo/2 : this.constantesNomina?.salarioIntegralMinimo) <= Number(this.formNomina.get('salarioMensualQuincenal').value);
   }
 
 }

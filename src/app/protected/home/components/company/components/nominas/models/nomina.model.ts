@@ -48,6 +48,7 @@ export interface caracteristicasNomina{
     salarioMensualQuincenal: number;
     trabajoDominicalFestivo: number;
     trabajoExtraSuplementario: number;
+    salarioIntegral: boolean;
 }
 
 export interface Nomina{
@@ -82,4 +83,5 @@ export interface Nomina{
     idEmpresa: number;
     idCaracteristicas: number;
     fechaRegistro: string;
+    diasTrabajados: number;
 }

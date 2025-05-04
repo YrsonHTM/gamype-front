@@ -21,14 +21,26 @@
                 <label class="required-label" for="titulo">Mes nomina</label>
             </p-floatLabel>
         </div>
-        <p-floatLabel class="mt-20">
-            <p-checkbox
-            class="checkbox"
-            formControlName="fraccionMes"
-            [binary]="true" 
-            inputId="quincena" />
-            <label class="ml-20" for="quincena">Nomina Quincenal</label>
-        </p-floatLabel>
+        <div class="row">
+            <p-floatLabel class="mt-20">
+                <p-checkbox
+                class="checkbox"
+                formControlName="fraccionMes"
+                [binary]="true" 
+                inputId="quincena" />
+                <label class="ml-20 w-200" for="quincena">Nomina Quincenal</label>
+            </p-floatLabel>
+            <p-floatLabel class="mt-10">
+                <p-inputNumber 
+                formControlName="diasTrabajados"
+                inputId="minmax" 
+                mode="decimal" 
+                [min]="0"
+                [max]="formNomina.get('fraccionMes').value ? 15 : 30"
+                />
+                <label class="required-label" for="minmax">Dias</label>
+            </p-floatLabel>
+        </div>
         @if(formNomina.get('fraccionMes').value){
             <p-floatLabel>
                 <p-selectButton 
@@ -39,7 +51,17 @@
                     <ng-template let-item pTemplate>
                         <span>{{item}}</span>
                     </ng-template>
-            </p-selectButton>
+                </p-selectButton>
+            </p-floatLabel>
+        }
+        @if(validarSalarioIntegral()){
+            <p-floatLabel class="mt-20">
+                <p-checkbox
+                class="checkbox"
+                formControlName="salarioIntegral"
+                [binary]="true" 
+                inputId="quincena" />
+                <label class="ml-20" for="quincena">Salario integral</label>
             </p-floatLabel>
         }
         <div class="row">

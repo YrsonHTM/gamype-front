@@ -11,6 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ReportePrimaComponent } from './reporte-prima/reporte-prima.component';
 import { ReporteCesantiasComponent } from './reporte-cesantias/reporte-cesantias.component';
 import { ReporteVacacionesComponent } from './reporte-vacaciones/reporte-vacaciones.component';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
   selector: 'app-nominas',
@@ -126,6 +127,7 @@ export class NominasComponent implements OnInit {
     private dialogService: DialogService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private companyService: CompanyService,
   ) { }
 
   ngOnInit(): void {
@@ -343,6 +345,7 @@ export class NominasComponent implements OnInit {
 
     descargarNomina(nominaResumen: NominaResumen){
       this.nominasService.getNominaById(nominaResumen.id).subscribe((nomina: Nomina) => {
+        console.log(this.companyService.getCompanyValue());
         this.generarNominaPdf(nomina, nominaResumen);
       });
     }
@@ -351,7 +354,7 @@ export class NominasComponent implements OnInit {
       const [year, month, day] = nominaResumen.fechaNomina.split('-').map(Number);
       const date = new Date(year, month - 1, day);
       const fechaAjustada = nominaResumen.fraccionMes ? `${year}-${month}/${day > 15 ? 2 : 1}` : `${year}-${month}`;
-      this.nominasService.generatePdfNomina(nomina, 'nomina.pdf', this.selectedEmpleado.nombresApellidos + (this.selectedEmpleado.tipoNroDocumento ? ' ' + this.selectedEmpleado.tipoNroDocumento : ''), fechaAjustada);
+      this.nominasService.generatePdfNomina(nomina, 'nomina.pdf', this.selectedEmpleado, fechaAjustada);
     }
 
     generarInformePrimas(resumenPrimas: any, filename: string, empleado: string,){
